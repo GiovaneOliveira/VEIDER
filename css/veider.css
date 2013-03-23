@@ -1,9 +1,13 @@
 /* INPUTS - TEXT, COMBO */
-.inputCommon{
+.inputCommon, .textCommon{
 	font-family: Gill, Helvetica, sans-serif; 
 	font-size: 13px;
 	color: #333333;
 	font-weight: bold;
+}
+
+.textCommon{
+	font-size: 17px;
 }
 
 /* BOTOES */
@@ -81,7 +85,7 @@
 }
 
 .tableList {
-	/*width: 100%;*/
+	width: 100%;
 	font-family: Gill, Helvetica, sans-serif;
 	padding-top: 33px;
 }

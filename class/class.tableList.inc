@@ -9,8 +9,8 @@
 		var $total;
 		
 		function tableList(){
-			echo "<link rel='stylesheet' type='text/css' href='../css/veider2.css'>";
-			echo "<script language='javascript' src='../js/tableList2.js'></script>";
+			echo "<link rel='stylesheet' type='text/css' href='../css/veider.css'>";
+			echo "<script language='javascript' src='../js/tableList.js'></script>";
 		}
 		
 		function setQueryFields($queryfields) {

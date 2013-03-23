@@ -45,6 +45,18 @@
 		}
 		
 		/*
+		*	Função para criar um campo font
+		*
+		*	@author	Fábio Augusto Cardoso
+		*
+		*	@param	string		$fontText
+		*/
+		function createFont($fontText)
+		{
+			echo "<font class='textCommon'>".$fontText."</font>";
+		}
+		
+		/*
 		*	Função para criar um campo combobox
 		*
 		*	@author Giovane de Oliveira

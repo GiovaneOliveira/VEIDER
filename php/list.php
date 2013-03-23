@@ -12,10 +12,10 @@
 </head>
 <body style="margin:0; background-color:whitesmoke; overflow:hidden;" >
 <input type="hidden" id="cdcompany" name="cdcompany">
-<div id="dvGrid" name="dvGrid" style="width:99.6%; height:99.5%; overflow:hidden; border: 2px solid #333333;"></div>
+<div id="dvGrid" name="dvGrid" style="width:99.6%; height:99.5%; overflow:hdden; border: 2px solid #333333;"></div>
 <?
-    $sql =  "SELECT a.CDCOMPANY, a.NMCOMPANY, a.NMCITY, a.NMSTATE, a.NRPHONE, a.DSADRESS, a.FLLOGO ".
-                "FROM VRCOMPANY a, VRCOMPANY c,VRCOMPANY v WHERE 1=1 ";
+    $sql =  "SELECT CDCOMPANY, NMCOMPANY, NMCITY, NMSTATE, NRPHONE, DSADRESS, FLLOGO ".
+                "FROM VRCOMPANY WHERE 1=1 ";
 	
 	if(isset($_REQUEST['nmcompany']) && $_REQUEST['nmcompany'] != "")
 		$sql .= "AND UPPER(NMCOMPANY) LIKE ('%".strtoupper($_REQUEST['nmcompany'])."%') ";

@@ -64,7 +64,7 @@
 		document.getElementById('dsadress').value = "";
 	}
 	
-	//divBorderHeight(25);
+	divBorderHeight(25);
 </script>
 </body>
 </html>

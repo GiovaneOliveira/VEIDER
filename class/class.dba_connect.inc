@@ -5,7 +5,7 @@
         var $reg = 0;
         
         function dba_connect() {
-            $conn = mssql_connect("Giovane-PC\SQLEXPRESS", "sa", "111111");
+            $conn = mssql_connect("DISTURBED-PC\SQLEXPRESS", "sa", "111111");
             
             if($conn) {
                 mssql_select_db("VEIDER", $conn);
@@ -17,6 +17,8 @@
         }
         
         function query($query) {
+			$this->reg = 0;
+			
             $sql = mssql_query($query, $this->conn);
             
             if($sql) {
