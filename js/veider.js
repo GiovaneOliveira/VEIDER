@@ -7,11 +7,11 @@ function window_open(url, w, h){
 }
 
 function divBorderHeight(minus){
-	/*h = (window.innerHeight - minus)+"px";	
+	h = (window.innerHeight - minus)+"px";	
 	
 	document.getElementById('dvborder').style.height = h;
 	if(document.getElementById('dvtoolbar'))
-		document.getElementById('dvtoolbar').style.height = h;*/
+		document.getElementById('dvtoolbar').style.height = h;
 }
 
 function mouseBtn(id, classBtn, classObj) {
