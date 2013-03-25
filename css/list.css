@@ -1,0 +1,51 @@
+.trHeader, .trList{
+	height:45px;
+	white-space:nowrap;
+	font-family: Gill, Helvetica, sans-serif;
+	font-size: 15px;
+}
+
+.trHeader{
+	color:#F5F5F5;
+	background-color:#333333;
+}
+
+.thHeader{
+	background-color:transparent;
+	border-left:2px groove #555555;
+	border-bottom:1px solid #000000;
+	padding:0px 15px 0px 15px;
+	-ms-user-select:none;
+}
+
+.trList{
+	background-color:transparent;
+	cursor:pointer;
+}
+
+.tdList{
+	background-color:transparent;
+	border-bottom:1px solid #DDDDDD;
+	padding:0px 15px 0px 15px;
+	-ms-user-select:none;
+}
+
+.dvFooter{
+	position:relative;
+	bottom:0px;
+	height:35px;
+	background-color:#333333;
+	color:#F5F5F5;
+	text-align:right;
+	font-family:Gill, Helvetica, sans-serif;
+	font-size:15px;
+	padding-right:15px;
+	font-weight:bold;
+}
+
+.fontFooter{
+	position:absolute;
+	bottom:7px;
+	right:15px;
+	-ms-user-select:none;
+}

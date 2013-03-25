@@ -7,7 +7,7 @@
 }
 
 .textCommon{
-	font-size: 17px;
+	font-size: 15px;
 }
 
 /* BOTOES */
@@ -51,13 +51,11 @@
 /* EFEITO ONMOUSEOUT */
 .buttonNormal {
 	background: -ms-linear-gradient(89deg, #777777, #333333);
-	background: -webkit-linear-gradient(89deg, #777777, #333333);
 }
 
 /* EFEITO ONMOUSEOVER */
 .buttonHover {
 	background: -ms-linear-gradient(89deg, #333333, #777777);
-	background: -webkit-linear-gradient(89deg, #333333, #777777);
 }
 
 /* EFEITO ONMOUSEDOWN */
@@ -73,64 +71,4 @@
 	padding:5px;
 	background-color:#F5F5F5;
 	border-radius: 15px;
-}
-
-/* CSS PARA A GRID */
-.dvList {
-	background-color: #F5F5F5;
-	top: 0px;
-	left: 0px;
-	overflow-y: scroll;
-	overflow-x: auto;
-}
-
-.tableList {
-	width: 100%;
-	font-family: Gill, Helvetica, sans-serif;
-	padding-top: 33px;
-}
-
-.titleTd {
-	border-left: 1px solid #555555;
-	background-color: #333333;
-	padding-left:8px;
-	height: 35px;
-}
-
-.titleFont {
-	color: #F5F5F5;
-	font-weight: bold;
-}
-
-.regTr {
-	cursor: pointer;
-	background-color: #F5F5F5;
-	height: 35px;
-}
-
-.regTd {
-	border-left: 1px solid #F5F5F5;
-	padding-left: 8px;
-	border-bottom: 1px solid #DDDDDD;
-}
-
-.regFont {
-	color: #333333;
-}
-
-.footer {
-	background-color: #333333;
-	font-family: Gill, Helvetica, sans-serif;
-	height: 35px;
-	position: relative;
-	bottom: 0px;
-}
-
-.footerFont {
-	font-weight: bold;
-	font-family: Gill, Helvetica, sans-serif;
-	color: #F5F5F5;
-	position: absolute;
-	right: 15px;
-	top: 8px;
 }
