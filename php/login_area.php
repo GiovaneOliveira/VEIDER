@@ -16,10 +16,10 @@
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
 				<td>
-					<? $utils->inputText("Usuário", "idlogin", "idlogin");?>
+					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15);?>
 				</td>
 				<td>
-					<? $utils->inputText("Senha", "idpassword", "idpassword", false, true);?>
+					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, false, true);?>
 				</td>
 			</tr>
 			<tr>
@@ -27,28 +27,29 @@
 					<? $utils->inputButton("Entrar", "btn_login", "btn_login", 145, "Login();");?>
 				</td>
 				<td>
-					<? $utils->inputButton("Registrar-se", "btn_register", "btn_register", 145, "userRegister()");?>
+					<? $utils->inputButton("Registrar-se", "btn_register", "btn_register", 145, "userRegister(1)");?>
 				</td>
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 1){?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
-			<tr>
-				<td>
+			<tr style="width:100%; height:50%;">
+				<td style="width:60%;">
 					<?$utils->createFont("USUÁRIO: ".$_SESSION['user_login']);?>
 				</td>
-			</tr>
-			<tr>
-				<td>
-					<? $utils->inputButton("Deseja tornar-se administrador?", "btn_admin", "btn_admin", 245, "alert('tem nada aqui não');");?>
-				</td>
-				<td>
-					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 145, "Loginout();");?>
+				<td style="width:40%;">
+					<? $utils->inputButton("Editar Perfil", "btn_edit", "btn_edit", 100, "userRegister(2)");?>
 				</td>
 			</tr>
-				<div id="div_photo" style="position:absolute; right:25px; bottom:8px; width:100px; height:100px; border-color:black; border-width:1px; border-style:solid">
-						<img id="img_user" name="img_user" width="100px" height="100px" src="../temp/<?=$_SESSION['user_photo']?>" />
-				</div>
+			<tr style="width:100%; height:50%;">
+				<td style="width:60%;">
+					<? $utils->inputButton("Tornar-se administrador", "btn_admin", "btn_admin", 225, "opa()");?>
+				</td>
+				<td style="width:40%;">
+					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
+				</td>
+			</tr>
+				<? $utils->inputDivImg("img_login", "img_login", "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
@@ -59,8 +60,8 @@
 	<?$utils->writeJS();?>
 	<?include_once("../js/rpc.js");?>
 	
-	function userRegister() {
-		window_open("register_user_data.php", 635, 470);
+	function userRegister(action) {
+		window_open("register_user_data.php?action="+action, 635, 470);
 	}
 	
 	function Logout()
@@ -83,6 +84,9 @@
 			alert('Deu merda');
 	}
 	
+	function opa(){
+	alert('tem nada aqui não');
+	}
 	divBorderHeight(25);
 </script>
 </body>

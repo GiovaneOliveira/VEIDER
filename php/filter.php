@@ -13,22 +13,22 @@
 		<table cellpadding="0" cellspacing="0" style="width:100%;">
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Nome da empresa", "nmcompany", "nmcompany", "width:100%"); ?>
+					<? $utils->inputText("Nome da empresa", "nmcompany", "nmcompany", 30, "width:100%"); ?>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Estado", "nmstate", "nmstate", "width:100%");?>
+					<? $utils->inputText("Estado", "nmstate", "nmstate", 50,"width:100%");?>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Cidade", "nmcity", "nmcity", "width:100%");?>
+					<? $utils->inputText("Cidade", "nmcity", "nmcity", 50,"width:100%");?>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Endereço", "dsadress", "dsadress", "width:100%");?>
+					<? $utils->inputText("Endereço", "dsadress", "dsadress", 50,"width:100%");?>
 				</td>
 			</tr>
 			<tr>
@@ -64,7 +64,7 @@
 		document.getElementById('dsadress').value = "";
 	}
 	
-	divBorderHeight(25);
+	divBorderHeight(26);
 </script>
 </body>
 </html>

@@ -16,6 +16,7 @@
 			
 			if(isset($ex[0]))
 			{
+				$_SESSION['user_code'] = $ex[0]['cduser'];
 				$_SESSION['user_login'] = $ex[0]['idlogin'];
 				$_SESSION['user_password'] = $ex[0]['idpassword'];
 				$_SESSION['user_photo'] = $ex[0]['flphoto'];
@@ -40,7 +41,7 @@
 				echo "0";
 		break;
 		case 1: //Verificar se IDLOGIN já está registrado
-			$ex = $conn->query("SELECT IDLOGIN FROM VRUSER WHERE IDLOGIN LIKE '".$_REQUEST['idlogin']."'");
+			$ex = $conn->query("SELECT IDLOGIN FROM VRUSER WHERE IDLOGIN LIKE '".$_REQUEST['idlogin']."'".($_REQUEST['action'] == 2 ? " AND IDLOGIN <> '".$_SESSION['user_login']."'" : ""));
 			
 			if(isset($ex[0]))
 				echo "1";

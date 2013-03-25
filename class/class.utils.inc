@@ -32,16 +32,16 @@
 		*	@author	Giovane de Oliveira
 		*				Maitê Raduenz Falcão
 		*
-		*	@param	string		$label, $id, $name, $style ex: 'width:100px;', $value
+		*	@param	string		$label, $id, $name, $style ex: 'width:100px;', $value , $disabled ex: 'disabled = disabled'
 		*	@param	boolean	$password (se TRUE - campo esconde caracteres digitados)
 		*/
-		function inputText($label = "", $id, $name, $style = "", $password = false, $value = "")
+		function inputText($label = "", $id, $name, $maxlength, $style = "", $password = false, $value = "")
 		{
 			$style = empty($style)? "" : "style='".$style."'";
 			$label = empty($label)? "" : "<label class='inputCommon' for='".$id."'>".$label."</label><br>";
 			$type = ($password)? "password" : "text";
 			
-			echo $label."<input type='".$type."' id='".$id."' name='".$name."' value='".$value."' ".$style." >";
+			echo $label."<input type='".$type."' id='".$id."' name='".$name."' maxlength='".$maxlength."' value='".$value."' ".$style.">";
 		}
 		
 		/*
@@ -77,7 +77,7 @@
 						<select id='".$id."' name='".$name."' ".$style.$onchange.">
 							<option value='' id='00'></option>";
 							foreach($option as $value) {
-								$selected = $select == $value? "selected='selected'" : "";
+								$selected = $select == $combo? "selected='selected'" : "";
 								$combobox .= "<option value='".$combo."' id='opt_".$id."_".$combo."' ".$selected.">".$value."</option>";
 								$combo++;
 							}
@@ -97,7 +97,7 @@
 		function inputFile($label, $id, $name, $style = "", $onchange = "")
 		{
 			$style = empty($style)? "" : "style='".$style."'";
-			$action = empty($action)? "" : "onchange='".$onchange."'";
+			$onchange = empty($onchange)? "" : "onchange='".$onchange."'";
 			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label><br>";
 			
 			
@@ -147,6 +147,22 @@
 			
 			$this->qtbuttons++;
 			$this->toolbar .= $button;
+		}
+		
+		/*
+		*	Função para criar div com imagem para o campo Photo
+		*
+		*	@author Fábio Augusto Cardoso
+		*
+		*	@param	string		$id, $name, $style
+		*	@param	strint		$img, campo Photo
+		*/
+		
+		function inputDivImg($id, $name, $style,$img)
+		{
+			echo '<div id="div_'.$id.'" name="div_'.$name.'" width="100" height="100" style="'.$style.'">
+						<img id="'.$id.'" name="'.$name.'" width="100" height="100" src="../temp/'.$img.'" />
+				</div>';
 		}
 		
 		/*

@@ -10,7 +10,7 @@ function split_screen() {
 	iframeTop.setAttribute("id", "top");
 	iframeTop.setAttribute("frameborder", 0);
 	iframeTop.setAttribute("style", "overflow:hidden; top:0px; left:0px;");
-	iframeTop.setAttribute("width", document.body.clientWidth * 0.7);
+	iframeTop.setAttribute("width", document.body.clientWidth - 550);
 	iframeTop.setAttribute("height", 120);
 	iframeTop.setAttribute("src", top);
 	document.body.appendChild(iframeTop);
@@ -19,7 +19,7 @@ function split_screen() {
 	iframeLogin.setAttribute("id", "login");
 	iframeLogin.setAttribute("frameborder", 0);
 	iframeLogin.setAttribute("style", "overflow:hidden; top:0px; right:0px;");
-	iframeLogin.setAttribute("width", document.body.clientWidth * 0.3);
+	iframeLogin.setAttribute("width", 550);
 	iframeLogin.setAttribute("height", 120);
 	iframeLogin.setAttribute("src", login);
 	document.body.appendChild(iframeLogin);
