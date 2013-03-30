@@ -1,5 +1,5 @@
 <?
-	require_once("../class/class.utils.inc");
+	require_once("../../class/class.utils.inc");
 	session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,7 +21,7 @@
 					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15);?>
 				</td>
 				<td>
-					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true);?>
+					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true, true);?>
 				</td>
 			</tr>
 			<tr>
@@ -60,22 +60,22 @@
 	<? $utils->endDivBorder(); ?>
 <script>
 	<?$utils->writeJS();?>
-	<?include_once("../js/rpc.js");?>
+	<?include_once("../../js/rpc.js");?>
 	
 	function userRegister(action) {
-		window_open("register_user_data.php?action="+action, 635, 470);
+		window_open("../user/register_user_data.php?action="+action, 635, 470);
 	}
 	
 	function Logout()
 	{
-		RPC = new REQUEST("veider_request.php?type=-1", "../php/");
+		RPC = new REQUEST("portal/veider_request.php?type=-1");
 		RPC.Response(null);
 		window.location.reload();
 	}
 	
 	function Login()
 	{
-		RPC = new REQUEST("veider_request.php?type=0&idlogin="+document.getElementById('idlogin').value+"&idpassword="+document.getElementById('idpassword').value, "../php/");
+		RPC = new REQUEST("portal/veider_request.php?type=0&idlogin="+document.getElementById('idlogin').value+"&idpassword="+document.getElementById('idpassword').value);
 		retorno = RPC.Response(null);
 		
 		if(retorno == 1)
@@ -89,7 +89,7 @@
 	function opa(){
 	alert('tem nada aqui não');
 	}
-	divBorderHeight(25);
+	divBorderHeight(26);
 </script>
 </body>
 </html>

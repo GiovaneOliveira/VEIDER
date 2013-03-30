@@ -1,5 +1,5 @@
 <?
-	require_once("../class/class.make_screen.inc");
+	require_once("../../class/class.make_screen.inc");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -14,10 +14,10 @@
 <?
 	$make->split_screen(
 		"header.php?",
-		"login_area.php?",
-		"filter.php?",
-		"list.php?",
-		"notices.php?",
+		"../user/login_area.php?",
+		"company_filter.php?",
+		"company_list.php?",
+		"../notice/notice_list.php?",
 		"footer.php?"
 	);
 ?>

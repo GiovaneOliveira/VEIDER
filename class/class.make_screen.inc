@@ -3,7 +3,7 @@
 	{
 		function make_screen()
 		{
-			echo "<script language='javascript' src='../js/screen.js'></script>";
+			echo "<script language='javascript' src='../../js/screen.js'></script>";
 		}
 		
 		function split_screen($top, $login, $left, $middle, $right, $bottom)

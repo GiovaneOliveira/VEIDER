@@ -14,8 +14,8 @@
 		var $total;
 
 		function tableList(){
-			echo "<script type='text/javascript' src='../js/list.js'></script>";
-			echo "<link rel='stylesheet' type='text/css' href='../css/list.css' />";
+			echo "<script type='text/javascript' src='../../js/list.js'></script>";
+			echo "<link rel='stylesheet' type='text/css' href='../../css/list.css' />";
 		}
 
 		function setQueryFields($queryfields) {
@@ -65,13 +65,13 @@
 
 			$mouseover = " onmouseover='mouseReg(this.id, 1)' ";
 			$mouseout = " onmouseout='mouseReg(this.id, 2)' ";
-			$mousedown = " onmousedown='mouseReg(this.id, 3); setHidden(".$this->hidden.")' ";
+			
 			if($this->clickfunction)
 				$click = " onclick='".$this->clickfunction."' ";
 			if($this->dblclickfunction)
 				$dblclick = " ondblclick='".$this->dblclickfunction."' ";
 
-			$events = $mouseover.$mouseout.$mousedown.$click.$dblclick;
+			$events = $mouseover.$mouseout.$click.$dblclick;
 
 			$list = "
 				<div id='dv_list_".$this->hidden."' style='width:100%;overflow:auto;'>
@@ -87,7 +87,7 @@
 						<tbody>\n";
 							foreach($this->queryfields as $rowfield) {
 									$col = 0;
-									$list .= "<tr class='trList' id='".$this->hidden."_tr_".$row."' ".$events.">\n";
+									$list .= "<tr class='trList' id='".$this->hidden."_tr_".$row."' ".$events." onmousedown='mouseReg(this.id, 3); setHidden(".$rowfield[strtolower($this->hidden)].")' >\n";
 									foreach($this->fieldnames as $colfield) {
 										$coldata = $this->alterColValue($colfield, $rowfield[strtolower($colfield)], $this->queryfields[$row-1]);
 										
@@ -109,7 +109,7 @@
 		
 		function alterColValue($colfield, $coldata, $rowdata)
 		{
-			require_once("../class/veider_functions.inc");
+			require_once("../../class/veider_functions.inc");
 			
 			if(is_array($this->datecols) && in_array($colfield, $this->datecols) && !empty($coldata)) {
 				return formatDate($coldata);

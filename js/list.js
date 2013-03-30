@@ -19,3 +19,11 @@ function mouseReg(id, type){
 function setHidden(value){
 	document.getElementById(hiddenField).value = value;
 }
+
+var win = null;
+function window_open(url, w, h){
+	positionLeft = (screen.width)? (screen.width-w)/2 : 0;
+	positionTop = (screen.height)? (screen.height-h)/2 : 0;
+	params = 'height='+h+', width='+w+', top='+positionTop+', left='+positionLeft+', resizable=0, location=0, menubar=0, scrollbars=0';
+	win = window.open(url, '_blank', params);
+}

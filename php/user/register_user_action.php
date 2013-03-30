@@ -1,6 +1,6 @@
 <? 
-	require_once("../class/class.dba_connect.inc");
-	require_once("../class/veider_functions.inc");
+	require_once("../../class/class.dba_connect.inc");
+	require_once("../../class/veider_functions.inc");
 	session_start();
 	
 	$conn = new dba_connect();
@@ -43,7 +43,7 @@
 				";
 	}
 	
-	$conn->executeDBA($sql);
+	$conn->insert($sql);
 	
 	echo "<script>".($_REQUEST['action'] == 2?"alert('relogar');":"")."window.close()</script>";
 ?>

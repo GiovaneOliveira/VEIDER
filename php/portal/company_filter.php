@@ -1,5 +1,5 @@
 <?
-	require_once("../class/class.utils.inc");
+	require_once("../../class/class.utils.inc");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -56,7 +56,7 @@
 		
 		var params = "&nmcompany="+nmcompany+"&nmstate="+nmstate+"&nmcity="+nmcity+"&dsadress="+dsadress;
 		
-		parent.document.getElementById('middle').src = "list.php?"+params;
+		parent.document.getElementById('middle').src = "company_list.php?"+params;
 	}
 	
 	function clearAll() {

@@ -1,7 +1,7 @@
 <? 
-	require_once("../class/class.utils.inc");
-	require_once("../class/class.dba_connect.inc");
-	require_once("../class/veider_functions.inc");
+	require_once("../../class/class.utils.inc");
+	require_once("../../class/class.dba_connect.inc");
+	require_once("../../class/veider_functions.inc");
 	session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -103,7 +103,7 @@
 <script type="text/javascript">
 	<?$utils->writeJS();?>
 	<?verifyFormatImg("flphoto","img_register");?>
-	<?include_once("../js/rpc.js");?>
+	<?include_once("../../js/rpc.js");?>
 	
 	document.getElementById('idlogin').setAttribute('onblur','verifyLogin()');
 	document.getElementById('idpassword').setAttribute('onblur','verifyPass()');
@@ -111,7 +111,7 @@
 	
 	function verifyLogin()
 	{
-		RPC = new REQUEST("veider_request.php?type=1&action=<?=$_REQUEST['action']?>&idlogin="+document.getElementById('idlogin').value, "../php/");
+		RPC = new REQUEST("portal/veider_request.php?type=1&action=<?=$_REQUEST['action']?>&idlogin="+document.getElementById('idlogin').value);
 		retorno = RPC.Response(null);
 		
 		if(retorno == 1)

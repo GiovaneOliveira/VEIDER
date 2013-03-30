@@ -10,6 +10,16 @@
 	font-size: 15px;
 }
 
+.readOnly{
+	font-family: Gill, Helvetica, sans-serif;
+	background-color: #CCCCCC;
+	color: #000000;
+}
+
+.textArea{
+	font-family: Gill, Helvetica, sans-serif;
+}
+
 /* BOTOES */
 
 .fontButton, .fontButtonPressed, .fontButtonDisabled {

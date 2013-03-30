@@ -8,7 +8,7 @@
         {
             $this->menu = array();
             $this->itens = 0;
-            echo "<script type='text/javascript' src='../js/jquery.js'></script>";
+            echo "<script type='text/javascript' src='../../js/jquery.js'></script>";
 			echo "<script type='text/javascript'>
 						$(document).ready(function()
 						{

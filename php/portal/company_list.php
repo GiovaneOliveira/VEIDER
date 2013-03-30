@@ -1,6 +1,6 @@
 <?
-    require_once("../class/class.tableList.inc");
-    require_once("../class/class.dba_connect.inc");
+    require_once("../../class/class.tableList.inc");
+    require_once("../../class/class.dba_connect.inc");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -12,9 +12,9 @@
     $list = new tableList();
 ?>
 </head>
-<body style="margin:0px; background-color:whitesmoke; overflow:hidden;" >
+<body style="background-color:#333333; overflow:hidden;" >
 <input type="hidden" id="cdcompany" name="cdcompany">
-<div id="dvGrid" name="dvGrid" style="width:99.6%; height:99.5%; overflow:hidden; border: 2px solid #333333;">
+<div id="dvGrid" name="dvGrid" style="background-color:#F5F5F5; border-radius:15px; width:100%; height:100%; overflow:hidden; border: 1px groove #333333;">
 <?
     $sql =  "SELECT CDCOMPANY, NMCOMPANY, NMCITY, NMSTATE, NRPHONE, DSADRESS, FLLOGO ".
                 "FROM VRCOMPANY WHERE 1=1 ";

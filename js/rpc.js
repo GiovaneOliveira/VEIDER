@@ -2,23 +2,20 @@
 *	Arquivo com função para chamar um arquivo PHP através de JS
 *
 *	Utilização:
-*	No arquivo php que vai fazer a requisição, adicionar <?include_once("../js/rpc.js");?> no script
+*	No arquivo php que vai fazer a requisição, adicionar <?include_once("../../js/rpc.js");?> no script
 *	A chamada é:
-*	RPC = new REQUEST("url.php?params", "../php/");
+*	RPC = new REQUEST("url.php?params");
 *	retorno = RPC.Response(null);
 *
 */
 
-REQUEST = function(url, path){
-        
-	path = (path == undefined) ? "" : path;
-	
+REQUEST = function(url){
 	if(window.XMLHttpRequest)
 		this.object = new XMLHttpRequest();
 	else if(window.ActiveXObject)
 		this.object = new ActiveXObject("Microsoft.XMLHTTP");
 		
-	this.url = path+url;
+	this.url = "../../php/"+url;
 	this.method = 'GET';
 	
 	return this;
