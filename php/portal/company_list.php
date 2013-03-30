@@ -42,6 +42,22 @@
 		$list->setHiddenObject("cdcompany");
 		$list->printList("dvGrid");
 	}
+	else {
+		echo "
+			<table style='width:100%; height:100%;' cellpadding='0' cellspacing='0'>
+				<tr style='height:70%; vertical-align:bottom;'>
+					<td align='center'>
+						<img src='../../image/veider/veider_280.png'/>
+					</td>
+				</tr>
+				<tr style='vertical-align:top;'>
+					<td align='center'>
+						<font style='color: #333333;font-family: Gill, Helvetica, sans-serif; font-size: 20px;font-weight: bold;'>Veider Sistema de Reservas &copy;</font>
+					</td>
+				</td>
+			</table>
+		";
+	}
 ?>
 </div>
 </body>

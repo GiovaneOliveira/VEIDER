@@ -16,7 +16,7 @@
 	<table cellpadding="0" cellspacing="0" style="width:100%; height:80px;">
 		<tr>
 			<td align="center">
-				<img style="height:42px;" src="../../image/veider.png"/>
+				<img style="height:42px;" src="../../image/veider/veider_40.png"/>
 			</td>
 		</tr>
 		<tr>

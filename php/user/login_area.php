@@ -17,18 +17,18 @@
 	<?if($_SESSION['startLogin'] == 0){?>
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
-				<td>
+				<td style="padding-left:55px;">
 					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15);?>
 				</td>
-				<td>
+				<td style="padding-left:55px;">
 					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true, true);?>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="padding-left:55px;">
 					<? $utils->inputButton("Entrar", "btn_login", "btn_login", 145, "Login();");?>
 				</td>
-				<td>
+				<td style="padding-left:55px;">
 					<? $utils->inputButton("Registrar-se", "btn_register", "btn_register", 145, "userRegister(1)");?>
 				</td>
 			</tr>
