@@ -8,6 +8,8 @@
 <html>
 <head>
 <title>Cadastro de usuário</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
 <?
 	$utils = new utils();
 	$conn = new dba_connect();
@@ -44,48 +46,48 @@
 		$img_register = $ex[0]['flphoto'];
 	}
 
-	$utils->imageButton("Registrar", "btnregister", "btnregister", "verifySubmit();", "../image/button_icon/save.gif");
+	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save");
 	$utils->beginDivBorder(true);
 ?>
 	<form action="register_user_action.php?action=<?=$_REQUEST['action']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table style="width:100%">
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Nome *", "nmuser", "nmuser", 60,"width:510px;", false, $nmuser);?>
+					<?$utils->inputText("Nome", "nmuser", "nmuser", 60,"width:510px;", $nmuser, true);?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Login *", "idlogin", "idlogin", 15, "width:510px;", false, $idlogin);?>
+					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Senha *", "idpassword", "idpassword", 50, "width:245px;", true, $idpassword);?>
+					<?$utils->inputText("Senha", "idpassword", "idpassword", 50, "width:245px;", $idpassword, true, true);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Confirme sua senha *", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", true, $idpassword_confirm);?>
+					<?$utils->inputText("Confirme sua senha *", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", $idpassword_confirm, true, true);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Email *", "idmail", "idmail", 50, "width:245px;", false, $idmail);?>
+					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Telefone *", "nrphone", "nrphone", 10, "width:245px;", false, $nrphone);?>
+					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Estado *", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate);?>
+					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Cidade *", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity);?>
+					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity);?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Endereço *", "dsadress", "dsadress", 50, "width:510px;", false, $dsadress);?>
+					<?$utils->inputText("Endereço", "dsadress", "dsadress", 50, "width:510px;", $dsadress, true);?>
 				</td>
 			</tr>
 			<tr>
@@ -101,7 +103,6 @@
 <script type="text/javascript">
 	<?$utils->writeJS();?>
 	<?verifyFormatImg("flphoto","img_register");?>
-	<?verifyRequired(array("nmuser","idlogin","idpassword","idpassword_confirm","idmail","nrphone","nmstate","nmcity","dsadress"),"form");?>
 	<?include_once("../js/rpc.js");?>
 	
 	document.getElementById('idlogin').setAttribute('onblur','verifyLogin()');
@@ -127,6 +128,11 @@
 			alert("Senha confirmada incorretamente");
 			document.getElementById('idpassword_confirm').value = '';
 		}
+	}
+	
+	function save(){
+		if(required(document.getElementById("form"))) // Retorna true se todos os campos requeridos estiverem preenchidos
+			document.getElementById("form").submit();
 	}
 	
 	divBorderHeight(30);

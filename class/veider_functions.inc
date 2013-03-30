@@ -79,26 +79,6 @@
 			";
 		}
 		
-		function verifyRequired($requiredElements,$form)
-		{
-			$elements = "";
-			for($x = 0; $x < count($requiredElements); $x++)
-			{
-				if($x != 0)
-					$elements .= " || ";
-				$elements .= "document.getElementById('".$requiredElements[$x]."').value == '' ";
-			}
-			echo "
-				function verifySubmit()
-				{
-					if(".$elements.")
-						alert('##Termo?');
-					else
-						document.getElementById('".$form."').submit();
-				}
-			";
-		}
-		
 		/*
 		*	Cria uma cópia de $img com nome aleatório na pasta 'temp' e retorna o nome do arquivo . extensão
 		*

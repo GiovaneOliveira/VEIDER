@@ -5,9 +5,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
 <?
 	$utils = new utils();
-	error_log(print_r($_SESSION, true));
+	//error_log(print_r($_SESSION, true));
 ?>
 </head>
 <body style="overflow:hidden; background-color:#333333">
@@ -19,7 +21,7 @@
 					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15);?>
 				</td>
 				<td>
-					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, false, true);?>
+					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true);?>
 				</td>
 			</tr>
 			<tr>
@@ -53,7 +55,7 @@
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
-		<b>ADMINISADOR: <?=$_SESSION['user_login']?></b>
+		<b>ADMINISTRADOR: <?=$_SESSION['user_login']?></b>
 	<?}?>
 	<? $utils->endDivBorder(); ?>
 <script>

@@ -12,11 +12,12 @@
 
 /* BOTOES */
 
-.fontButton, .fontButtonPressed {
+.fontButton, .fontButtonPressed, .fontButtonDisabled {
 	font-family: Gill, Helvetica, sans-serif; 
 	font-size: 13px;
 	font-weight: bold;
 	color: #F5F5F5;
+	-ms-user-select:none;
 }
 
 .fontButtonPressed {
@@ -24,13 +25,19 @@
 	padding-top: 2px;
 }
 
-.imgButton, .imgButtonPressed {
+.fontButtonDisabled {
+	color:#666666;
+	font-weight:normal;
+}
+
+.imgButton, .imgButtonPressed, .imgButtonDisabled {
 	width: 20px;
 	height: 20px;
 	padding-top: 0px;
 	padding-right: 10px;
 	padding-bottom: 5px;
 	padding-left: 10px;
+	-ms-user-select:none;
 }
 
 .imgButtonPressed{
@@ -41,21 +48,29 @@
 }
 
 /* CLASSE PAI */
-.button, .buttonNormal, .buttonHover {
+.button, .buttonNormal, .buttonHover, .buttonDisabled {
 	border: 2px solid #222222;
 	cursor: pointer;
 	border-radius:7px;
 	box-shadow: 2px 2px 3px #333333;
 }
 
+.buttonDisabled {
+	border: 2px solid #666666;
+	background-color:#CCCCCC;
+	box-shadow: 2px 2px 3px #333333;
+}
+
 /* EFEITO ONMOUSEOUT */
 .buttonNormal {
 	background: -ms-linear-gradient(89deg, #777777, #333333);
+	background: -webkit-linear-gradient(89deg, #777777, #333333);
 }
 
 /* EFEITO ONMOUSEOVER */
 .buttonHover {
 	background: -ms-linear-gradient(89deg, #333333, #777777);
+	background: -webkit-linear-gradient(89deg, #333333, #777777);
 }
 
 /* EFEITO ONMOUSEDOWN */

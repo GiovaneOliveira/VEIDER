@@ -18,3 +18,21 @@ function mouseBtn(id, classBtn, classObj) {
 	document.getElementById(id).className = classBtn;
 	document.getElementById('obj_'+id).className = classObj;
 }
+
+function required(form)
+{
+	for(i=0; i<form.length; i++)
+	{
+		var required = form[i].required;
+		if(required == 1)
+		{
+			if(form[i].value == "")
+			{
+				alert("Há dados obrigatórios não informados.");
+				form[i].focus();
+				return false;
+			}
+		}
+	}
+	return true;
+}
