@@ -34,9 +34,10 @@
 		*
 		*	@param	string		$label, $id, $name, $style ex: 'width:100px;', $value
 		*	@param	integer		$maxlength
-		*	@param	boolean	$password (se TRUE - campo esconde caracteres digitados)
+		*	@param	boolean		$required, $enabled, $password
+		*	@param array			$events ex: array("onblur"=>"functionEvent()")
 		*/
-		function inputText($label = "", $id, $name, $maxlength, $style = "", $value = "", $required = false, $enabled = true, $password = false)
+		function inputText($label = "", $id, $name, $maxlength, $style = "", $value = "", $required = false, $enabled = true, $password = false, $events = array())
 		{
 			$style = empty($style)? "" : "style='".$style."'";
 			$requiredLabel = ($required)? "<font class='inputCommon' style='cursor:help;' title='Obrigatório'>&nbsp;*</font>" : "";
@@ -45,15 +46,22 @@
 			$enabled = (!$enabled)? "readonly='readonly' class='readOnly'" : "";
 			$type = ($password)? "password" : "text";
 			
-			echo $label."<input type='".$type."' id='".$id."' name='".$name."' maxlength='".$maxlength."' value='".$value."' ".$style.$required.$enabled.">";
+			$event = "";
+			foreach($events as $key => $value) {
+				$event .= " ".$key."='".$value."' ";
+			}
+
+			echo $label."<input type='".$type."' id='".$id."' name='".$name."' maxlength='".$maxlength."' value='".$value."' ".$style.$required.$enabled.$event.">";
 		}
-		
+
 		/*
 		*	Função para criar um campo <textarea>
 		*
 		*	@param	string	$label, $id, $name, $style, $value
+		*	@param boolean	$required, $enabled
+		*	@param array		$events ex: array("onblur"=>"functionOnBlur()")
 		*/
-		function inputTextArea($label = "", $id, $name, $style = "", $value = "", $required = false, $enabled = true)
+		function inputTextArea($label = "", $id, $name, $style = "", $value = "", $required = false, $enabled = true, $events = array())
 		{
 			$style = empty($style)? "" : "style='".$style."'";
 			$requiredLabel = ($required)? "<font class='inputCommon' style='cursor:help;' title='Obrigatório'>&nbsp;*</font>" : "";
@@ -61,9 +69,14 @@
 			$required = ($required)? "required='1'" : "";
 			$enabled = (!$enabled)? "readonly='readonly' class='readOnly'" : "";
 			
-			echo $label."<textarea id='".$id."' name='".$name."' maxlength='2000' ".$style.$required.$enabled." class='textArea'>".$value."</textarea>";
+			$event = "";
+			foreach($events as $key => $value) {
+				$event .= " ".$key."='".$value."' ";
+			}
+			
+			echo $label."<textarea id='".$id."' name='".$name."' maxlength='2000' ".$style.$required.$enabled.$event." class='textArea'>".$value."</textarea>";
 		}
-		
+
 		/*
 		*	Função para criar um campo font
 		*
@@ -82,9 +95,10 @@
 		*	@author Giovane de Oliveira
 		*
 		*	@param	string		$label, $id, $name, $style ex: 'width:100px;'
+		*	@param	array		$option ex: array('option1', 'option2', ...)
 		*	@param	string		$onchange ex: 'functionJS(params);' -> Função JS que será executada ao trocar opção do combo
 		*	@param	string		$select ex: 'option2' -> Opção do combo que virá selecionada por padrão
-		*	@param	array		$option ex: array('option1', 'option2', ...)
+		*	@param boolean		$required, $enabled
 		*/
 		function inputCombobox($label = "", $id, $name, $style = "", $option = array(), $onchange = "", $select = null, $required = false, $enabled = true)
 		{
@@ -94,7 +108,7 @@
 			$onchange = empty($onchange)? "" : "onchange='".$onchange."'";
 			$required = ($required)? "required='1'" : "";
 			$enabled = (!$enabled)? "disabled='disabled'" : "";
-			
+
 			$combo = 1;
 			$combobox = $label."
 						<select id='".$id."' name='".$name."' ".$style.$onchange.$required.$enabled." >
@@ -116,6 +130,7 @@
 		*
 		*	@param	string		$label, $id, $name, $style ex: 'width:100px;', $onchange ex: 'functionJS(params);'
 		*	@param	string		$onchange ex: 'functionJS(params);' -> Função JS que será executada ao selecionar um arquivo
+		*	@param boolean		$enabled
 		*/
 		function inputFile($label, $id, $name, $style = "", $onchange = "", $enabled = true)
 		{
@@ -123,7 +138,7 @@
 			$onchange = empty($onchange)? "" : "onchange='".$onchange."'";
 			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label><br>";
 			$enabled = (!$enabled)? "disabled='disabled'" : "";
-			
+
 			echo $label."<input type='file' name='".$id."' id='".$name."' ".$style." ".$onchange.$enabled." />";
 		}
 
@@ -141,7 +156,7 @@
 		{
 			$width = empty($width)? "" : "width:".$width."px;";
 			$action = empty($action)? "" : " onclick='".$action."' ";
-			
+
 			if($enabled) {
 				$mouseover = " onmouseover='mouseBtn(this.id, \"buttonHover\", \"fontButton\")' ";
 				$mouseout = " onmouseout='mouseBtn(this.id, \"buttonNormal\", \"fontButton\")' ";
@@ -149,17 +164,17 @@
 				$mouseup  = " onmouseup='mouseBtn(this.id, \"buttonNormal\", \"fontButton\")' ";
 				$class = " class='buttonNormal' ";
 				$font = " class='fontButton' ";
-				
+
 				$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class;
 			} else {
 				$events = " class='buttonDisabled' ";
 				$font = " class='fontButtonDisabled' ";
 			}
-			
+
 			$button = "<div id='".$id."' name='".$name."' style='padding-top:5px; height:18px; ".$width."' ".$events." align='center'>
 								<font id='obj_".$id."' name='obj_".$name."' align='center' ".$font.">".$label."</font>
 							</div>";
-			
+
 			$this->qtbuttons++;
 
 			echo $button;
@@ -172,12 +187,13 @@
 		*
 		*	@param	string		$hint, $id, $name
 		*	@param	string		$action ex: 'functionJS(params);' -> Função JS que será executada pressionar o botão
-		*	@param	strint		$icon ex: '../image/imagem.png' -> url da imagem a ser usada
+		*	@param	strint		$icon ex: 'save' -> nome da imagem salva em "image/button_icon", em formato PNG
+		*	@param boolean		$enabled
 		*/
-		function imageButton($hint, $id, $name, $action, $icon, $enabled = true)
+		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true)
 		{
 			$action = empty($action)? "" : "onclick='".$action."'";
-			
+
 			if($enabled) {
 				$mouseover = " onmouseover='mouseBtn(this.id, \"buttonHover\", \"imgButton\")' ";
 				$mouseout = " onmouseout='mouseBtn(this.id, \"buttonNormal\", \"imgButton\")' ";
@@ -186,21 +202,25 @@
 				$class = " class='buttonNormal' ";
 				$font = " class='imgButton' ";
 				$src = "../../image/button_icon/".$icon.".png";
-				
+
 				$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class;
 			} else {
 				$events = " class='buttonDisabled' ";
 				$font = " class='imgButtonDisabled' ";
 				$src = "../../image/button_icon/".$icon."_disabled.png";
 			}
-			
+
 			$margintop = ($this->qtbuttons >= 1)? "10" : "5";
 			$button = "<div id='".$id."' name='".$name."' style='padding-top:5px; width:54px; margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
 								<img id='obj_".$id."' src='".$src."' ".$font."/>
 							</div>";
-			
+
 			$this->qtbuttons++;
-			$this->toolbar .= $button;
+            
+            if($isToolbar)
+                $this->toolbar .= $button;
+            else
+                return $button;
 		}
 
 		/*
