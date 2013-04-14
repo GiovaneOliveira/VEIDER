@@ -58,15 +58,15 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true);?>
+					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true, true, false, array("onblur"=>"verifyLogin()"));?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Senha", "idpassword", "idpassword", 50, "width:245px;", $idpassword, true, true);?>
+					<?$utils->inputText("Senha", "idpassword", "idpassword", 50, "width:245px;", $idpassword, true, true, true, array("onblur"=>"verifyPass()"));?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Confirme sua senha *", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", $idpassword_confirm, true, true);?>
+					<?$utils->inputText("Confirme sua senha", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", $idpassword_confirm, true, true, true, array("onblur"=>"verifyPass()"));?>
 				</td>
 			</tr>
 			<tr>
@@ -104,10 +104,6 @@
 	<?$utils->writeJS();?>
 	<?verifyFormatImg("flphoto","img_register");?>
 	<?include_once("../../js/rpc.js");?>
-	
-	document.getElementById('idlogin').setAttribute('onblur','verifyLogin()');
-	document.getElementById('idpassword').setAttribute('onblur','verifyPass()');
-	document.getElementById('idpassword_confirm').setAttribute('onblur','verifyPass()');
 	
 	function verifyLogin()
 	{

@@ -47,8 +47,8 @@
 			$type = ($password)? "password" : "text";
 			
 			$event = "";
-			foreach($events as $key => $value) {
-				$event .= " ".$key."='".$value."' ";
+			foreach($events as $key => $val) {
+				$event .= " ".$key."='".$val."' ";
 			}
 
 			echo $label."<input type='".$type."' id='".$id."' name='".$name."' maxlength='".$maxlength."' value='".$value."' ".$style.$required.$enabled.$event.">";
@@ -70,8 +70,8 @@
 			$enabled = (!$enabled)? "readonly='readonly' class='readOnly'" : "";
 			
 			$event = "";
-			foreach($events as $key => $value) {
-				$event .= " ".$key."='".$value."' ";
+			foreach($events as $key => $val) {
+				$event .= " ".$key."='".$val."' ";
 			}
 			
 			echo $label."<textarea id='".$id."' name='".$name."' maxlength='2000' ".$style.$required.$enabled.$event." class='textArea'>".$value."</textarea>";
