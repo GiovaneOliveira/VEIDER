@@ -20,16 +20,16 @@
                 "FROM VRCOMPANY WHERE 1=1 ";
 	
 	if(isset($_REQUEST['nmcompany']) && $_REQUEST['nmcompany'] != "")
-		$sql .= "AND UPPER(NMCOMPANY) LIKE ('%".strtoupper($_REQUEST['nmcompany'])."%') ";
+		$sql .= "AND ".$conn->protectStr("NMCOMPANY", $_REQUEST['nmcompany']);
 	
 	if(isset($_REQUEST['nmcity']) && $_REQUEST['nmcity'] != "")
-		$sql .= "AND UPPER(NMCITY) LIKE ('%".strtoupper($_REQUEST['nmcity'])."%') ";
+		$sql .= "AND ".$conn->protectStr("NMCITY", $_REQUEST['nmcity']);
 	
 	if(isset($_REQUEST['nmstate']) && $_REQUEST['nmstate'] != "")
-		$sql .= "AND UPPER(NMSTATE) LIKE ('%".strtoupper($_REQUEST['nmstate'])."%') ";
+		$sql .= "AND ".$conn->protectStr("NMSTATE", $_REQUEST['nmstate']);
 	
 	if(isset($_REQUEST['dsadress']) && $_REQUEST['dsadress'] != "")
-		$sql .= " AND UPPER(DSADRESS) LIKE('%".strtoupper($_REQUEST['dsadress'])."%') ";
+		$sql .= " AND ".$conn->protectStr("DSADRESS", $_REQUEST['dsadress']);
 	
 	if(isset($_REQUEST['nmcompany'])) {
 		$exec = $conn->query($sql);
@@ -52,7 +52,7 @@
 				</tr>
 				<tr style='vertical-align:top;'>
 					<td align='center'>
-						<font style='color: #333333;font-family: Gill, Helvetica, sans-serif; font-size: 20px;font-weight: bold;'>Veider Sistema de Reservas &copy;</font>
+						<font style='color: #333333;font-family: Gill, Helvetica, sans-serif; font-size: 20px;font-weight: bold;'>Veider Sistema de Reservas</font>
 					</td>
 				</td>
 			</table>

@@ -12,7 +12,10 @@
 			 createSession();
 		break;
 		case 0: //Vevificar campos para Login
-			$ex = $conn->query("SELECT CDUSER, IDLOGIN, IDPASSWORD, FGTYPE, FLPHOTO FROM VRUSER WHERE IDLOGIN LIKE '".$_REQUEST['idlogin']."' AND IDPASSWORD LIKE '".$_REQUEST['idpassword']."'");
+			$sql = "SELECT CDUSER, IDLOGIN, IDPASSWORD, FGTYPE, FLPHOTO FROM VRUSER 
+			WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false)." AND ".$conn->protectStr("IDPASSWORD", $_REQUEST['idpassword'], false);
+			
+			$ex = $conn->query($sql);
 			
 			if(isset($ex[0]))
 			{
@@ -41,7 +44,9 @@
 				echo "0";
 		break;
 		case 1: //Verificar se IDLOGIN já está registrado
-			$ex = $conn->query("SELECT IDLOGIN FROM VRUSER WHERE IDLOGIN LIKE '".$_REQUEST['idlogin']."'".($_REQUEST['action'] == 2 ? " AND IDLOGIN <> '".$_SESSION['user_login']."'" : ""));
+			$sql = "SELECT IDLOGIN FROM VRUSER WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false).($_REQUEST['action'] == 2 ? " AND ".$conn->protectStr("IDLOGIN", $_SESSION['user_login'], false) : "");
+			
+			$ex = $conn->query($sql);
 			
 			if(isset($ex[0]))
 				echo "1";

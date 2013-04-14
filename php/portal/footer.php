@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<font>Veider Sistema de Reservas &copy;</font>
+				<font>Veider Sistema de Reservas</font>
 			</td>
 		</tr>
 	</table>

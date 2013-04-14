@@ -18,7 +18,7 @@
         
         function query($query) {
 			$this->reg = 0;
-			
+
             $sql = mssql_query($query, $this->conn);
             
             if($sql) {
@@ -47,13 +47,13 @@
             }
             
         }
-		
+
 		function getNextCode($table,$column)
 		{
 			$sql = "SELECT COALESCE((MAX(".$column.")+1),1) AS result FROM ".$table;
-			
+
 			$ex = $this->query($sql);
-			
+
 			return $ex[0]['result']; 
 		}
         
@@ -61,5 +61,13 @@
 		{
 			mssql_query($query, $this->conn);
 		}
+		
+        function protectStr($field, $value, $percent = true)
+        {
+			$percent = $percent? "%" : "";
+			$value = $percent.$value.$percent;
+			$sql = " ".$field." LIKE (".str_replace("\\''", "'", "'".str_replace("'", "''", $value)."'").") ";
+			return $sql;
+        }
     }
 ?>
