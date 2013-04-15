@@ -17,19 +17,22 @@
 	<?if($_SESSION['startLogin'] == 0){?>
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
-				<td style="padding-left:55px;">
-					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15);?>
+				<td colspan="2" style="padding-left:40px; width: 66.6%">
+					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15, "width: 250");?>
 				</td>
-				<td style="padding-left:55px;">
+				<td style="width: 33.3%">
 					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true, true);?>
 				</td>
 			</tr>
 			<tr>
-				<td style="padding-left:55px;">
-					<? $utils->inputButton("Entrar", "btn_login", "btn_login", 145, "Login();");?>
+				<td style="padding-left:40px; width: 33.3%">
+					<? $utils->inputButton("Entrar", "btn_login", "btn_login", 100, "Login();");?>
 				</td>
-				<td style="padding-left:55px;">
-					<? $utils->inputButton("Registrar-se", "btn_register", "btn_register", 145, "userRegister(1)");?>
+				<td style="padding-left:10px; width: 33.3%">
+					<? $utils->inputButton("Registrar-se", "btn_register", "btn_register", 100, "userRegister(1)");?>
+				</td>
+				<td style="width: 33.3%">
+					<? $utils->inputButton("Ativar conta", "btn_active", "btn_active", 140, "userActive()");?>
 				</td>
 			</tr>
 		</table>
@@ -64,6 +67,10 @@
 	
 	function userRegister(action) {
 		window_open("../user/register_user_data.php?action="+action, 635, 470);
+	}
+	
+	function userActive() {
+		window_open("../user/active_data.php", 635, 115);
 	}
 	
 	function Logout()

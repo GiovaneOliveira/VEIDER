@@ -71,7 +71,7 @@
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true);?>
+					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, true, false, array("onblur"=>"verifyMail()"));?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
 					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true);?>
@@ -114,6 +114,18 @@
 		{
 			alert('Este Login já está registrado');
 			document.getElementById('idlogin').value = '';
+		}
+	}
+	
+	function verifyMail()
+	{
+		RPC = new REQUEST("portal/veider_request.php?type=2&action=<?=$_REQUEST['action']?>&idmail="+document.getElementById('idmail').value);
+		retorno = RPC.Response(null);
+		
+		if(retorno == 1)
+		{
+			alert('Este E-mail já está registrado');
+			document.getElementById('idmail').value = '';
 		}
 	}
 	
