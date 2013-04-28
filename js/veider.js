@@ -15,12 +15,13 @@ function divBorderHeight(minus){
 }
 
 function mouseBtn(id, classBtn, classObj) {
-	document.getElementById(id).className = classBtn;
-	document.getElementById('obj_'+id).className = classObj;
+	if(!document.getElementById(id).disabled) {
+		document.getElementById(id).className = "button"+classBtn;
+		document.getElementById('obj_'+id).className = classObj;
+	}
 }
 
-function required(form)
-{
+function required(form){
 	for(i=0; i<form.length; i++)
 	{
 		var required = form[i].required;
@@ -35,4 +36,38 @@ function required(form)
 		}
 	}
 	return true;
+}
+
+function disableButton(id){
+	if(!document.getElementById(id).disabled) {
+		child = document.getElementById(id).firstElementChild;
+		obj = document.getElementById(id);
+		obj.className = "buttonDisabled";
+		obj.setAttribute("disabled", "disabled");
+		
+		if(child.src) {
+			l = child.src.length-4;
+			child.src = child.src.substr(0, l)+"_disabled.png";
+			child.className = "imgButtonDisabled";
+		} else {
+			child.className = "fontButtonDisabled";
+		}
+	}
+}
+
+function enableButton(id){
+	if(document.getElementById(id).disabled) {
+		child = document.getElementById(id).firstElementChild;
+		obj = document.getElementById(id);
+		obj.className = "buttonNormal";
+		obj.removeAttribute("disabled");
+		
+		if(child.src) {
+			l = child.src.length-13;
+			child.src = child.src.substr(0, l)+".png";
+			child.className = "imgButton";
+		} else {
+			child.className = "fontButton";
+		}
+	}
 }

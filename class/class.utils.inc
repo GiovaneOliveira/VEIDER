@@ -156,24 +156,26 @@
 		{
 			$width = empty($width)? "" : "width:".$width."px;";
 			$action = empty($action)? "" : " onclick='".$action."' ";
-
+			
+			$mouseover = " onmouseover='mouseBtn(this.id, \"Hover\", \"fontButton\")' ";
+			$mouseout = " onmouseout='mouseBtn(this.id, \"Normal\", \"fontButton\")' ";
+			$mousedown = " onmousedown='mouseBtn(this.id, \"Pressed\", \"fontButtonPressed\")' ";
+			$mouseup  = " onmouseup='mouseBtn(this.id, \"Normal\", \"fontButton\")' ";
+			
 			if($enabled) {
-				$mouseover = " onmouseover='mouseBtn(this.id, \"buttonHover\", \"fontButton\")' ";
-				$mouseout = " onmouseout='mouseBtn(this.id, \"buttonNormal\", \"fontButton\")' ";
-				$mousedown = " onmousedown='mouseBtn(this.id, \"buttonPressed\", \"fontButtonPressed\")' ";
-				$mouseup  = " onmouseup='mouseBtn(this.id, \"buttonNormal\", \"fontButton\")' ";
 				$class = " class='buttonNormal' ";
+				$disable = "";
 				$font = " class='fontButton' ";
-
-				$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class;
 			} else {
-				$events = " class='buttonDisabled' ";
+				$class = " class='buttonDisabled' ";
+				$disable = " disabled='disabled' ";
 				$font = " class='fontButtonDisabled' ";
 			}
-
-			$button = "<div id='".$id."' name='".$name."' style='padding-top:5px; height:18px; ".$width."' ".$events." align='center'>
+			$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class.$disable;
+			
+			$button = "<button id='".$id."' name='".$name."' style='padding-top:5px; height:28px; ".$width."' ".$events." align='center'>
 								<font id='obj_".$id."' name='obj_".$name."' align='center' ".$font.">".$label."</font>
-							</div>";
+							</button>";
 
 			$this->qtbuttons++;
 
@@ -193,27 +195,29 @@
 		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true)
 		{
 			$action = empty($action)? "" : "onclick='".$action."'";
-
+			
+			$mouseover = " onmouseover='mouseBtn(this.id, \"Hover\", \"imgButton\")' ";
+			$mouseout = " onmouseout='mouseBtn(this.id, \"Normal\", \"imgButton\")' ";
+			$mousedown = " onmousedown='mouseBtn(this.id, \"Pressed\", \"imgButtonPressed\")' ";
+			$mouseup  = " onmouseup='mouseBtn(this.id, \"Normal\", \"imgButton\")' ";
+			
 			if($enabled) {
-				$mouseover = " onmouseover='mouseBtn(this.id, \"buttonHover\", \"imgButton\")' ";
-				$mouseout = " onmouseout='mouseBtn(this.id, \"buttonNormal\", \"imgButton\")' ";
-				$mousedown = " onmousedown='mouseBtn(this.id, \"buttonPressed\", \"imgButtonPressed\")' ";
-				$mouseup  = " onmouseup='mouseBtn(this.id, \"buttonNormal\", \"imgButton\")' ";
 				$class = " class='buttonNormal' ";
+				$disable = "";
 				$font = " class='imgButton' ";
 				$src = "../../image/button_icon/".$icon.".png";
-
-				$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class;
 			} else {
-				$events = " class='buttonDisabled' ";
+				$class = " class='buttonDisabled' ";
+				$disable = " disabled='disabled' ";
 				$font = " class='imgButtonDisabled' ";
 				$src = "../../image/button_icon/".$icon."_disabled.png";
 			}
-
+			$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class.$disable;
+			
 			$margintop = ($this->qtbuttons >= 1)? "10" : "5";
-			$button = "<div id='".$id."' name='".$name."' style='padding-top:5px; width:54px; margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
+			$button = "<button id='".$id."' name='".$name."' style='padding-top:5px; width:57px; margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
 								<img id='obj_".$id."' src='".$src."' ".$font."/>
-							</div>";
+							</button>";
 
 			$this->qtbuttons++;
             

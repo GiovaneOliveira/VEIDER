@@ -52,13 +52,13 @@
 
 .imgButtonPressed{
 	padding-top: 1px;
-	padding-right: 9px;
+	padding-right: 10px;
 	padding-bottom: 4px;
-	padding-left: 11px;
+	padding-left: 10px;
 }
 
 /* CLASSE PAI */
-.button, .buttonNormal, .buttonHover, .buttonDisabled {
+.buttonNormal, .buttonHover, .buttonDisabled {
 	border: 2px solid #222222;
 	cursor: pointer;
 	border-radius:7px;
