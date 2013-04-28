@@ -16,15 +16,18 @@
 <input type="hidden" id="cdnotice" name="cdnotice">
 <div id="dvlistnotices" name="dvlistnotices" style="background-color:#F5F5F5; border-radius:15px; width:100%; height:100%; overflow:hidden; border: 1px groove #333333;">
 <?
-    $sql =  "SELECT CDNOTICE, NMNOTICE, DTNOTICE FROM VRNOTICE ORDER BY DTNOTICE DESC";
+    $sql =  " SELECT NOTI.CDNOTICE, NOTI.NMNOTICE, NOTI.DTNOTICE, COMP.NMCOMPANY
+				FROM VRNOTICE NOTI, VRCOMPANY COMP
+				WHERE NOTI.CDCOMPANY = COMP.CDCOMPANY
+				ORDER BY NOTI.DTNOTICE DESC";
 	
 	$exec = $conn->query($sql);
 	
 	$list->setQueryFields($exec);
-	$list->setFieldNames(array("NMNOTICE", "DTNOTICE"));
-	$list->setTitleNames(array("NOTÍCIA", "DATA"));
-	$list->setColWidth(array("200px", "100px"));
-	$list->setColAlign(array("left", "right"));
+	$list->setFieldNames(array("NMNOTICE", "NMCOMPANY", "DTNOTICE"));
+	$list->setTitleNames(array("NOTÍCIA", "EMPRESA", "DATA"));
+	$list->setColWidth(array("200px", "200px", "100px"));
+	$list->setColAlign(array("left", "left", "right"));
 	$list->setDateCols(array("DTNOTICE"));
 	$list->setDblClickFunction("open_notice()");
 	$list->setHiddenObject("cdnotice");
