@@ -79,10 +79,10 @@
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate);?>
+					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate, true);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity);?>
+					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity, true);?>
 				</td>
 			</tr>
 			<tr>
@@ -96,7 +96,7 @@
 				</td>
 			</tr>
 		</table>
-		<? $utils->inputDivImg("img_register", "img_register", "position:absolute; right:30px; bottom:30px; border-color:black; border-width:1px; border-style:solid",$img_register);?>
+		<? $utils->inputDivImg("img_register", "img_register", 100, 100,"position:absolute; right:30px; bottom:30px; border-color:black; border-width:1px; border-style:solid",$img_register);?>
 	</form>
 <? $utils->endDivBorder(); ?>
 

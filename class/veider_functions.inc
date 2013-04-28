@@ -61,7 +61,7 @@
 		*	@param	imagem	$img
 		*	@return	string		$nmimg
 		*/
-		function uploadImg($img)
+		function uploadImg($img, $new_width, $new_height)
 		{
 			preg_match("/\.(png|jpg|jpeg|gif){1}$/i", $img["name"], $ext);
 			
@@ -76,8 +76,6 @@
 			
 			$x   = imagesx($img2);
 			$y   = imagesy($img2);
-			$new_width = 100;
-			$new_height = 100;
 			
 			$image_p = imagecreatetruecolor($new_width, $new_height);
 			imagecopyresampled($image_p, $img2, 0, 0, 0, 0, $new_width, $new_height, $x, $y);

@@ -48,13 +48,13 @@
 			</tr>
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
-					<? $utils->inputButton("Tornar-se administrador", "btn_admin", "btn_admin", 225, "opa()");?>
+					<? $utils->inputButton("Tornar-se administrador", "btn_admin", "btn_admin", 225, "companyRegister(1)");?>
 				</td>
 				<td style="width:40%;">
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
-				<? $utils->inputDivImg("img_login", "img_login", "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
+				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
@@ -67,6 +67,16 @@
 	
 	function userRegister(action) {
 		window_open("../user/register_user_data.php?action="+action, 635, 470);
+	}
+	
+	function companyRegister(action) {
+		RPC = new REQUEST("portal/veider_request.php?type=5");
+		retorno = RPC.Response(null);
+		
+		if(retorno == 0)
+			window_open("../user/register_company_data.php?action="+action, 635, 470);
+		else
+			alert('não');
 	}
 	
 	function userActive() {

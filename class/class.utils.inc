@@ -228,14 +228,14 @@
 		*
 		*	@author Fábio Augusto Cardoso
 		*
-		*	@param	string		$id, $name, $style
+		*	@param	string		$id, $name, $style, $width, $height
 		*	@param	strint		$img, campo Photo
 		*/
 
-		function inputDivImg($id, $name, $style,$img)
+		function inputDivImg($id, $name, $width, $height,$style,$img)
 		{
-			echo '<div id="div_'.$id.'" name="div_'.$name.'" width="100" height="100" style="'.$style.'">
-						<img id="'.$id.'" name="'.$name.'" width="100" height="100" src="../../temp/'.$img.'" />
+			echo '<div id="div_'.$id.'" name="div_'.$name.'" width="'.$width.'" height="'.$height.'" style="'.$style.'">
+						<img id="'.$id.'" name="'.$name.'" width="'.$width.'" height="'.$height.'" src="../../temp/'.$img.'" />
 				</div>';
 		}
 

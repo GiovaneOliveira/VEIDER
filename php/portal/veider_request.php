@@ -12,7 +12,7 @@
 			 createSession();
 		break;
 		case 0: //Vevificar campos para Login
-			$sql = "SELECT CDUSER, IDLOGIN, IDMAIL, IDPASSWORD, FGTYPE, FLPHOTO FROM VRUSER 
+			$sql = "SELECT CDUSER, IDLOGIN, IDMAIL, IDPASSWORD, FGTYPE, FLPHOTO, FGBLOCK FROM VRUSER 
 			WHERE FGBLOCK <> 1 AND ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false)." AND ".$conn->protectStr("IDPASSWORD", $_REQUEST['idpassword'], false);
 			
 			$ex = $conn->query($sql);
@@ -80,6 +80,26 @@
 				
 				echo "1";
 			}
+			else
+				echo "0";
+		break;
+		case 4: //Verificar NMCOMPANY já está registrado
+			$sql = "SELECT NMCOMPANY FROM VRCOMPANY WHERE ".$conn->protectStr("NMCOMPANY", $_REQUEST['nmcompany'], false).($_REQUEST['action'] == 2 ? " AND NMCOMPANY <> '".$_SESSION['nm_company']."'" : "");
+			
+			$ex = $conn->query($sql);
+			
+			if(isset($ex[0]))
+				echo "1";
+			else
+				echo "0";
+		break;
+		case 5://Verificar FGBLOCK de usuario
+			$sql = "SELECT FGBLOCK FROM VRUSER WHERE CDUSER =".$_SESSION['user_code'];
+			
+			$ex = $conn->query($sql);
+			
+			if($ex[0]['fgblock'] == 2)
+				echo "1";
 			else
 				echo "0";
 		break;
