@@ -58,7 +58,26 @@
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
-		<b>ADMINISTRADOR: <?=$_SESSION['user_login']?></b>
+		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
+			<tr style="width:100%; height:50%;">
+				<td style="width:60%;">
+					<?$utils->createFont("ADMINISTRADOR: ".$_SESSION['user_login']);?>
+				</td>
+				<td style="width:40%;">
+					<? $utils->inputButton("Editar Perfil", "btn_edit_user", "btn_edit_user", 100, "userRegister(2)");?>
+				</td>
+			</tr>
+			<tr style="width:100%; height:50%;">
+				<td style="width:60%;">
+					<? $utils->inputButton("Editar Empresa", "btn_edit_company", "btn_edit_company", 225, "companyRegister(2)");?>
+				</td>
+				<td style="width:40%;">
+					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
+				</td>
+			</tr>
+				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
+			</tr>
+		</table>
 	<?}?>
 	<? $utils->endDivBorder(); ?>
 <script>
@@ -76,7 +95,7 @@
 		if(retorno == 0)
 			window_open("../user/register_company_data.php?action="+action, 635, 470);
 		else
-			alert('não');
+			alert('Solicitação já requisitada');
 	}
 	
 	function userActive() {
@@ -87,7 +106,7 @@
 	{
 		RPC = new REQUEST("portal/veider_request.php?type=-1");
 		RPC.Response(null);
-		window.location.reload();
+		parent.window.location.reload();
 	}
 	
 	function Login()
@@ -97,7 +116,7 @@
 		
 		if(retorno == 1)
 		{
-			window.location.reload();
+			parent.window.location.reload();
 		}
 		else
 			alert('Deu merda');

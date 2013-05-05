@@ -24,26 +24,23 @@
 		$nmcompany = "";
 		$dsadress_company = "";
 		$nrphone_company = "";
-		$nrphone_company = "";
 		$nmstate_company = "";
 		$nmcity_company = "";
-		$img_company ="img_null.png";
+		$img_company ="logo_portal.png";
 	}
-	/*else if($_REQUEST['action'] == 2)
+	else if($_REQUEST['action'] == 2)
 	{
-		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_SESSION['user_code']);
+		$ex = $conn->query("SELECT * FROM VRCOMPANY WHERE CDCOMPANY =".$_SESSION['cd_company']);
 	
-		$nmuser = $ex[0]['nmuser'];
-		$idlogin = $ex[0]['idlogin'];
-		$idpassword = $ex[0]['idpassword'];
-		$idpassword_confirm = $ex[0]['idpassword'];
-		$idmail = $ex[0]['idmail'];
-		$nrphone = $ex[0]['nrphone'];
-		$nmstate = $ex[0]['cdstate'];
-		$nmcity = $ex[0]['cdcity'];
-		$dsadress = $ex[0]['dsadress'];
-		$img_register = $ex[0]['flphoto'];
-	}*/
+		$admin_login = $_SESSION['user_login'];
+		$admin_mail = $_SESSION['user_mail'];
+		$nmcompany = $ex[0]['nmcompany'];
+		$dsadress_company = $ex[0]['dsadress'];
+		$nrphone_company = $ex[0]['nrphone'];
+		$nmstate_company = $ex[0]['nmstate'];
+		$nmcity_company = $ex[0]['nmcity'];
+		$img_company = $ex[0]['fllogo'];
+	}
 
 	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save");
 	$utils->beginDivBorder(true);

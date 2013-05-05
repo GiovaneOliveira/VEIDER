@@ -28,17 +28,12 @@
 				
 				if($ex[0]['fgtype'] == 2)
 				{
-					$excompany = $conn->query("SELECT CDCOMPANY, NMCOMPANY FROM VRCOMPANY WHERE CDADMIN =".$ex[0]['cduser']);
+					$excompany = $conn->query("SELECT CDCOMPANY, NMCOMPANY, FLLOGO FROM VRCOMPANY WHERE CDADMIN =".$ex[0]['cduser']);
 					
 					$_SESSION['cd_company'] = $excompany[0]['cdcompany'];
 					$_SESSION['nm_company'] = $excompany[0]['nmcompany'];
+					$_SESSION['company_logo'] = $excompany[0]['fllogo'];
 				}
-				else
-				{
-					$_SESSION['cd_company'] = '';
-					$_SESSION['nm_company'] = '';
-				}
-				
 				echo "1";
 			}
 			else
