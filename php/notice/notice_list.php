@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
     $conn = new dba_connect();
@@ -18,8 +18,12 @@
 <?
     $sql =  " SELECT NOTI.CDNOTICE, NOTI.NMNOTICE, NOTI.DTNOTICE, COMP.NMCOMPANY
 				FROM VRNOTICE NOTI, VRCOMPANY COMP
-				WHERE NOTI.CDCOMPANY = COMP.CDCOMPANY
-				ORDER BY NOTI.DTNOTICE DESC";
+				WHERE NOTI.CDCOMPANY = COMP.CDCOMPANY ";
+	
+	if(isset($_REQUEST['cdcompany']) && $_REQUEST['cdcompany'] != "")
+		$sql .= " AND NOTI.CDCOMPANY = ".$_REQUEST['cdcompany'];
+	
+	$sql .= " ORDER BY NOTI.DTNOTICE DESC ";
 	
 	$exec = $conn->query($sql);
 	

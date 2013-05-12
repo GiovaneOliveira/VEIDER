@@ -8,7 +8,7 @@
 <html>
 <head>
 <title>Cadastro de administrador</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
 	$utils = new utils();
@@ -93,15 +93,16 @@
 	<?verifyFormatImg("flphoto_company","img_company");?>
 	<?include_once("../../js/rpc.js");?>
 	
-	function verifyLogin()
+	function verifyCompany()
 	{
 		RPC = new REQUEST("portal/veider_request.php?type=4&action=<?=$_REQUEST['action']?>&nmcompany="+document.getElementById('nmcompany').value);
 		retorno = RPC.Response(null);
 		
 		if(retorno == 1)
 		{
-			alert('Este Login já está registrado');
-			document.getElementById('idlogin').value = '';
+			alert('Este empresa já está registrada');
+			document.getElementById('nmcompany').value = '';
+			document.getElementById('nmcompany').focus();
 		}
 	}
 	

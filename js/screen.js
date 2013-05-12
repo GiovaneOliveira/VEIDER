@@ -60,3 +60,9 @@ function split_screen() {
 	iframeBottom.setAttribute("src", bottom);
 	document.body.appendChild(iframeBottom);
 }
+
+function refreshSrc(position, src) {
+	try {
+		document.getElementById(position).src = src;
+	} catch (e) { alert("Frame não encontrada!"); }
+}

@@ -8,18 +8,19 @@
         {
             $this->menu = array();
             $this->itens = 0;
+            echo "<link rel='stylesheet' type='text/css' href='../../css/menu.css'>";
+            echo "<script type='text/javascript' src='../../js/menu.js'></script>";
             echo "<script type='text/javascript' src='../../js/jquery.js'></script>";
-			echo "<script type='text/javascript'>
-						$(document).ready(function()
-						{
-							// desliza o elemento com class=menu_body quando paragrafo com class=menu_head é clicado
-							$('#output_menu p.menu_head').click(function()
-							{
-								//$(this).next('div.menu_body').slideToggle(300).siblings('div.menu_body').slideUp('slow'); -> Contrai o q estiver expandido
-								$(this).next('div.menu_body').slideToggle(400);
-							});
-						});
-					</script>";
+            // Efeito Jquery para deslizar opções do menu
+            echo "  <script>
+                            $(document).ready( function() {
+                                /* Faz o slide do elemento que tiver class = menuItem , quando um paragrafo com classe = menuTitle for clicado */
+                                $('#output_menu p.menuTitle').click(function() {
+                                    $(this).next('div.menuItem').slideToggle(300).siblings('div.menuItem')/*.slideUp('slow')*/;
+                                    $(this).siblings();
+                                });
+                            });
+                        </script>";
         }
         
         /*
@@ -44,21 +45,25 @@
         {
             $array = $this->menu;
             
-            $output = "<div id='output_menu' name='output_menu' width='".$width."'>";
+            $mouseover = " onmouseover=\"menuBG(this.id, 1);\" ";
+            $mouseout = " onmouseout=\"menuBG(this.id, 2);\" ";
             
+            $output = "<div id='output_menu' name='output_menu' class='dvMenu' style='width:".$width.";'>\n";
+            
+            $item = 0;
             foreach($array as $key => $value)
             {
                 if($value['owner']) {
                     if($key > 0)
-                        $output .= "</div>";
-                    $output .= "<p class='menu_head'>".$value['label']."</p>";
-                    $output .= "<div class='menu_body'>";
+                        $output .= "</div>\n";
+                    $output .= "<p class='menuTitle'>".$value['label']."</p>\n";
+                    $output .= "<div class='menuItem'>\n";
                 } else {
-                    $output .= "<a href='#'>".$value['label']."</a>";
+                    $item ++;
+                    $output .= "\t<a id='item_".$item."' class='itemSpan' onmousedown=\"menuBG(this.id, 3); reloadFrames('".$value['src']."');\" ".$mouseover.$mouseout.">".$value['label']."</a>\n";
                 }
             }
-            
-            $output .= "</div>";
+            $output .= "</div>\n";
             
             echo $output;
         }

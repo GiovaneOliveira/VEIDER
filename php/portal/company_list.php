@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
     $conn = new dba_connect();
@@ -39,6 +39,7 @@
 		$list->setTitleNames(array("NOME", "CIDADE", "ESTADO", "FONE", "ENDEREÇO"));
 		$list->setColWidth(array("300px", "200px", "75px", "130px", "300px"));
 		$list->setColAlign(array("left", "left", "center", "right", "left"));
+		$list->setDblClickFunction("reloadFrames()");
 		$list->setHiddenObject("cdcompany");
 		$list->printList("dvGrid");
 	}
@@ -60,5 +61,19 @@
 	}
 ?>
 </div>
+<script type="text/javascript">
+	function reloadFrames() {
+		cdcompany = document.getElementById('cdcompany').value;
+		
+		// Menu
+		parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);
+		// Notícias
+		parent.refreshSrc("right", "../notice/notice_list.php?cdcompany="+cdcompany);
+		// Central
+		parent.refreshSrc("middle", "../portal/company_list.php");
+		// Cabeçalho
+		parent.refreshSrc("top", "../portal/header.php?cdcompany="+cdcompany);
+	}
+</script>
 </body>
 </html>

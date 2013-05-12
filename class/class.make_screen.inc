@@ -21,5 +21,14 @@
 					</script>
 				";
 		}
+		
+		function refreshSrc($position, $src)
+		{
+			echo "
+					<script type='text/javascript'>
+						refreshSrc('".$position."', '".$src."');
+					</script>
+				";
+		}
 	}
 ?>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Dados da notícia</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
 	$utils = new utils();
