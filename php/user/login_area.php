@@ -63,12 +63,11 @@
 				</td>
 			</tr>
 				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
-			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
-				<td style="width:60%;">
+				<td style="width:60%;" colspan="2">
 					<?$utils->createFont("ADMINISTRADOR: ".$ex[0]['idlogin']);?>
 				</td>
 				<td style="width:40%;">
@@ -76,15 +75,17 @@
 				</td>
 			</tr>
 			<tr style="width:100%; height:50%;">
-				<td style="width:60%;">
-					<? $utils->inputButton("Editar Empresa", "btn_edit_company", "btn_edit_company", 225, "companyRegister(2)");?>
+				<td style="width:33%;">
+					<? $utils->inputButton("Editar Empresa", "btn_edit_company", "btn_edit_company", 125, "companyRegister(2)");?>
 				</td>
-				<td style="width:40%;">
+				<td style="width:33%;">
+					<? $utils->inputButton("Visitar Empresa", "btn_login_company", "btn_login_company", 125, "loginCompany()");?>
+				</td>
+				<td style="width:33%;">
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
 				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
-			</tr>
 		</table>
 	<?}?>
 	<? $utils->endDivBorder(); ?>
@@ -117,6 +118,20 @@
 		parent.window.location.reload();
 	}
 	
+	function loginCompany()
+	{
+		cdcompany = "<?= $_SESSION['cd_company']?>";
+		
+		// Menu
+		parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);
+		// Notícias
+		parent.refreshSrc("right", "../notice/notice_list.php?cdcompany="+cdcompany);
+		// Central
+		parent.refreshSrc("middle", "../portal/company_list.php");
+		// Cabeçalho
+		parent.refreshSrc("top", "../portal/header.php?cdcompany="+cdcompany);
+	}
+	
 	function Login()
 	{
 		RPC = new REQUEST("portal/veider_request.php?type=0&idlogin="+document.getElementById('idlogin').value+"&idpassword="+document.getElementById('idpassword').value);
@@ -124,7 +139,7 @@
 		
 		if(retorno == 1)
 		{
-			parent.window.location.reload();
+			parent.refreshSrc("login", "../user/login_area.php");
 		}
 		else
 			alert('Deu merda');

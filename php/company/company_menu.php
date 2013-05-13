@@ -26,12 +26,27 @@
 	$menu->add("Cadastro de sugestões", null, false);
 	
 	$menu->output("100%");
-	
+?>
+	<div align="center" style="width:100%; bottom:20px; left:0px; position:absolute;">
+		<? $utils->inputButton("Retornar a tela de pesquisa", "btn_back", "btn_back", 310, "backReload()");?>
+	</div>
+<?
 	$utils->endDivBorder();
 ?>
 <script type="text/javascript">
 	function reloadFrames(src) {
 		parent.refreshSrc("middle", src);
+	}
+	
+	function backReload(){
+		// Filtro
+		parent.refreshSrc("left", "../portal/company_filter.php?");
+		// Notícias
+		parent.refreshSrc("right", "../notice/notice_list.php?");
+		// Central
+		parent.refreshSrc("middle", "../portal/company_list.php");
+		// Cabeçalho
+		parent.refreshSrc("top", "../portal/header.php?");
 	}
 	
 	divBorderHeight(26);
