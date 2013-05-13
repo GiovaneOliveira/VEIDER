@@ -34,20 +34,17 @@
 			
 			$sql .= "UPDATE VRUSER SET FGBLOCK = 2 WHERE CDUSER = '".$_SESSION['user_code']."'";
 		}
-		/*else if($_REQUEST['action'] == 2)
+		else if($_REQUEST['action'] == 2)
 		{
-			$sql = "UPDATE VRUSER SET NMUSER = '".$_REQUEST['nmuser']."',
-												 IDLOGIN = '".$_REQUEST['idlogin']."',
-												 IDPASSWORD = '".$_REQUEST['idpassword']."',
-												 IDMAIL = '".$_REQUEST['idmail']."',
-												 DSADRESS = '".$_REQUEST['dsadress']."',
-												 NRPHONE = '".$_REQUEST['nrphone']."',
-												 ".(!empty($_FILES["flphoto"]['tmp_name'])?"FLPHOTO = ".$imagem.",":"")."
-												 CDSTATE = ".$_REQUEST['nmstate'].",
-												 CDCITY = ".$_REQUEST['nmcity']."
-												 WHERE CDUSER = '".$_SESSION['user_code']."'
+			$sql = "UPDATE VRCOMPANY SET NMCOMPANY = '".$_REQUEST['nmcompany']."',
+												 DSADRESS = '".$_REQUEST['dsadress_company']."',
+												 NRPHONE = '".$_REQUEST['nrphone_company']."',
+												 ".(!empty($_FILES["flphoto_company"]['tmp_name'])?"FLLOGO = ".$imagem.",":"")."
+												 NMSTATE = ".$_REQUEST['nmstate_company'].",
+												 NMCITY = ".$_REQUEST['nmcity_company']."
+												 WHERE CDADMIN = '".$_SESSION['user_code']."'
 					";
-		}*/
+		}
 		
 		$conn->insert($sql);
 		

@@ -1,5 +1,6 @@
 <?
 	require_once("../../class/class.utils.inc");
+	require_once("../../class/class.dba_connect.inc");
 	session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -9,12 +10,19 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
 	$utils = new utils();
+	$conn = new dba_connect();
 	//error_log(print_r($_SESSION, true));
 ?>
 </head>
 <body style="overflow:hidden; background-color:#333333">
-	<?	$utils->beginDivBorder();?>
-	<?if($_SESSION['startLogin'] == 0){?>
+	<?	$utils->beginDivBorder();
+	
+	if(isset($_SESSION['user_code']))
+	{
+		$ex = $conn->query("SELECT IDLOGIN, FLPHOTO FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
+	}
+	
+	if($_SESSION['startLogin'] == 0){?>
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
 				<td colspan="2" style="padding-left:40px; width: 66.6%">
@@ -40,7 +48,7 @@
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
-					<?$utils->createFont("USUÁRIO: ".$_SESSION['user_login']);?>
+					<?$utils->createFont("USUÁRIO: ".$ex[0]['idlogin']);?>
 				</td>
 				<td style="width:40%;">
 					<? $utils->inputButton("Editar Perfil", "btn_edit", "btn_edit", 100, "userRegister(2)");?>
@@ -54,14 +62,14 @@
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
-				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
+				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
 			</tr>
 		</table>
 	<?} else if($_SESSION['startLogin'] == 2){?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
-					<?$utils->createFont("ADMINISTRADOR: ".$_SESSION['user_login']);?>
+					<?$utils->createFont("ADMINISTRADOR: ".$ex[0]['idlogin']);?>
 				</td>
 				<td style="width:40%;">
 					<? $utils->inputButton("Editar Perfil", "btn_edit_user", "btn_edit_user", 100, "userRegister(2)");?>
@@ -75,7 +83,7 @@
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
-				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$_SESSION['user_photo']);?>
+				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
 			</tr>
 		</table>
 	<?}?>
@@ -93,7 +101,7 @@
 		retorno = RPC.Response(null);
 		
 		if(retorno == 0)
-			window_open("../user/register_company_data.php?action="+action, 635, 470);
+			window_open("../company/register_company_data.php?action="+action, 635, 470);
 		else
 			alert('Solicitação já requisitada');
 	}

@@ -20,10 +20,6 @@
 			if(isset($ex[0]))
 			{
 				$_SESSION['user_code'] = $ex[0]['cduser'];
-				$_SESSION['user_login'] = $ex[0]['idlogin'];
-				$_SESSION['user_mail'] = $ex[0]['idmail'];
-				$_SESSION['user_password'] = $ex[0]['idpassword'];
-				$_SESSION['user_photo'] = $ex[0]['flphoto'];
 				$_SESSION['startLogin'] = $ex[0]['fgtype'];
 				
 				if($ex[0]['fgtype'] == 2)
@@ -31,8 +27,6 @@
 					$excompany = $conn->query("SELECT CDCOMPANY, NMCOMPANY, FLLOGO FROM VRCOMPANY WHERE CDADMIN =".$ex[0]['cduser']);
 					
 					$_SESSION['cd_company'] = $excompany[0]['cdcompany'];
-					$_SESSION['nm_company'] = $excompany[0]['nmcompany'];
-					$_SESSION['company_logo'] = $excompany[0]['fllogo'];
 				}
 				echo "1";
 			}
@@ -40,7 +34,7 @@
 				echo "0";
 		break;
 		case 1: //Verificar se IDLOGIN já está registrado
-			$sql = "SELECT IDLOGIN FROM VRUSER WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false).($_REQUEST['action'] == 2 ? " AND IDLOGIN <> '".$_SESSION['user_login']."'" : "");
+			$sql = "SELECT IDLOGIN FROM VRUSER WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false).($_REQUEST['action'] == 2 ? " AND IDLOGIN <> (SELECT IDLOGIN FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."')": "");
 			
 			$ex = $conn->query($sql);
 			
@@ -50,7 +44,7 @@
 				echo "0";
 		break;
 		case 2: //Verificar se IDMAIL já está registrado
-			$sql = "SELECT IDMAIL FROM VRUSER WHERE ".$conn->protectStr("IDMAIL", $_REQUEST['idmail'], false).($_REQUEST['action'] == 2 ? " AND IDMAIL <> '".$_SESSION['user_mail']."'" : "");
+			$sql = "SELECT IDMAIL FROM VRUSER WHERE ".$conn->protectStr("IDMAIL", $_REQUEST['idmail'], false).($_REQUEST['action'] == 2 ? " AND IDMAIL <> (SELECT IDMAIL FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."')" : "");
 			
 			$ex = $conn->query($sql);
 			
@@ -79,7 +73,7 @@
 				echo "0";
 		break;
 		case 4: //Verificar NMCOMPANY já está registrado
-			$sql = "SELECT NMCOMPANY FROM VRCOMPANY WHERE ".$conn->protectStr("NMCOMPANY", $_REQUEST['nmcompany'], false).($_REQUEST['action'] == 2 ? " AND NMCOMPANY <> '".$_SESSION['nm_company']."'" : "");
+			$sql = "SELECT NMCOMPANY FROM VRCOMPANY WHERE ".$conn->protectStr("NMCOMPANY", $_REQUEST['nmcompany'], false).($_REQUEST['action'] == 2 ? " AND NMCOMPANY <> (SELECT NMCOMPANY FROM VRCOMPANY WHERE CDADMIN = '".$_SESSION['user_code']."')" : "");
 			
 			$ex = $conn->query($sql);
 			

@@ -17,10 +17,12 @@
 </head>
 <body style="margin:10px;" bgcolor="#333333">
 <?
+	$exUser = $conn->query("SELECT IDLOGIN, IDMAIL FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
+
 	if($_REQUEST['action'] == 1)
 	{
-		$admin_login = $_SESSION['user_login'];
-		$admin_mail = $_SESSION['user_mail'];
+		$admin_login = $exUser[0]['idlogin'];
+		$admin_mail = $exUser[0]['idmail'];
 		$nmcompany = "";
 		$dsadress_company = "";
 		$nrphone_company = "";
@@ -32,8 +34,8 @@
 	{
 		$ex = $conn->query("SELECT * FROM VRCOMPANY WHERE CDCOMPANY =".$_SESSION['cd_company']);
 	
-		$admin_login = $_SESSION['user_login'];
-		$admin_mail = $_SESSION['user_mail'];
+		$admin_login = $exUser[0]['idlogin'];
+		$admin_mail = $exUser[0]['idmail'];
 		$nmcompany = $ex[0]['nmcompany'];
 		$dsadress_company = $ex[0]['dsadress'];
 		$nrphone_company = $ex[0]['nrphone'];

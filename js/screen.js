@@ -62,7 +62,11 @@ function split_screen() {
 }
 
 function refreshSrc(position, src) {
-	try {
-		document.getElementById(position).src = src;
-	} catch (e) { alert("Frame não encontrada!"); }
+	if(src != "") {
+		try {
+			document.getElementById(position).src = src;
+		} catch (e) { alert("Frame não encontrada!"); }
+	} else {
+		document.getElementById(position).location.reload();
+	}
 }
