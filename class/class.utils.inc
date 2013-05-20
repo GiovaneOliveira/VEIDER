@@ -192,7 +192,7 @@
 		*	@param	strint		$icon ex: 'save' -> nome da imagem salva em "image/button_icon", em formato PNG
 		*	@param boolean		$enabled
 		*/
-		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true)
+		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true, $listBtns = false)
 		{
 			$action = empty($action)? "" : "onclick='".$action."'";
 			
@@ -214,7 +214,7 @@
 			}
 			$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class.$disable;
 			
-			$margintop = ($this->qtbuttons >= 1)? "10" : "5";
+			$margintop = ($this->qtbuttons >= 1 && !$listBtns)? "10" : "5";
 			$button = "<button id='".$id."' name='".$name."' style='padding-top:5px; width:57px; margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
 								<img id='obj_".$id."' src='".$src."' ".$font."/>
 							</button>";

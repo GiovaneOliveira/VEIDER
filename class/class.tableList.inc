@@ -1,4 +1,6 @@
 <?
+	require_once("class.utils.inc");
+	
 	class tableList
 	{
 		var $queryfields;
@@ -9,13 +11,17 @@
 		var $hidden;
 		var $clickfunction = false;
 		var $dblclickfunction = false;
+		var $hastoolbar = false;
+		var $toolbarbuffer = "";
+		var $_utils;
 		var $datecols = null;
 		var $imgcols = null;
 		var $total;
-
+		
 		function tableList(){
 			echo "<script type='text/javascript' src='../../js/list.js'></script>";
 			echo "<link rel='stylesheet' type='text/css' href='../../css/list.css' />";
+			$this->_utils = new utils();
 		}
 
 		function setQueryFields($queryfields) {
@@ -50,12 +56,20 @@
 			$this->dblclickfunction = $function;
 		}
 		
+		function setHasToolbar($hastoolbar) {
+			$this->hastoolbar = $hastoolbar;
+		}
+		
 		function setDateCols($cols) {
 			$this->datecols = $cols;
 		}
 		
 		function setImgCols($cols) {
 			$this->imgcols = $cols;
+		}
+		
+		function addButton($label, $id, $name, $action, $icon) {
+			$this->toolbarbuffer[$id] = $this->_utils->imageButton($label, $id, $name, $action, $icon, true, false, true);
 		}
 		
 		function printList($obj) {
@@ -76,8 +90,21 @@
 			$list = "
 				<div id='dv_list_".$this->hidden."' style='width:100%;overflow:auto;'>
 					<table cellpadding='0' cellspacing='0' style='min-width:100%;'>
-						<thead>
-							<tr class='trHeader'>\n";
+						<thead>\n";
+							if($this->hastoolbar) {
+								$list .= "<tr>
+												<td>
+													<table cellpadding='0' cellspacing='0'>
+														<tr>\n";
+															foreach($this->toolbarbuffer as $value) {
+																$list .= "<td style='padding-left:10px; padding-bottom:7px;'>\n".$value."\n</td>\n";
+															}
+													$list .= "</tr>
+													</table>
+												</td>
+											</tr>";
+							}
+							$list .= "<tr class='trHeader'>\n";
 								foreach($this->titlenames as $value) {
 									$list .= "<th class='thHeader' style='width:".$this->colwidth[$col]."; text-align:".$this->colalign[$col].";'>".$value."</th>\n";
 									$col++;
