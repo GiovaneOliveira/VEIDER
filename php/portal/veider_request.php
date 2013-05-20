@@ -13,11 +13,11 @@
 		break;
 		case 0: //Vevificar campos para Login
 			$sql = "SELECT CDUSER, IDLOGIN, IDMAIL, IDPASSWORD, FGTYPE, FLPHOTO, FGBLOCK FROM VRUSER 
-			WHERE FGBLOCK <> 1 AND ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false)." AND ".$conn->protectStr("IDPASSWORD", $_REQUEST['idpassword'], false);
+			WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false)." AND ".$conn->protectStr("IDPASSWORD", $_REQUEST['idpassword'], false);
 			
 			$ex = $conn->query($sql);
 			
-			if(isset($ex[0]))
+			if(isset($ex[0]) && $ex[0]['fgblock'] != 1)
 			{
 				$_SESSION['user_code'] = $ex[0]['cduser'];
 				$_SESSION['startLogin'] = $ex[0]['fgtype'];
@@ -29,6 +29,10 @@
 					$_SESSION['cd_company'] = $excompany[0]['cdcompany'];
 				}
 				echo "1";
+			}
+			else if(isset($ex[0]) && $ex[0]['fgblock'] == 1)
+			{
+				echo "2";
 			}
 			else
 				echo "0";

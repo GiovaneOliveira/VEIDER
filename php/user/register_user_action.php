@@ -56,7 +56,7 @@
 		
 		$conn->insert($sql);
 		
-		echo "<script>".($_REQUEST['action'] == 2?"alert('relogar');":"")."window.close()</script>";
+		echo "<script>".($_REQUEST['action'] == 2?"alert('É necessario efetuar login novamente');":"alert('Cadastro salvo com sucesso, acesse seu e-mail e ative sua conta');")."window.close()</script>";
 	}
 	else
 	{

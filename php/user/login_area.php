@@ -120,7 +120,7 @@
 	
 	function loginCompany()
 	{
-		cdcompany = "<?= $_SESSION['cd_company']?>";
+		cdcompany = "<?= isset($_SESSION['cd_company'])?$_SESSION['cd_company']:''?>";
 		
 		// Menu
 		parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);
@@ -141,8 +141,12 @@
 		{
 			parent.refreshSrc("login", "../user/login_area.php");
 		}
+		else if(retorno == 2)
+		{
+			alert('Acesse seu e-mail e ative sua conta');
+		}
 		else
-			alert('Deu merda');
+			alert('Usuário e/ou Senha inválidos');
 	}
 	
 	function opa(){

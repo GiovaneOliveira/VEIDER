@@ -48,7 +48,7 @@
 		
 		$conn->insert($sql);
 		
-		echo "<script>".($_REQUEST['action'] == 2?"alert('relogar');":"")."window.close()</script>";
+		echo "<script>".($_REQUEST['action'] == 2?"alert('É necessario efetuar login novamente');":"alert('Solicição efetuada com sucesso, acesse seu e-mail para mais informações');")."window.close()</script>";
 	}
 	else
 	{
