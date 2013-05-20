@@ -1,6 +1,7 @@
 <?
 	require_once("../../class/class.utils.inc");
 	require_once("../../class/class.menu.inc");
+	session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -14,16 +15,36 @@
 </head>
 <body style="overflow:hidden; background-color:#333333;">
 <?
+	$company = false;
+	$veider = false;
+	if($_SESSION['startLogin'] == 2 && $_SESSION['cd_company'] == $_REQUEST['cdcompany'])
+		$company = true;
+	else if($_SESSION['startLogin'] == 3)
+		$veider = true;
+	
 	$utils->beginDivBorder();
 	
-	$menu->add("Reservas", null, true);
-	$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
-	$menu->add("Consulta", null, false);
-	$menu->add("Cancelamento", null, false);
-	$menu->add("Opções", null, true);
-	$menu->add("Visualizar dados da empresa", null, false);
-	$menu->add("Visualizar espaços", null, false);
-	$menu->add("Cadastro de sugestões", null, false);
+	if($veider) {
+		$menu->add("Empresas", null, true);
+		$menu->add("Solicitações pendentes", "", false);
+	}
+	else {
+		$menu->add("Reservas", null, true);
+		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
+		$menu->add("Consulta", "", false);
+		$menu->add("Cancelamento", "", false);
+		
+		if($company) {
+			$menu->add("Informativo", null, true);
+			$menu->add("Relatório de agendamento", "", false);
+			$menu->add("Relatório de assiduidade", "", false);
+		}
+		
+		$menu->add("Opções", null, true);
+		$menu->add("Dados da empresa", "", false);
+		$menu->add("Espaços", "", false);
+		$menu->add("Sugestões", "", false);
+	}
 	
 	$menu->output("100%");
 ?>

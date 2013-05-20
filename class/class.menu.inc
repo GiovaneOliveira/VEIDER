@@ -16,7 +16,7 @@
                             $(document).ready( function() {
                                 /* Faz o slide do elemento que tiver class = menuItem , quando um paragrafo com classe = menuTitle for clicado */
                                 $('#output_menu p.menuTitle').click(function() {
-                                    $(this).next('div.menuItem').slideToggle(300).siblings('div.menuItem')/*.slideUp('slow')*/;
+                                    $(this).next('div.menuItem').slideToggle(300).siblings('div.menuItem').slideUp('slow');
                                     $(this).siblings();
                                 });
                             });
