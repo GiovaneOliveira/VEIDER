@@ -19,7 +19,7 @@
 	
 	if(isset($_SESSION['user_code']))
 	{
-		$ex = $conn->query("SELECT IDLOGIN, FLPHOTO FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
+		$ex = $conn->query("SELECT IDLOGIN, NMUSER, FLPHOTO FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
 	}
 	
 	if($_SESSION['startLogin'] == 0){?>
@@ -48,7 +48,9 @@
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
-					<?$utils->createFont("USUÁRIO: ".$ex[0]['idlogin']);?>
+					<?$utils->createFont("USUÁRIO: ");
+					   $utils->inputText("", "login_name", "login_name", 60, "width: 150", $ex[0]['nmuser'], false, false);
+					?>
 				</td>
 				<td style="width:40%;">
 					<? $utils->inputButton("Editar Perfil", "btn_edit", "btn_edit", 100, "userRegister(2)");?>
@@ -64,11 +66,13 @@
 			</tr>
 				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
 		</table>
-	<?} else if($_SESSION['startLogin'] == 2){?>
+	<?} else if($_SESSION['startLogin'] == 2 || $_SESSION['startLogin'] == 3){?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;" colspan="2">
-					<?$utils->createFont("ADMINISTRADOR: ".$ex[0]['idlogin']);?>
+					<?$utils->createFont("ADMINISTRADOR: ");
+					   $utils->inputText("", "login_name", "login_name", 60, "width: 130", $ex[0]['nmuser'], false, false);
+					?>
 				</td>
 				<td style="width:40%;">
 					<? $utils->inputButton("Editar Perfil", "btn_edit_user", "btn_edit_user", 100, "userRegister(2)");?>
