@@ -89,5 +89,40 @@
 			
 			return $nmImg;
 		}
+        
+        /*
+        *   Cria div de carregando
+        */
+        function loading()
+        {
+            echo "
+                <div id='dvLoading' name='dvLoading' class='dvLoading' style='overflow: hidden;'>
+                    <img id='imgLoading' src='../../image/veider/loading.gif' class='imgLoading'/>
+                </div>
+                <script type='text/javascript' src='../../js/jquery.js'></script>
+                <script>
+                    function showLoading(){
+                        $(document).ready(function () {
+                            $('#dvLoading').fadeIn();
+                        });
+                    }
+                    function hideLoading(){
+                        $(document).ready(function () {
+                            $('#dvLoading').fadeOut();
+                        });
+                    }
+                     window.onload = function() { hideLoading(); };
+                </script>
+            ";
+        }
+		
+		function companyPendency($col, $row) {
+			if($col == 2)
+				return "<img src='../../image/list_icon/money.png' title='Aguardando pagamento'/>";
+			else if($col == 3)
+				return "<img src='../../image/list_icon/inactive.png' title='Desativado'/>";
+			else
+				return "";
+		}
 	}
 ?>

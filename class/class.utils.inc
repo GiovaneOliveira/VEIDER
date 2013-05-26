@@ -108,15 +108,20 @@
 			$onchange = empty($onchange)? "" : "onchange='".$onchange."'";
 			$required = ($required)? "required='1'" : "";
 			$enabled = (!$enabled)? "disabled='disabled'" : "";
-
-			$combo = 1;
+            
 			$combobox = $label."
 						<select id='".$id."' name='".$name."' ".$style.$onchange.$required.$enabled." >
 							<option value='' id='00'></option>";
-							foreach($option as $value) {
-								$selected = $select == $combo? "selected='selected'" : "";
-								$combobox .= "<option value='".$combo."' id='opt_".$id."_".$combo."' ".$selected.">".$value."</option>";
-								$combo++;
+							foreach($option as $key => $value) {
+                                if(is_array($value)) {
+                                    $text = $value['content'];
+                                    $father = "father='".$value['father']."'";
+                                } else {
+                                    $text = $value;
+                                    $father = "";
+                                }
+								$selected = $select == $key? "selected='selected'" : "";
+								$combobox .= "<option value='".$key."' id='opt_".$id."_".$key."' ".$selected.$father.">".$text."</option>";
 							}
 			$combobox .= "</select>";
 

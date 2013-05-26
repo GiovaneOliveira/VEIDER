@@ -19,6 +19,7 @@
 		var $total;
 		
 		function tableList(){
+            echo "<script type='text/javascript' src='../../js/jquery.js'></script>";
 			echo "<script type='text/javascript' src='../../js/list.js'></script>";
 			echo "<link rel='stylesheet' type='text/css' href='../../css/list.css' />";
 			$this->_utils = new utils();
@@ -75,7 +76,7 @@
 		function printList($obj) {
 			$this->total = count($this->queryfields);
 
-			$col = 0; $row = 1; $click = ""; $dblclick = "";
+			$col = 0; $row = 1; $click = ""; $dblclick = ""; $dvlist_height = 35;
 
 			$mouseover = " onmouseover='mouseReg(this.id, 1)' ";
 			$mouseout = " onmouseout='mouseReg(this.id, 2)' ";
@@ -86,24 +87,25 @@
 				$dblclick = " ondblclick='".$this->dblclickfunction."' ";
 
 			$events = $mouseover.$mouseout.$click.$dblclick;
-
+            
+            if($this->hastoolbar) {
+                $dvlist_height = 82;
+                $toolbar = "
+                    <div id='dv_toolbar_".$this->hidden."' style='width:100%; overflow:hidden;'>
+                        <table cellpadding='0' cellspacing='0'>
+                            <tr>\n";
+                                foreach($this->toolbarbuffer as $value) {
+                                    $toolbar .= "<td style='padding-left:10px; padding-bottom:7px;'>\n".$value."\n</td>\n";
+                                }
+                            $toolbar .= "</tr>
+                        </table>
+                    </div>\n";
+            }
+            
 			$list = "
-				<div id='dv_list_".$this->hidden."' style='width:100%;overflow:auto;'>
-					<table cellpadding='0' cellspacing='0' style='min-width:100%;'>
+				<div id='dv_list_".$this->hidden."' style='width:100%; overflow:auto;'>
+					<table id='table_list_".$this->hidden."' cellpadding='0' cellspacing='0' style='min-width:100%;'>
 						<thead>\n";
-							if($this->hastoolbar) {
-								$list .= "<tr>
-												<td>
-													<table cellpadding='0' cellspacing='0'>
-														<tr>\n";
-															foreach($this->toolbarbuffer as $value) {
-																$list .= "<td style='padding-left:10px; padding-bottom:7px;'>\n".$value."\n</td>\n";
-															}
-													$list .= "</tr>
-													</table>
-												</td>
-											</tr>";
-							}
 							$list .= "<tr class='trHeader'>\n";
 								foreach($this->titlenames as $value) {
 									$list .= "<th class='thHeader' style='width:".$this->colwidth[$col]."; text-align:".$this->colalign[$col].";'>".$value."</th>\n";
@@ -128,9 +130,32 @@
 					</table>
 				</div>
 				<div class='dvFooter'><font class='fontFooter'>Total - (".$this->total.")</font></div>
-				<script type='text/javascript'>var hiddenField = '".$this->hidden."'; document.getElementById('dv_list_".$this->hidden."').style.height = (".$obj.".clientHeight - 35)+'px';</script>
 			";
 			
+            $script = "
+                <script>
+                    $('#dv_list_".$this->hidden."').scroll(function(){
+                        var scroll = $('#dv_list_".$this->hidden."').scrollTop();
+                        if(scroll > 0) {
+                            translate($('#table_list_".$this->hidden." th'), 0, scroll);
+                        } else {
+                            translate($('#table_list_".$this->hidden." th'), 0, 0);
+                        }
+                    });
+                    
+                    function translate(element, x, y) {    
+                        var translation = 'translate('+x+'px,'+y+'px)';
+                        element.css({
+                            'transform': translation,
+                            '-ms-transform': translation
+                        });
+                    }
+                    
+                    var hiddenField = '".$this->hidden."';
+                    document.getElementById('dv_list_".$this->hidden."').style.height = (".$obj.".clientHeight - ".$dvlist_height.")+'px';
+                </script>";
+            
+            $list = ($this->hastoolbar? $toolbar : "").$list.$script;
 			echo $list;
 		}
 		
