@@ -96,7 +96,7 @@
             if($this->hastoolbar) {
                 $dvlist_height = 82;
                 $toolbar = "
-                    <div id='dv_toolbar_".$this->hidden."' style='width:100%; overflow:hidden;'>
+                    <div id='dv_toolbar_".$this->hidden."' style='width:100%; overflow:hidden; border-bottom:2px groove #333333'>
                         <table cellpadding='0' cellspacing='0'>
                             <tr>\n";
                                 foreach($this->toolbarbuffer as $value) {
