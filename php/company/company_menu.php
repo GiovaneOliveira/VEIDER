@@ -25,12 +25,12 @@
 	$utils->beginDivBorder();
 	
 	if($veider) {
-		$menu->add("Empresas", null, true);
-		$menu->add("Solicitações pendentes", "", false);
+		$menu->add("Gestão", null, true);
+		$menu->add("Usuários", "../company/company_pendency.php?type=user", false);
+		$menu->add("Empresas", "../company/company_pendency.php?type=company", false);
 	}
 	else {
 		$menu->add("Reservas", null, true);
-		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		$menu->add("Consulta", "", false);
 		$menu->add("Cancelamento", "", false);
 		
@@ -42,16 +42,18 @@
 		
 		$menu->add("Opções", null, true);
 		$menu->add("Dados da empresa", "", false);
-		$menu->add("Espaços", "", false);
+		$menu->add("Espaços", "../room/room_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		$menu->add("Sugestões", "", false);
 	}
 	
 	$menu->output("100%");
-?>
-	<div align="center" style="width:100%; bottom:20px; left:0px; position:absolute;">
-		<? $utils->inputButton("Retornar a tela de pesquisa", "btn_back", "btn_back", 310, "backReload()");?>
-	</div>
-<?
+	
+	if($_SESSION['FGTYPE'] != 3) {		
+		echo "<div align='center' style='width:100%; bottom:20px; left:0px; position:absolute;'>";
+		$utils->inputButton("Retornar a tela de pesquisa", "btn_back", "btn_back", 310, "backReload()");
+		echo "</div>";
+	}
+	
 	$utils->endDivBorder();
 ?>
 <script type="text/javascript">
