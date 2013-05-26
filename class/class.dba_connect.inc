@@ -5,10 +5,10 @@
 		var $reg = 0;
 		
 		function dba_connect() {
-			$conn = mssql_connect("DES067\SQLEXPRESS", "sa", "111111");
+			$conn = mssql_connect("Giovane-PC\SQLEXPRESS", "sa", "111111");
 			
 			if($conn) {
-				mssql_select_db("testes", $conn);
+				mssql_select_db("VEIDER", $conn);
 			} else {
 				error_log("Erro ao conectar com o banco de dados.");
 			}
@@ -136,15 +136,33 @@
 				END TRY
 				
 				BEGIN CATCH
-					THROW;
+					DECLARE @ErrorMessage NVARCHAR(4000);
+					DECLARE @ErrorSeverity INT;
+					DECLARE @ErrorState INT;
+					
+					SELECT
+						@ErrorMessage = ERROR_MESSAGE(),
+						@ErrorSeverity = ERROR_SEVERITY(),
+						@ErrorState = ERROR_STATE();
+					
+					RAISERROR (
+						@ErrorMessage,
+						@ErrorSeverity,
+						@ErrorState
+					);
 					ROLLBACK TRANSACTION
 				END CATCH
 			";
 			
 			$execution = mssql_query($transaction);
 			
-			if( !$execution)
+			if( !$execution) {
 				error_log("Erro ao executar transação.");
+				return false;
+			}
+			else {
+				return true;
+			}
 		}
 		
 		function protectStr($field, $value, $percent = true)
