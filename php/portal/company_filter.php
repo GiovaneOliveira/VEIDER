@@ -56,7 +56,7 @@
 		
 		var params = "&nmcompany="+nmcompany+"&nmstate="+nmstate+"&nmcity="+nmcity+"&dsadress="+dsadress;
 		
-		parent.document.getElementById('middle').src = parent.document.getElementById('middle').src+params;
+		parent.document.getElementById('middle').src = "../portal/company_list.php?"+params;
 	}
 	
 	function clearAll() {
