@@ -71,3 +71,11 @@ function enableButton(id){
 		}
 	}
 }
+
+function disableField(id){
+    document.getElementById(id).disabled = "disabled";
+}
+
+function enableField(id){
+    document.getElementById(id).removeAttribute("disabled");
+}
