@@ -170,7 +170,7 @@
 			
 			if(is_array($this->datecols) && in_array($colfield, $this->datecols) && !empty($coldata)) {
 				return formatDate($coldata);
-			} else if(is_array($this->moneycols) && in_array($colfield, $this->moneycols) && $coldata != "")
+			} else if(is_array($this->moneycols) && in_array($colfield, $this->moneycols) && $coldata != "") {
                 return formatMoney($coldata);
             } else if(is_array($this->imgcols) && array_key_exists($colfield, $this->imgcols)) {
 				$function = $this->imgcols[$colfield];
