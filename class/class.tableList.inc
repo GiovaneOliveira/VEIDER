@@ -149,11 +149,11 @@
                     });
                     
                     function translate(element, x, y) {    
-                        var translation = 'translate('+x+'px,'+y+'px)';
+                        /*var translation = 'translate('+x+'px,'+y+'px)';
                         element.css({
                             'transform': translation,
                             '-ms-transform': translation
-                        });
+                        });*/
                     }
                     
                     var hiddenField = '".$this->hidden."';
