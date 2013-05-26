@@ -1,6 +1,7 @@
 <?
 	require_once("../../class/class.tableList.inc");
 	require_once("../../class/class.dba_connect.inc");
+	session_start();
 ?>
 <!DOCTYPE HTML PUBLI "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -29,7 +30,7 @@
 	$list->setColWidth(array("400px", "400px", "200px"));
 	$list->setColAlign(array("left", "left", "right"));
 	$list->setHasToolbar(true);
-	if(isset($_SESSION['CDCOMPAY']) && $_SESSION['CDCOMPANY'] == $_REQUEST['cdcompany']) {
+	if(isset($_SESSION['CDCOMPANY']) && $_SESSION['CDCOMPANY'] == $_REQUEST['cdcompany']) {
 		$list->addButton("Novo", "btn_new", "btn_new", "roomActions(1)", "new", true);
 		$list->addButton("Editar", "btn_edit", "btn_edit", "roomActions(2)", "edit", false);
 		$list->setDblClickFunction("roomActions(2)");
