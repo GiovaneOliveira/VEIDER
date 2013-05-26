@@ -15,6 +15,7 @@
 		var $toolbarbuffer = "";
 		var $_utils;
 		var $datecols = null;
+        var $moneycols = null;
 		var $imgcols = null;
 		var $total;
 		
@@ -65,12 +66,16 @@
 			$this->datecols = $cols;
 		}
 		
+        function setMoneyCols($cols) {
+            $this->moneycols = $cols;
+        }
+        
 		function setImgCols($cols) {
 			$this->imgcols = $cols;
 		}
 		
-		function addButton($label, $id, $name, $action, $icon) {
-			$this->toolbarbuffer[$id] = $this->_utils->imageButton($label, $id, $name, $action, $icon, true, false, true);
+		function addButton($label, $id, $name, $action, $icon, $enabled) {
+			$this->toolbarbuffer[$id] = $this->_utils->imageButton($label, $id, $name, $action, $icon, $enabled, false, true);
 		}
 		
 		function printList($obj) {
@@ -165,7 +170,9 @@
 			
 			if(is_array($this->datecols) && in_array($colfield, $this->datecols) && !empty($coldata)) {
 				return formatDate($coldata);
-			} else if(is_array($this->imgcols) && array_key_exists($colfield, $this->imgcols)) {
+			} else if(is_array($this->moneycols) && in_array($colfield, $this->moneycols) && $coldata != "")
+                return formatMoney($coldata);
+            } else if(is_array($this->imgcols) && array_key_exists($colfield, $this->imgcols)) {
 				$function = $this->imgcols[$colfield];
 				return $function($coldata, $rowdata);
 			}

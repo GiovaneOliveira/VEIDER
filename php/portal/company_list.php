@@ -14,7 +14,7 @@
 </head>
 <body style="background-color:#333333; overflow:hidden;" >
 <input type="hidden" id="cdcompany" name="cdcompany">
-<div id="dvGrid" name="dvGrid" style="background-color:#F5F5F5; border-radius:15px; width:100%; height:100%; overflow:hidden; border: 1px groove #333333;">
+<div id="dvGrid" name="dvGrid" class="dvToGrid">
 <?
     $sql =  "SELECT CDCOMPANY, NMCOMPANY, NMCITY, NMSTATE, NRPHONE, DSADRESS, FLLOGO ".
                 "FROM VRCOMPANY WHERE 1=1 ";

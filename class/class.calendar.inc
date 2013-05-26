@@ -13,7 +13,9 @@
 		
 		var $availableMonths;
 		var $lastAvailable;
-		
+		var $workdays;
+        var $company;
+        
 		var $_utils;
 		
 		function calendar($var)
@@ -33,6 +35,16 @@
 			$this->_utils = new utils();
 		}
 		
+        function setWorkDays($workdays)
+        {
+            $this->workdays = $workdays;
+        }
+        
+        function setCompany($company)
+        {
+            $this->company = $company;
+        }
+        
 		function variableDate()
 		{
 			$m = $this->actual_month + ($this->variation);
@@ -140,7 +152,8 @@
 			// Cabeçalho
 			$calendar .= "			<tr>\n";
 			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Anterior", "btnback", "btnback", "changeMonth(\"previous\")", "previous", ($this->variation <= -5? false:true), false)."</div></th>\n";
-			$calendar .= "				<th colspan='5'><font class='titleMonth'>".$this->getMonthName()."</font></th>\n";
+			$calendar .= "				<th colspan='5'><table cellpadding='0' cellspacing='0' style='width:100%;'><tr><td style='border:none; vertical-align:bottom; text-align:center;'><font class='titleMonth'>".$this->company."</font></td></tr>\n";
+            $calendar .= "				<tr><td style='border:none; vertical-align:top; text-align:center;'><font class='titleMonth'>".$this->getMonthName()."</font></td></tr></table></th>\n";
 			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Próximo", "btnnext", "btnnext", "changeMonth(\"next\")", "next", ($this->variation >= 5? false:true), false)."</div></th>\n";
 			$calendar .= "			</tr>\n";
 			// Dias da semana
@@ -157,10 +170,10 @@
 				$calendar .= "			<tr>\n";
 					for($c=0; $c<=6; $c++) {
 						
-						if($start || $c == $monthDays['first']) {
+                        if($start || $c == $monthDays['first']) {
 							$start = true;
 							
-							if($end || ($day < $this->actual_day && $this->month == $this->actual_month) || ($this->month < $this->actual_month) || ($this->year < $this->actual_year) || ($this->lastAvailable < mktime(0, 0, 0, $this->month, $day, $this->year)))
+							if($this->workdays[$c] == 0 || $end || ($day < $this->actual_day && $this->month == $this->actual_month) || ($this->month < $this->actual_month) || ($this->year < $this->actual_year) || ($this->lastAvailable < mktime(0, 0, 0, $this->month, $day, $this->year)))
 								$disable = true;
 							else
 								$disable = false;

@@ -50,7 +50,7 @@
 												 ".(!empty($_FILES["flphoto"]['tmp_name'])?"FLPHOTO = ".$imagem.",":"")."
 												 CDSTATE = ".$_REQUEST['nmstate'].",
 												 CDCITY = ".$_REQUEST['nmcity']."
-												 WHERE CDUSER = '".$_SESSION['user_code']."'
+												 WHERE CDUSER = '".$_SESSION['CDUSER']."'
 					";
 		}
 		

@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Cadastro de administrador</title>
+<title>Cadastro de empresa</title>
 <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
@@ -17,7 +17,7 @@
 </head>
 <body style="margin:10px;" bgcolor="#333333">
 <?
-	$exUser = $conn->query("SELECT IDLOGIN, IDMAIL FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
+	$exUser = $conn->query("SELECT IDLOGIN, IDMAIL FROM VRUSER WHERE CDUSER = ".$_SESSION['CDUSER']);
 
 	if($_REQUEST['action'] == 1)
 	{
@@ -32,7 +32,7 @@
 	}
 	else if($_REQUEST['action'] == 2)
 	{
-		$ex = $conn->query("SELECT * FROM VRCOMPANY WHERE CDCOMPANY =".$_SESSION['cd_company']);
+		$ex = $conn->query("SELECT * FROM VRCOMPANY WHERE CDCOMPANY =".$_SESSION['CDCOMPANY']);
 	
 		$admin_login = $exUser[0]['idlogin'];
 		$admin_mail = $exUser[0]['idmail'];

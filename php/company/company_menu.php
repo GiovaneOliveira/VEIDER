@@ -17,9 +17,9 @@
 <?
 	$company = false;
 	$veider = false;
-	if($_SESSION['startLogin'] == 2 && $_SESSION['cd_company'] == $_REQUEST['cdcompany'])
+	if($_SESSION['FGTYPE'] == 2 && $_SESSION['CDCOMPANY'] == $_REQUEST['cdcompany'])
 		$company = true;
-	else if($_SESSION['startLogin'] == 3)
+	else if($_SESSION['FGTYPE'] == 3)
 		$veider = true;
 	
 	$utils->beginDivBorder();

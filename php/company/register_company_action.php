@@ -22,7 +22,7 @@
 		if($_REQUEST['action'] == 1)
 		{
 			$sql = "INSERT INTO VRCOMPANY VALUES (".$next.",
-																".$_SESSION['user_code'].",
+																".$_SESSION['CDUSER'].",
 																'COMPANY".$next."',
 																'".$_REQUEST['nmcompany']."',
 																'".$_REQUEST['dsadress_company']."',
@@ -32,7 +32,7 @@
 																".$imagem."
 															) ";
 			
-			$sql .= "UPDATE VRUSER SET FGBLOCK = 2 WHERE CDUSER = '".$_SESSION['user_code']."'";
+			$sql .= "UPDATE VRUSER SET FGBLOCK = 2 WHERE CDUSER = '".$_SESSION['CDUSER']."'";
 		}
 		else if($_REQUEST['action'] == 2)
 		{
@@ -42,7 +42,7 @@
 												 ".(!empty($_FILES["flphoto_company"]['tmp_name'])?"FLLOGO = ".$imagem.",":"")."
 												 NMSTATE = ".$_REQUEST['nmstate_company'].",
 												 NMCITY = ".$_REQUEST['nmcity_company']."
-												 WHERE CDADMIN = '".$_SESSION['user_code']."'
+												 WHERE CDADMIN = '".$_SESSION['CDUSER']."'
 					";
 		}
 		

@@ -11,18 +11,19 @@
 <?
 	$utils = new utils();
 	$conn = new dba_connect();
-	//error_log(print_r($_SESSION, true));
 ?>
 </head>
 <body style="overflow:hidden; background-color:#333333">
-	<?	$utils->beginDivBorder();
+<?
+	$utils->beginDivBorder();
 	
-	if(isset($_SESSION['user_code']))
-	{
-		$ex = $conn->query("SELECT IDLOGIN, NMUSER, FLPHOTO FROM VRUSER WHERE CDUSER = '".$_SESSION['user_code']."'");
+	if(isset($_SESSION['CDUSER'])) {
+		$ex = $conn->query("SELECT IDLOGIN, NMUSER, FLPHOTO FROM VRUSER WHERE CDUSER = ".$_SESSION['CDUSER']);
 	}
 	
-	if($_SESSION['startLogin'] == 0){?>
+	// NÃO LOGADO
+	if($_SESSION['FGTYPE'] == 0)
+	{	?>
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
 				<td colspan="2" style="padding-left:40px; width: 66.6%">
@@ -44,7 +45,12 @@
 				</td>
 			</tr>
 		</table>
-	<?} else if($_SESSION['startLogin'] == 1){?>
+		<?
+	} 
+	
+	// USUARIO LOGADO
+	else if($_SESSION['FGTYPE'] == 1)
+	{	?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
@@ -66,7 +72,12 @@
 			</tr>
 				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
 		</table>
-	<?} else if($_SESSION['startLogin'] == 2 || $_SESSION['startLogin'] == 3){?>
+		<?
+	}
+	
+	// ADMINISTRADOR LOGADO OU VEIDER LOGADO
+	else if($_SESSION['FGTYPE'] == 2 || $_SESSION['FGTYPE'] == 3)
+	{	?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;" colspan="2">
@@ -91,11 +102,17 @@
 			</tr>
 				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
 		</table>
-	<?}?>
-	<? $utils->endDivBorder(); ?>
+		<?
+	}
+	
+	$utils->endDivBorder(); 
+?>
+
 <script>
-	<?$utils->writeJS();?>
-	<?include_once("../../js/rpc.js");?>
+<?
+	$utils->writeJS();
+	include_once("../../js/rpc.js");
+?>
 	
 	function userRegister(action) {
 		window_open("../user/register_user_data.php?action="+action, 635, 470);
@@ -124,7 +141,7 @@
 	
 	function loginCompany()
 	{
-		cdcompany = "<?= isset($_SESSION['cd_company'])?$_SESSION['cd_company']:''?>";
+		cdcompany = "<?= isset($_SESSION['CDCOMPANY'])?$_SESSION['CDCOMPANY']:''?>";
 		
 		// Menu
 		parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);

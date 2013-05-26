@@ -32,7 +32,7 @@
 	}
 	else if($_REQUEST['action'] == 2)
 	{
-		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_SESSION['user_code']);
+		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_SESSION['CDUSER']);
 	
 		$nmuser = $ex[0]['nmuser'];
 		$idlogin = $ex[0]['idlogin'];
