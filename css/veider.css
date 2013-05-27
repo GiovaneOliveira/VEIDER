@@ -3,6 +3,13 @@ body {
 	background-color: #333333;
 }
 
+legend{
+	font-family: Gill, Helvetica, sans-serif; 
+	font-size: 13px;
+	color: #333333;
+	font-weight: bold;
+}
+
 /* INPUTS - TEXT, COMBO */
 .inputCommon, .textCommon{
 	font-family: Gill, Helvetica, sans-serif; 

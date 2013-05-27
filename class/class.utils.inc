@@ -144,7 +144,27 @@
 			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label><br>";
 			$enabled = (!$enabled)? "disabled='disabled'" : "";
 
-			echo $label."<input type='file' name='".$id."' id='".$name."' ".$style." ".$onchange.$enabled." />";
+			echo $label."<input type='file' name='".$name."' id='".$id."' ".$style." ".$onchange.$enabled." />";
+		}
+		
+		/*
+		*	Função para criar um checkbox
+		*
+		*	@author Fabio Augusto Cardoso
+		*
+		*	@param	string		$label, $type(1 = checkbox, !1 = radio), $id, $name, $onclick ex: 'functionJS(params);'
+		*	@param	string		$onclick ex: 'functionJS(params);' -> Função JS que será executada ao selecionar um arquivo
+		*	@param boolean		$checked, $enabled
+		*/
+		function inputCheckbox($label, $type = 1, $id, $name, $onclick = "", $checked = true, $enabled = true)
+		{
+			$onclick = empty($onclick)? "" : " onclick='".$onclick."'";
+			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label>";
+			$enabled = (!$enabled)? " disabled='disabled'" : "";
+			$type = ($type == 1)?" checkbox":"radio";
+			$checked = ($checked)?" checked='true'":"checked='false'";
+			
+			echo "<input type=".$type." name='".$name."' id='".$id."' ".$onclick.$checked.$enabled." />".$label;
 		}
 
 		/*

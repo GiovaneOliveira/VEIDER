@@ -17,7 +17,7 @@
 <input type="hidden" id="cdroom" name="cdroom">
 <div id="dvRoomGrid" id="dvRoomGrid" class="dvToGrid">
 <?
-	$sql = "SELECT ROOM.CDROOM, ROOM.NMROOM, ROOM.DSROOM, ROOM.VLHOUR
+	$sql = "SELECT ROOM.CDROOM, ROOM.CDCOMPANY,ROOM.NMROOM, ROOM.DSROOM, ROOM.VLHOUR
 				FROM VRROOM ROOM, VRCOMPANY COMP
 				WHERE ROOM.CDCOMPANY = COMP.CDCOMPANY
 				AND ROOM.CDCOMPANY = ".$_REQUEST['cdcompany']."
@@ -41,6 +41,7 @@
 	$list->addButton("Calendário do espaço", "btn_calendar", "btn_calendar", "openCalendar()", "calendar", false);
 	$list->setClickFunction("enableDisable()");
 	$list->setHiddenObject("cdroom");
+	$list->setHiddenFields(array("cdroom"));
 	$list->printList("dvRoomGrid");
 ?>
 </div>
@@ -50,7 +51,7 @@
 		cdroom = document.getElementById("cdroom").value;
 		
 		switch(action) {
-			case 1: window_open("room_data.php?cdroom="+cdroom, 500, 500); break;
+			case 1: window_open("room_data.php?action="+action+"&cdroom="+cdroom+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 800, 600); break;
 			case 2: alert("Editar!"); break; // Abre tela "editar"
 			case 3: alert("Visualizar!"); break; // Abre tela "visualizar"
 		}
