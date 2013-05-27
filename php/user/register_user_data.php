@@ -1,4 +1,6 @@
 <? 
+	require_once("../../class/veider_functions.inc");
+	loading();
 	require_once("../../class/class.utils.inc");
 	require_once("../../class/class.dba_connect.inc");
 	require_once("../../class/veider_functions.inc");
@@ -32,7 +34,7 @@
 	}
 	else if($_REQUEST['action'] == 2)
 	{
-		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_SESSION['CDUSER']);
+		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_REQUEST['cduser']);
 	
 		$nmuser = $ex[0]['nmuser'];
 		$idlogin = $ex[0]['idlogin'];
@@ -45,54 +47,59 @@
 		$dsadress = $ex[0]['dsadress'];
 		$img_register = $ex[0]['flphoto'];
 	}
-
-	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save");
+	
+	if(isset($_REQUEST['view']) && $_REQUEST['view'] == 1)
+		$enabled = false;
+	else
+		$enabled = true;
+	
+	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save", $enabled);
 	$utils->beginDivBorder(true);
 ?>
 	<form action="register_user_action.php?action=<?=$_REQUEST['action']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table style="width:100%">
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Nome", "nmuser", "nmuser", 60,"width:510px;", $nmuser, true);?>
+					<?$utils->inputText("Nome", "nmuser", "nmuser", 60,"width:510px;", $nmuser, true, $enabled);?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true, true, false, array("onblur"=>"verifyLogin()"));?>
+					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true, $enabled, false, array("onblur"=>"verifyLogin()"));?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Senha", "idpassword", "idpassword", 50, "width:245px;", $idpassword, true, true, true, array("onblur"=>"verifyPass()"));?>
+					<?$utils->inputText("Senha", "idpassword", "idpassword", 50, "width:245px;", $idpassword, true, $enabled, true, array("onblur"=>"verifyPass()"));?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Confirme sua senha", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", $idpassword_confirm, true, true, true, array("onblur"=>"verifyPass()"));?>
+					<?$utils->inputText("Confirme sua senha", "idpassword_confirm", "idpassword_confirm", 50, "width:245px;", $idpassword_confirm, true, $enabled, true, array("onblur"=>"verifyPass()"));?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, true, false, array("onblur"=>"verifyMail()"));?>
+					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, $enabled, false, array("onblur"=>"verifyMail()"));?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true);?>
+					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true, $enabled);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate, true);?>
+					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate, true, $enabled);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity, true);?>
+					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity, true, $enabled);?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Endereço", "dsadress", "dsadress", 50, "width:510px;", $dsadress, true);?>
+					<?$utils->inputText("Endereço", "dsadress", "dsadress", 50, "width:510px;", $dsadress, true, $enabled);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding-top:10px;" colspan="2">
-					<?$utils->inputFile("Foto", "flphoto", "flphoto", "width: 70%", "verifyImage()");?>
+					<?$utils->inputFile("Foto", "flphoto", "flphoto", "width: 70%", "verifyImage()", $enabled);?>
 				</td>
 			</tr>
 		</table>
@@ -139,8 +146,10 @@
 	}
 	
 	function save(){
+		showLoading();
+		/*
 		if(required(document.getElementById("form"))) // Retorna true se todos os campos requeridos estiverem preenchidos
-			document.getElementById("form").submit();
+			document.getElementById("form").submit();*/
 	}
 	
 	divBorderHeight(30);

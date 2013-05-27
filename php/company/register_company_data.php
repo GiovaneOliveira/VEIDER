@@ -43,8 +43,8 @@
 		$nmcompany = $ex[0]['nmcompany'];
 		$dsadress_company = $ex[0]['dsadress'];
 		$nrphone_company = $ex[0]['nrphone'];
-		$nmstate_company = $ex[0]['nmstate'];
-		$nmcity_company = $ex[0]['nmcity'];
+		$nmstate_company = $ex[0]['cdstate'];
+		$nmcity_company = $ex[0]['cdcity'];
 		$img_company = $ex[0]['fllogo'];
 	}
 	

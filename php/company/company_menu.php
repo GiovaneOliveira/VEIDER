@@ -26,8 +26,8 @@
 	
 	if($veider) {
 		$menu->add("Gestão", null, true);
-		$menu->add("Usuários", "../company/company_pendency.php?type=user", false);
-		$menu->add("Empresas", "../company/company_pendency.php?type=company", false);
+		$menu->add("Usuários", "../portal/user_pendency.php?", false);
+		$menu->add("Empresas", "../portal/company_pendency.php?", false);
 	}
 	else {
 		$menu->add("Reservas", null, true);

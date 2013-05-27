@@ -96,7 +96,7 @@
         function loading()
         {
             echo "
-                <div id='dvLoading' name='dvLoading' class='dvLoading' style='overflow: hidden;'>
+                <div id='dvLoading' name='dvLoading' class='dvLoading' style='overflow:hidden; z-index:50;'>
                     <img id='imgLoading' src='../../image/veider/loading.gif' class='imgLoading'/>
                 </div>
                 <script type='text/javascript' src='../../js/jquery.js'></script>
@@ -119,6 +119,13 @@
 		function companyPendency($col, $row) {
 			if($col == 2)
 				return "<img src='../../image/list_icon/money.png' title='Aguardando pagamento'/>";
+			else
+				return "";
+		}
+		
+		function userBlock($col, $row) {
+			if($col == 1 && $row['actcode'] == null)
+				return "<img src='../../image/list_icon/inactive.png' title='Bloqueado'/>";
 			else
 				return "";
 		}

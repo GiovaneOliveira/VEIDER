@@ -144,7 +144,8 @@
 ?>
 	
 	function userRegister(action) {
-		window_open("../user/register_user_data.php?action="+action, 635, 470);
+		cduser = "<?= isset($_SESSION['CDUSER'])?$_SESSION['CDUSER']:''?>";
+		window_open("../user/register_user_data.php?action="+action+"&cduser="+cduser, 635, 470);
 	}
 	
 	function companyRegister(action) {
@@ -205,9 +206,9 @@
 	function pendency(type)
 	{
 		if(type == 1)
-			parent.refreshSrc("middle", "../portal/company_pendency.php?type=user");
+			parent.refreshSrc("middle", "../portal/user_pendency.php?");
 		else
-			parent.refreshSrc("middle", "../portal/company_pendency.php?type=company");
+			parent.refreshSrc("middle", "../portal/company_pendency.php?");
 	}
 	<?
 		if($_SESSION['FGTYPE'] == 3) {
