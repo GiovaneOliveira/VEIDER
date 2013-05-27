@@ -75,8 +75,8 @@
 		<?
 	}
 	
-	// ADMINISTRADOR LOGADO OU VEIDER LOGADO
-	else if($_SESSION['FGTYPE'] == 2 || $_SESSION['FGTYPE'] == 3)
+	// ADMINISTRADOR LOGADO
+	else if($_SESSION['FGTYPE'] == 2)
 	{	?>
 		<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr style="width:100%; height:50%;">
@@ -105,6 +105,35 @@
 		<?
 	}
 	
+	// VEIDER LOGADO
+	else if($_SESSION['FGTYPE'] == 3)
+	{	?>
+		<table cellpadding="0" cellspacing="0" style="padding-left:10px; padding-top:13px">
+			<tr>
+				<td>
+					<?
+						$utils->createFont("USUÁRIO: ");
+						$utils->inputText("", "login_name", "login_name", 60, "width:105px", $ex[0]['nmuser'], false, false);
+					?>
+				</td>
+				<td style="padding-left: 12px;">
+					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 175, "Logout()"); ?>
+				</td>
+			</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" style="padding-left:10px; padding-top:15px">
+			<tr>
+				<td>
+					<? $utils->inputButton("Gestão de usuários", "btn_vruser", "btn_vruser", 175, "pendency(1)");?>
+				</td>
+				<td style="padding-left:20px;">
+					<? $utils->inputButton("Gestão de empresas", "btn_vrcompany", "btn_vrcompany", 175, "pendency(2)");?>
+				</td>
+			</tr>
+		</table>
+		<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);
+	}
+	
 	$utils->endDivBorder(); 
 ?>
 
@@ -119,11 +148,14 @@
 	}
 	
 	function companyRegister(action) {
+		cdcompany = "<?= isset($_SESSION['CDCOMPANY'])?$_SESSION['CDCOMPANY']:''?>";
+		cduser = "<?= isset($_SESSION['CDUSER'])?$_SESSION['CDUSER']:''?>";
+		
 		RPC = new REQUEST("portal/veider_request.php?type=5");
 		retorno = RPC.Response(null);
 		
 		if(retorno == 0)
-			window_open("../company/register_company_data.php?action="+action, 635, 470);
+			window_open("../company/register_company_data.php?action="+action+"&cdcompany="+cdcompany+"&cduser="+cduser, 635, 470);
 		else
 			alert('Solicitação já requisitada');
 	}
@@ -170,9 +202,19 @@
 			alert('Usuário e/ou Senha inválidos');
 	}
 	
-	function opa(){
-	alert('tem nada aqui não');
+	function pendency(type)
+	{
+		if(type == 1)
+			parent.refreshSrc("middle", "../portal/company_pendency.php?type=user");
+		else
+			parent.refreshSrc("middle", "../portal/company_pendency.php?type=company");
 	}
+	<?
+		if($_SESSION['FGTYPE'] == 3) {
+			echo "parent.refreshSrc('left', '../company/company_menu.php?');";
+		}
+	?>
+	
 	divBorderHeight(26);
 </script>
 </body>

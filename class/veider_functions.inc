@@ -119,8 +119,6 @@
 		function companyPendency($col, $row) {
 			if($col == 2)
 				return "<img src='../../image/list_icon/money.png' title='Aguardando pagamento'/>";
-			else if($col == 3)
-				return "<img src='../../image/list_icon/inactive.png' title='Desativado'/>";
 			else
 				return "";
 		}
