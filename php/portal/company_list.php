@@ -1,5 +1,5 @@
 <?
-    require_once("../../class/class.tableList.inc");
+	require_once("../../class/class.tableList.inc");
     require_once("../../class/class.dba_connect.inc");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -41,6 +41,7 @@
 		$list->setColAlign(array("left", "left", "center", "right", "left"));
 		$list->setDblClickFunction("reloadFrames()");
 		$list->setHiddenObject("cdcompany");
+		$list->setHiddenFields(array("cdcompany"));
 		$list->printList("dvGrid");
 	}
 	else {

@@ -35,6 +35,7 @@
 	$list->setDateCols(array("DTNOTICE"));
 	$list->setDblClickFunction("open_notice()");
 	$list->setHiddenObject("cdnotice");
+	$list->setHiddenFields(array("cdnotice"));
 	$list->printList("dvlistnotices");
 ?>
 </div>

@@ -9,6 +9,7 @@
 		var $colwidth;
 		var $colalign;
 		var $hidden;
+		var $hiddenfields = "";
 		var $clickfunction = false;
 		var $dblclickfunction = false;
 		var $hastoolbar = false;
@@ -49,7 +50,11 @@
 		function setHiddenObject($hidden) {
 			$this->hidden = $hidden;
 		}
-
+		
+		function setHiddenFields($array) {
+			$this->hiddenfields = $array;
+		}
+		
 		function setClickFunction($function) {
 			$this->clickfunction = $function;
 		}
@@ -120,8 +125,12 @@
 						</thead>
 						<tbody>\n";
 							foreach($this->queryfields as $rowfield) {
-									$col = 0;
-									$list .= "<tr class='trList' id='".$this->hidden."_tr_".$row."' ".$events." onmousedown='mouseReg(this.id, 3); setHidden(".$rowfield[strtolower($this->hidden)].")' >\n";
+									$col = 0; $hidden = "";
+									foreach($this->hiddenfields as $hiddenfield) {
+										$hidden .= ";".$rowfield[strtolower($hiddenfield)];
+									}
+									$hidden = substr($hidden, 1);
+									$list .= "<tr class='trList' id='".$this->hidden."_tr_".$row."' ".$events." onmousedown='mouseReg(this.id, 3); setHidden(\"".$hidden."\")' >\n";
 									foreach($this->fieldnames as $colfield) {
 										$coldata = $this->alterColValue($colfield, $rowfield[strtolower($colfield)], $this->queryfields[$row-1]);
 										
