@@ -16,27 +16,30 @@
 <input type="hidden" id="cdcompany" name="cdcompany">
 <div id="dvGrid" name="dvGrid" class="dvToGrid">
 <?
-    $sql =  "SELECT CDCOMPANY, NMCOMPANY, NMCITY, NMSTATE, NRPHONE, DSADRESS, FLLOGO ".
-                "FROM VRCOMPANY WHERE 1=1 ";
+    $sql = "SELECT COMP.CDCOMPANY, COMP.NMCOMPANY, STA.NMSTATE, CIT.NMCITY, COMP.NRPHONE, COMP.DSADRESS ".
+			"FROM VRCOMPANY COMP, VRSTATE STA, VRCITY CIT ".
+			"WHERE COMP.CDSTATE = STA.CDSTATE AND COMP.CDCITY = CIT.CDCITY ";
 	
 	if(isset($_REQUEST['nmcompany']) && $_REQUEST['nmcompany'] != "")
-		$sql .= "AND ".$conn->protectStr("NMCOMPANY", $_REQUEST['nmcompany']);
+		$sql .= " AND ".$conn->protectStr("COMP.NMCOMPANY", $_REQUEST['nmcompany']);
 	
-	if(isset($_REQUEST['nmcity']) && $_REQUEST['nmcity'] != "")
-		$sql .= "AND ".$conn->protectStr("NMCITY", $_REQUEST['nmcity']);
+	if(isset($_REQUEST['cdcity']) && $_REQUEST['cdcity'] != "" && $_REQUEST['cdcity'] > 0)
+		$sql .= " AND COMP.CDCITY = ".$_REQUEST['cdcity'];
 	
-	if(isset($_REQUEST['nmstate']) && $_REQUEST['nmstate'] != "")
-		$sql .= "AND ".$conn->protectStr("NMSTATE", $_REQUEST['nmstate']);
+	if(isset($_REQUEST['cdstate']) && $_REQUEST['cdstate'] != "" && $_REQUEST['cdstate'] > 0)
+		$sql .= " AND COMP.CDSTATE = ".$_REQUEST['cdstate'];
 	
 	if(isset($_REQUEST['dsadress']) && $_REQUEST['dsadress'] != "")
-		$sql .= " AND ".$conn->protectStr("DSADRESS", $_REQUEST['dsadress']);
+		$sql .= " AND ".$conn->protectStr("COMP.DSADRESS", $_REQUEST['dsadress']);
+	
+	$sql .= " ORDER BY COMP.NMCOMPANY ";
 	
 	if(isset($_REQUEST['nmcompany'])) {
 		$exec = $conn->query($sql);
 		
 		$list->setQueryFields($exec);
-		$list->setFieldNames(array("NMCOMPANY", "NMCITY", "NMSTATE", "NRPHONE", "DSADRESS"));
-		$list->setTitleNames(array("NOME", "CIDADE", "ESTADO", "FONE", "ENDEREÇO"));
+		$list->setFieldNames(array("NMCOMPANY", "NMSTATE", "NMCITY", "NRPHONE", "DSADRESS"));
+		$list->setTitleNames(array("NOME", "ESTADO", "CIDADE", "FONE", "ENDEREÇO"));
 		$list->setColWidth(array("300px", "200px", "75px", "130px", "300px"));
 		$list->setColAlign(array("left", "left", "center", "right", "left"));
 		$list->setDblClickFunction("reloadFrames()");

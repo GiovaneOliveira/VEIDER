@@ -21,29 +21,31 @@
 <?
 	if($_REQUEST['action'] == 1)
 	{
+		$cduser = "";
 		$nmuser = "";
 		$idlogin = "";
 		$idpassword = "";
 		$idpassword_confirm = "";
 		$idmail = "";
 		$nrphone = "";
-		$nmstate = "";
-		$nmcity = "";
+		$cdstate = "";
+		$cdcity = "";
 		$dsadress = "";
 		$img_register ="img_null.png";
 	}
 	else if($_REQUEST['action'] == 2)
 	{
+		$cduser = $_REQUEST['cduser'];
 		$ex = $conn->query("SELECT * FROM VRUSER WHERE CDUSER =".$_REQUEST['cduser']);
-	
+		
 		$nmuser = $ex[0]['nmuser'];
 		$idlogin = $ex[0]['idlogin'];
 		$idpassword = $ex[0]['idpassword'];
 		$idpassword_confirm = $ex[0]['idpassword'];
 		$idmail = $ex[0]['idmail'];
 		$nrphone = $ex[0]['nrphone'];
-		$nmstate = $ex[0]['cdstate'];
-		$nmcity = $ex[0]['cdcity'];
+		$cdstate = $ex[0]['cdstate'];
+		$cdcity = $ex[0]['cdcity'];
 		$dsadress = $ex[0]['dsadress'];
 		$img_register = $ex[0]['flphoto'];
 	}
@@ -56,7 +58,7 @@
 	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save", $enabled);
 	$utils->beginDivBorder(true);
 ?>
-	<form action="register_user_action.php?action=<?=$_REQUEST['action']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
+	<form action="register_user_action.php?action=<?echo $_REQUEST['action']?>.&cduser=<?echo $cduser;?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table style="width:100%">
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
@@ -65,7 +67,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true, $enabled, false, array("onblur"=>"verifyLogin()"));?>
+					<?$utils->inputText("Login", "idlogin", "idlogin", 15, "width:510px;", $idlogin, true, $enabled, false, array("onblur"=>"verifyField(this.id, 'login')"));?>
 				</td>
 			</tr>
 			<tr>
@@ -78,7 +80,7 @@
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, $enabled, false, array("onblur"=>"verifyMail()"));?>
+					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, $enabled, false, array("onblur"=>"verifyField(this.id, 'e-mail')"));?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
 					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true, $enabled);?>
@@ -86,10 +88,10 @@
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Estado", "nmstate", "nmstate", "width:250px;", array("Estado"), "", $nmstate, true, $enabled);?>
+					<?$utils->inputStateCombo("width:245px;", $cdstate, $enabled);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputCombobox("Cidade", "nmcity", "nmcity", "width:250px;", array("Cidade"), "", $nmcity, true, $enabled);?>
+					<?$utils->inputCityCombo("width:245px;", $cdcity, $enabled);?>
 				</td>
 			</tr>
 			<tr>
@@ -108,31 +110,26 @@
 <? $utils->endDivBorder(); ?>
 
 <script type="text/javascript">
-	<?$utils->writeJS();?>
-	<?verifyFormatImg("flphoto","img_register");?>
-	<?include_once("../../js/rpc.js");?>
+	<?
+        verifyFormatImg("flphoto", "img_register");
+		include_once("../../js/rpc.js");
+        $utils->writeJS();
+    ?>
 	
-	function verifyLogin()
+	function verifyField(field, msg)
 	{
-		RPC = new REQUEST("portal/veider_request.php?type=1&action=<?=$_REQUEST['action']?>&idlogin="+document.getElementById('idlogin').value);
+		var action = <? echo $_REQUEST['action']; ?>;
+		var value = document.getElementById(field).value;
+		var field = field.toUpperCase();
+		var table = "VRUSER";
+		var whereField = "CDUSER";
+		
+		RPC = new REQUEST("portal/veider_request.php?type=1&action="+action+"&value="+value+"&field="+field+"&table="+table);
 		retorno = RPC.Response(null);
 		
-		if(retorno == 1)
-		{
-			alert('Este Login já está registrado');
-			document.getElementById('idlogin').value = '';
-		}
-	}
-	
-	function verifyMail()
-	{
-		RPC = new REQUEST("portal/veider_request.php?type=2&action=<?=$_REQUEST['action']?>&idmail="+document.getElementById('idmail').value);
-		retorno = RPC.Response(null);
-		
-		if(retorno == 1)
-		{
-			alert('Este E-mail já está registrado');
-			document.getElementById('idmail').value = '';
+		if(retorno == 1) {
+			alert("Este "+msg+" já está registrado");
+			document.getElementById(field).value = "";
 		}
 	}
 	
@@ -146,10 +143,10 @@
 	}
 	
 	function save(){
-		showLoading();
-		/*
-		if(required(document.getElementById("form"))) // Retorna true se todos os campos requeridos estiverem preenchidos
-			document.getElementById("form").submit();*/
+		if(required(document.getElementById("form"))) { // Retorna true se todos os campos requeridos estiverem preenchidos
+			showLoading();
+			document.getElementById("form").submit();
+		}
 	}
 	
 	divBorderHeight(30);

@@ -3,6 +3,18 @@
 	{
 		define("_VEIDER_FUNCTIONS_", 1);
 		
+        function sendMail($mailProperties = array())
+        {
+            $mailProperties['headers'] = 
+                "From: veider.reservas@gmail.com"."\r\n".
+                "Reply-To: veider.reservas@gmail.com"."\r\n".
+                "X-Mailer: PHP/" . phpversion();
+            
+            $mailSent = mail($mailProperties['to'], $mailProperties['subject'], $mailProperties['message'], $mailProperties['headers']);
+            
+            return $mailSent;
+        }
+        
 		/*
 		*	Função para retornar data formatada para exibição em tela ou uso em sql
 		*
@@ -21,36 +33,6 @@
 			$year = $explodeDate[0];
 			
 			return $day."/".$month."/".$year;
-		}
-		
-		function verifyFormatImg($file,$img)
-		{
-			echo "
-				function verifyImage()
-				{
-					var string = document.getElementById('".$file."').value;
-					var extension = (string.substring(string.lastIndexOf('.'))).toLowerCase(); 
-					
-					var right_ext = new Array('.png','.jpeg','.jpg','.gif');
-					var valid_ext = false;
-					for(x=0;x<4;x++)
-					{
-						if(right_ext[x] == extension)
-							valid_ext = true;
-					}
-					
-					if(valid_ext == true)
-						document.getElementById('".$img."').src = document.getElementById('".$file."').value;
-					else
-					{
-						var lastFile = document.getElementById('".$file."');
-						var cleanFile = lastFile.cloneNode(true);
-						lastFile.parentNode.replaceChild(cleanFile, lastFile);
-						document.getElementById('".$img."').src = '../../temp/img_null.png';
-						alert('erro');
-					}
-				}
-			";
 		}
 		
 		/*
@@ -89,7 +71,37 @@
 			
 			return $nmImg;
 		}
-        
+		
+		function verifyFormatImg($file,$img)
+		{
+			echo "
+				function verifyImage()
+				{
+					var string = document.getElementById('".$file."').value;
+					var extension = (string.substring(string.lastIndexOf('.'))).toLowerCase(); 
+
+					var right_ext = new Array('.png','.jpeg','.jpg','.gif');
+					var valid_ext = false;
+					for(x=0;x<4;x++)
+					{
+						if(right_ext[x] == extension)
+							valid_ext = true;
+					}
+
+					if(valid_ext == true)
+						document.getElementById('".$img."').src = document.getElementById('".$file."').value;
+					else
+					{
+						var lastFile = document.getElementById('".$file."');
+						var cleanFile = lastFile.cloneNode(true);
+						lastFile.parentNode.replaceChild(cleanFile, lastFile);
+						document.getElementById('".$img."').src = '../../temp/img_null.png';
+						alert('erro');
+					}
+				}
+			";
+		}
+		
         /*
         *   Cria div de carregando
         */

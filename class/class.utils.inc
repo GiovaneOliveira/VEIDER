@@ -12,18 +12,23 @@
 		var $javascript;
 		var $qtbuttons;
 		var $toolbar;
-
+		var $stateCombo;
+		var $cityCombo;
+		
 		/*
 		*	Construtor - Carrega arquivo de funções em JS e arquivo CSS
 		*/
 		function utils()
 		{
 			echo "<script language='javascript' src='../../js/veider.js'></script>";
+            echo "<script src='../../js/jquery.js'></script>";
 			echo "<link rel='stylesheet' type='text/css' href='../../css/veider.css'>";
 
 			$this->javascript = "";
 			$this->qtbuttons = 0;
 			$this->toolbar = "";
+			$this->stateCombo = false;
+			$this->cityCombo = false;
 		}
 
 		/*
@@ -127,7 +132,48 @@
 
 			echo $combobox;
 		}
-
+		
+		function inputStateCombo($style = "", $selected = "00", $enabled = true, $required = true)
+		{
+			require_once("class.dba_connect.inc");
+			$conn = new dba_connect();
+			
+			$stateOptions = array();
+			$sql = "SELECT CDSTATE, NMSTATE FROM VRSTATE";
+			$ex = $conn->query($sql);
+			$conn->close();
+			
+			foreach($ex as $value) {
+				$stateOptions[$value['cdstate']] = $value['nmstate'];
+			}
+			
+			$this->stateCombo = true;
+			$stateCombo = $this->inputCombobox("Estado", "cdstate", "cdstate", $style, $stateOptions, "", $selected, $required, $enabled);
+			
+			echo $stateCombo;
+		}
+		
+		function inputCityCombo($style = "", $selected = "00", $enabled = true, $required = true)
+		{
+			require_once("class.dba_connect.inc");
+			$conn = new dba_connect();
+			
+			$cityOptions = array();
+			
+			$sql = "SELECT CDCITY, NMCITY, CDSTATE FROM VRCITY ORDER BY NMCITY";
+			$ex = $conn->query($sql);
+			foreach($ex as $value) {
+				$cityOptions[$value['cdcity']]['content'] = $value['nmcity'];
+				$cityOptions[$value['cdcity']]['father'] = $value['cdstate'];
+			}
+			$conn->close();
+			
+			$this->cityCombo = true;
+			$cityCombo = $this->inputCombobox("Cidade", "cdcity", "cdcity", $style, $cityOptions, "", $selected, $required, $enabled);
+			
+			echo $cityCombo;
+		}
+		
 		/*
 		*	Função para criar um campo file
 		*
@@ -311,6 +357,26 @@
 		*/
 		function writeJS()
 		{
+			if($this->stateCombo && $this->cityCombo) {
+				$this->javascript .=
+					"var cdcity = $('#cdcity option').clone();
+					
+					$('#cdstate').change(function() {
+						var val = $(this).val();  
+						
+						$('#cdcity').empty();
+						
+						var emptyOption = new Option('', '0');
+						$('#cdcity').append(emptyOption);
+						
+						cdcity.filter(function(idx, el) {
+							if($(el).attr('father') == val || val == 0)
+								return $(el).text();
+						}).appendTo('#cdcity');
+					});
+				";
+			}
+			
 			echo $this->javascript;
 		}
 	}
