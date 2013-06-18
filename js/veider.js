@@ -27,7 +27,7 @@ function required(form){
 		var required = form[i].required;
 		if(required == 1)
 		{
-			if(form[i].value == "" || (form[i].id == "cdstate" && form[i].value < 1) || (form[i].id == "cdcity" && form[i].value < 1))
+			if(form[i].value == "")
 			{
 				alert("Há dados obrigatórios não informados.");
 				form[i].focus();
@@ -73,9 +73,9 @@ function enableButton(id){
 }
 
 function disableField(id){
-	document.getElementById(id).disabled = "disabled";
+    document.getElementById(id).disabled = "disabled";
 }
 
 function enableField(id){
-	document.getElementById(id).removeAttribute("disabled");
+    document.getElementById(id).removeAttribute("disabled");
 }

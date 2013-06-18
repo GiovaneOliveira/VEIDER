@@ -1,25 +1,12 @@
 <? 
 	require_once("../../class/class.dba_connect.inc");
+	session_start();
 	
 	$conn = new dba_connect();
+	$cdnotice = $conn->getNextCode("VRNOTICE","CDNOTICE");
 	
-	$table = array(
-		"table"=>"VRNOTICE",
-		"primarykey"=>"CDNOTICE"
-	);
-	$fields = array(
-		"CDCOMPANY"=>$_REQUEST['cdcompany'],
-		"NMNOTICE"=>$conn->formatStringDBA($_REQUEST['nmnotice']),
-		"DSNOTICE"=>$conn->formatStringDBA($_REQUEST['dsnotice'])
-		"DTNOTICE"=>"GETDATE()"
-	);
-	
-	$conn->transaction("insert", $table, $fields);
-	$conn->close();
-	
-	echo "
-		<script>
-			window.open('notice_data.php?cdnotice=".$cdnotice."&cdcompany=".$_REQUEST['cdcompany']."&view=1', '_self')
-		</script>
-	";
+	$sql = "INSERT INTO VRNOTICE (CDNOTICE, CDCOMPANY, NMNOTICE, DSNOTICE, DTNOTICE)
+			VALUES (".$cdnotice.", ".$_REQUEST['cdcompany'].", '".$_REQUEST['nmnotice']."', '".$_REQUEST['dsnotice']."', GETDATE())";
+	$conn->insert($sql);
+	echo "<script>window.open('notice_data.php?cdnotice=".$cdnotice."&cdcompany=".$_REQUEST['cdcompany']."&view=1', '_self')</script>";
 ?>

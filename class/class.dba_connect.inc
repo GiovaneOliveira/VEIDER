@@ -4,8 +4,7 @@
 		var $conn = null;
 		var $reg = 0;
 		
-		function dba_connect()
-        {
+		function dba_connect() {
 			$conn = mssql_connect("Giovane-PC\SQLEXPRESS", "sa", "111111");
 			
 			if($conn) {
@@ -17,13 +16,7 @@
 			$this->conn = $conn;
 		}
 		
-        function close()
-        {
-            mssql_close($this->conn);
-        }
-        
-		function query($query)
-        {
+		function query($query) {
 			$this->reg = 0;
 
 			$sql = mssql_query($query, $this->conn);
@@ -172,17 +165,6 @@
 			}
 		}
 		
-        function formatString($string)
-        {
-            return "'".$string."'";
-        }
-        
-        function selectID($prefix, $cdfield, $table)
-        {
-            $id = "(SELECT '".$prefix."'+(SELECT CAST(MAX(".$cdfield.")+1 AS VARCHAR) FROM ".$table."))";
-            return $id;
-        }
-        
 		function protectStr($field, $value, $percent = true)
 		{
 			$percent = $percent? "%" : "";

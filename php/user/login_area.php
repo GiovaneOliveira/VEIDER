@@ -152,7 +152,7 @@
 		cdcompany = "<?= isset($_SESSION['CDCOMPANY'])?$_SESSION['CDCOMPANY']:''?>";
 		cduser = "<?= isset($_SESSION['CDUSER'])?$_SESSION['CDUSER']:''?>";
 		
-		RPC = new REQUEST("portal/veider_request.php?type=3");
+		RPC = new REQUEST("portal/veider_request.php?type=5");
 		retorno = RPC.Response(null);
 		
 		if(retorno == 0)

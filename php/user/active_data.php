@@ -37,7 +37,7 @@
 	
 	function verifyCode()
 	{
-		RPC = new REQUEST("portal/veider_request.php?type=2&actice_code="+document.getElementById('actice_code').value);
+		RPC = new REQUEST("portal/veider_request.php?type=3&actice_code="+document.getElementById('actice_code').value);
 		retorno = RPC.Response(null);
 		
 		if(retorno == 0)
