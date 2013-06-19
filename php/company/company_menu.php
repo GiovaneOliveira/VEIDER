@@ -43,6 +43,7 @@
 		$menu->add("Opções", null, true);
 		$menu->add("Dados da empresa", "", false);
 		$menu->add("Espaços", "../room/room_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
+		$menu->add("Itens", "", false);
 		$menu->add("Sugestões", "", false);
 	}
 	
