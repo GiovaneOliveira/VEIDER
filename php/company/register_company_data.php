@@ -65,17 +65,17 @@
 		<table style="width:100%">
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Administrador", "idlogin", "idlogin", 60,"width:510px;", $idlogin, true, false);?>
+					<?$utils->inputText("Administrador", "idlogin", "idlogin", 100,"width:510px;", $idlogin, true, false);?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Empresa", "nmcompany", "nmcompany", 60,"width:510px;", $nmcompany, true, $enabled, false, array("onblur"=>"verifyCompany()"));?>
+					<?$utils->inputText("Empresa", "nmcompany", "nmcompany", 100,"width:510px;", $nmcompany, true, $enabled, false, array("onblur"=>"verifyCompany()"));?>
 				</td>
 			</tr>
 			<tr>
 				<td style="width:50%; padding-top:10px;">
-					<?$utils->inputText("Email", "idmail", "idmail", 50, "width:245px;", $idmail, true, false);?>
+					<?$utils->inputText("Email", "idmail", "idmail", 100, "width:245px;", $idmail, true, false);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
 					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true, $enabled);?>
@@ -91,7 +91,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
-					<?$utils->inputText("Endereço", "dsadress", "dsadress", 50, "width:510px;", $dsadress, true, $enabled);?>
+					<?$utils->inputText("Endereço", "dsadress", "dsadress", 100, "width:510px;", $dsadress, true, $enabled);?>
 				</td>
 			</tr>
 			<tr>

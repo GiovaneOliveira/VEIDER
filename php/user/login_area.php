@@ -27,7 +27,7 @@
 		<table cellpadding="0" cellspacing="0" style="width:100%; height:100%;">
 			<tr>
 				<td colspan="2" style="padding-left:40px; width: 66.6%">
-					<? $utils->inputText("Usuário", "idlogin", "idlogin", 15, "width: 250");?>
+					<? $utils->inputText("Usuário", "idlogin", "idlogin", 100, "width: 250");?>
 				</td>
 				<td style="width: 33.3%">
 					<? $utils->inputText("Senha", "idpassword", "idpassword", 50, "", "", false, true, true);?>
@@ -55,7 +55,7 @@
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;">
 					<?$utils->createFont("USUÁRIO: ");
-					   $utils->inputText("", "login_name", "login_name", 60, "width: 150", $ex[0]['nmuser'], false, false);
+					   $utils->inputText("", "login_name", "login_name", 100, "width: 150", $ex[0]['nmuser'], false, false);
 					?>
 				</td>
 				<td style="width:40%;">
@@ -82,7 +82,7 @@
 			<tr style="width:100%; height:50%;">
 				<td style="width:60%;" colspan="2">
 					<?$utils->createFont("ADMINISTRADOR: ");
-					   $utils->inputText("", "login_name", "login_name", 60, "width: 130", $ex[0]['nmuser'], false, false);
+					   $utils->inputText("", "login_name", "login_name", 100, "width: 130", $ex[0]['nmuser'], false, false);
 					?>
 				</td>
 				<td style="width:40%;">
@@ -113,7 +113,7 @@
 				<td>
 					<?
 						$utils->createFont("USUÁRIO: ");
-						$utils->inputText("", "login_name", "login_name", 60, "width:105px", $ex[0]['nmuser'], false, false);
+						$utils->inputText("", "login_name", "login_name", 100, "width:105px", $ex[0]['nmuser'], false, false);
 					?>
 				</td>
 				<td style="padding-left: 12px;">

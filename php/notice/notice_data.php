@@ -33,7 +33,7 @@
 		<table style="width:100%">
 			<tr>
 				<td style="padding-top:10px;">
-					<?$utils->inputText("Empresa", "nmcompany", "nmcompany", 60, "width:100%;", $data[0]['nmcompany'], false, false);?>
+					<?$utils->inputText("Empresa", "nmcompany", "nmcompany", 100, "width:100%;", $data[0]['nmcompany'], false, false);?>
 				</td>
 			</tr>
 			<tr>
