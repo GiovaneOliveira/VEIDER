@@ -3,18 +3,18 @@
 	{
 		define("_VEIDER_FUNCTIONS_", 1);
 		
-        function sendMail($mailProperties = array())
-        {
-            $mailProperties['headers'] = 
-                "From: veider.reservas@gmail.com"."\r\n".
-                "Reply-To: veider.reservas@gmail.com"."\r\n".
-                "X-Mailer: PHP/" . phpversion();
-            
-            $mailSent = mail($mailProperties['to'], $mailProperties['subject'], $mailProperties['message'], $mailProperties['headers']);
-            
-            return $mailSent;
-        }
-        
+		function sendMail($mailProperties = array())
+		{
+			$mailProperties['headers'] = 
+				"From: veider.reservas@gmail.com"."\r\n".
+				"Reply-To: veider.reservas@gmail.com"."\r\n".
+				"X-Mailer: PHP/" . phpversion();
+			
+			$mailSent = mail($mailProperties['to'], $mailProperties['subject'], $mailProperties['message'], $mailProperties['headers']);
+			
+			return $mailSent;
+		}
+		
 		/*
 		*	Função para retornar data formatada para exibição em tela ou uso em sql
 		*
@@ -102,31 +102,31 @@
 			";
 		}
 		
-        /*
-        *   Cria div de carregando
-        */
-        function loading()
-        {
-            echo "
-                <div id='dvLoading' name='dvLoading' class='dvLoading' style='overflow:hidden; z-index:50;'>
-                    <img id='imgLoading' src='../../image/veider/loading.gif' class='imgLoading'/>
-                </div>
-                <script type='text/javascript' src='../../js/jquery.js'></script>
-                <script>
-                    function showLoading(){
-                        $(document).ready(function () {
-                            $('#dvLoading').fadeIn();
-                        });
-                    }
-                    function hideLoading(){
-                        $(document).ready(function () {
-                            $('#dvLoading').fadeOut();
-                        });
-                    }
-                     window.onload = function() { hideLoading(); };
-                </script>
-            ";
-        }
+		/*
+		*   Cria div de carregando
+		*/
+		function loading()
+		{
+			echo "
+				<div id='dvLoading' name='dvLoading' class='dvLoading' style='overflow:hidden; z-index:50;'>
+					<img id='imgLoading' src='../../image/veider/loading.gif' class='imgLoading'/>
+				</div>
+				<script type='text/javascript' src='../../js/jquery.js'></script>
+				<script>
+					function showLoading(){
+						$(document).ready(function () {
+							$('#dvLoading').fadeIn();
+						});
+					}
+					function hideLoading(){
+						$(document).ready(function () {
+							$('#dvLoading').fadeOut();
+						});
+					}
+					 window.onload = function() { hideLoading(); };
+				</script>
+			";
+		}
 		
 		function companyPendency($col, $row) {
 			if($col == 2)
@@ -157,6 +157,39 @@
 				}
 			
 			return $arrayHours;
+		}
+		
+		/*
+		*	Retorna string criptografada
+		*
+		*	@param	string	$key		chave para criptografar
+		*	@param	string	$value	valor a ser criptografado
+		*/
+		function encrypt($key, $value)
+		{
+			$key = md5($key);
+			$encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $value, MCRYPT_MODE_ECB);
+			$encrypted = base64_encode($encrypted);
+			
+			return $encrypted;
+		}
+		
+		/*
+		*	Retorna string descriptografada
+		*
+		*	@param string $key	chave para descriptografar
+		*	@param string $value	valor criptografado
+		*
+		*	@warning
+		*		a chave deve ser a mesma que foi usada para criptografar
+		*/
+		function decrypt($key, $value)
+		{
+			$key = md5($key);
+			$decrypted = base64_decode($value);
+			$decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decrypted, MCRYPT_MODE_ECB);
+			
+			return $decrypted;
 		}
 	}
 ?>

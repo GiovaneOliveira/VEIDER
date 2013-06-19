@@ -18,7 +18,7 @@
 			$sql = "SELECT CDUSER, IDLOGIN, IDMAIL, IDPASSWORD, FGTYPE, FLPHOTO, FGBLOCK 
 						FROM VRUSER 
 						WHERE ".$conn->protectStr("IDLOGIN", $_REQUEST['idlogin'], false)." 
-						AND ".$conn->protectStr("IDPASSWORD", $_REQUEST['idpassword'], false);
+						AND ".$conn->protectStr("IDPASSWORD", encrypt($_REQUEST['idlogin'], $_REQUEST['idpassword']), false);
 			
 			$ex = $conn->query($sql);
 			

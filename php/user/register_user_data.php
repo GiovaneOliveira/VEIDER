@@ -40,8 +40,8 @@
 		
 		$nmuser = $ex[0]['nmuser'];
 		$idlogin = $ex[0]['idlogin'];
-		$idpassword = $ex[0]['idpassword'];
-		$idpassword_confirm = $ex[0]['idpassword'];
+		$idpassword = decrypt($ex[0]['idmail'], $ex[0]['idpassword']);
+		$idpassword_confirm = decrypt($ex[0]['idlogin'], $ex[0]['idpassword']);
 		$idmail = $ex[0]['idmail'];
 		$nrphone = $ex[0]['nrphone'];
 		$cdstate = $ex[0]['cdstate'];

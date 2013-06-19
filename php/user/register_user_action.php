@@ -24,7 +24,7 @@
         $fields = array(
             "NMUSER"=>$conn->formatString($_REQUEST['nmuser']),
             "IDLOGIN"=>$conn->formatString($_REQUEST['idlogin']),
-            "IDPASSWORD"=>$conn->formatString($_REQUEST['idpassword']),
+            "IDPASSWORD"=>$conn->formatString(encrypt($_REQUEST['idlogin'], $_REQUEST['idpassword'])),
             "IDMAIL"=>$conn->formatString($_REQUEST['idmail']),
             "DSADRESS"=>$conn->formatString($_REQUEST['dsadress']),
             "NRPHONE"=>$_REQUEST['nrphone'],
