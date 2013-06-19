@@ -7,6 +7,7 @@
 <head><title>VEIDER RESERVAS</title>
 <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
+<link rel='stylesheet' type='text/css' href='../../css/veider.css'>
 <?
 	$make = new make_screen();
 ?>

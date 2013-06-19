@@ -3,50 +3,62 @@
 	require_once("../../class/veider_functions.inc");
 	session_start();
 	
-	$conn = new dba_connect();
-	$next = $conn->getNextCode("VRCOMPANY","CDCOMPANY");
+	$mailProperties['to'] = $_REQUEST['idmail'];
+	$mailProperties['subject'] = "Ativação de conta de administrador";
+	$mailProperties['message'] = "DEPOSITO EM CONTA";
+	$mailSent = sendMail($mailProperties);
 	
-	$imagem = 'null';
-	
-	if(!empty($_FILES["flphoto_company"]['tmp_name']))
-		$imagem = "'".uploadImg($_FILES["flphoto_company"], 500, 100)."'";
-	
-	$to      = $_REQUEST['admin_mail'];
-	$subject = 'Ativação de conta administradora';
-	$message = 'DEPOSITO EM CONTA';
-	$headers = 'From: veider.reservas@gmail.com' . "\r\n" .
-	'Reply-To: veider.reservas@gmail.com' . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-	
-	if(mail($to, $subject, $message, $headers)){	
+	if($mailSent)
+	{
+		$conn = new dba_connect();
+		
+		$fllogo = "NULL";
+		if(!empty($_FILES["flphoto_company"]["tmp_name"]))
+			$fllogo = uploadImg($_FILES["flphoto_company"], 500, 100);
+		
+		$table = array(
+			"table"=>"VRCOMPANY",
+			"primarykey"=>"CDCOMPANY"
+		);
+		
+		$fields = array(
+			"NMCOMPANY"=>$conn->formatString($_REQUEST['nmcompany']),
+			"DSADRESS"=>$conn->formatString($_REQUEST['dsadress']),
+			"CDSTATE"=>$_REQUEST['cdstate'],
+			"CDCITY"=>$_REQUEST['cdcity'],
+			"NRPHONE"=>$_REQUEST['nrphone'],
+			"FLLOGO"=>$conn->formatString($fllogo)
+		);
+		
+		// INSERT
 		if($_REQUEST['action'] == 1)
 		{
-			$sql = "INSERT INTO VRCOMPANY VALUES (".$next.",
-																".$_SESSION['CDUSER'].",
-																'COMPANY".$next."',
-																'".$_REQUEST['nmcompany']."',
-																'".$_REQUEST['dsadress_company']."',
-																'".$_REQUEST['nmstate_company']."',
-																".$_REQUEST['nmcity_company'].",
-																".$_REQUEST['nrphone_company'].",
-																".$imagem."
-															) ";
+			$fieldsInsert = array(
+				"CDADMIN"=>$_REQUEST['cduser'],
+				"IDCOMPANY"=>$conn->selectID("COMPANY", "CDCOMPANY", "VRCOMPANY"),
+			);
+			$fields = array_merge($fields, $fieldsInsert);
 			
-			$sql .= "UPDATE VRUSER SET FGBLOCK = 2 WHERE CDUSER = '".$_SESSION['CDUSER']."'";
-		}
-		else if($_REQUEST['action'] == 2)
-		{
-			$sql = "UPDATE VRCOMPANY SET NMCOMPANY = '".$_REQUEST['nmcompany']."',
-												 DSADRESS = '".$_REQUEST['dsadress_company']."',
-												 NRPHONE = '".$_REQUEST['nrphone_company']."',
-												 ".(!empty($_FILES["flphoto_company"]['tmp_name'])?"FLLOGO = ".$imagem.",":"")."
-												 NMSTATE = ".$_REQUEST['nmstate_company'].",
-												 NMCITY = ".$_REQUEST['nmcity_company']."
-												 WHERE CDADMIN = '".$_SESSION['CDUSER']."'
-					";
+			$insert = $conn->transaction("insert", $table, $fields);
+			
+			if($insert) {
+				$userTable = array("table"=>"VRUSER");
+				$userField = array("FGBLOCK"=>2);
+				$userWhere = array("CDUSER = ".$_REQUEST['cduser']=>" AND ");
+				
+				$conn->transaction("update", $userTable, $userField, $userWhere);
+			}
+			$conn->close();
 		}
 		
-		$conn->insert($sql);
+		// UPDATE
+		else if($_REQUEST['action'] == 2)
+		{
+			$where = array("CDADMIN = ".$_REQUEST['cduser']=>" AND ");
+			
+			$conn->transaction("update", $table, $fields, $where);
+			$conn->close();
+		}
 		
 		echo "<script>".($_REQUEST['action'] == 2?"alert('É necessario efetuar login novamente');":"alert('Solicição efetuada com sucesso, acesse seu e-mail para mais informações');")."window.close()</script>";
 	}

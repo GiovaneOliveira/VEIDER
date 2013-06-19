@@ -20,12 +20,12 @@
 			</tr>
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Estado", "nmstate", "nmstate", 50,"width:100%");?>
+					<?$utils->inputStateCombo("width:100%;", "00", true, false);?>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding-top:10px;">
-					<? $utils->inputText("Cidade", "nmcity", "nmcity", 50,"width:100%");?>
+					<?$utils->inputCityCombo("width:100%;", "00", true, false);?>
 				</td>
 			</tr>
 			<tr>
@@ -50,19 +50,19 @@
 	
 	function search() {
 		var nmcompany = document.getElementById("nmcompany").value;
-		var nmstate = document.getElementById("nmstate").value;
-		var nmcity = document.getElementById("nmcity").value;
+		var cdstate = document.getElementById("cdstate").value;
+		var cdcity = document.getElementById("cdcity").value;
 		var dsadress = document.getElementById('dsadress').value;
 		
-		var params = "&nmcompany="+nmcompany+"&nmstate="+nmstate+"&nmcity="+nmcity+"&dsadress="+dsadress;
+		var params = "&nmcompany="+nmcompany+"&cdstate="+cdstate+"&cdcity="+cdcity+"&dsadress="+dsadress;
 		
 		parent.document.getElementById('middle').src = "../portal/company_list.php?"+params;
 	}
 	
 	function clearAll() {
 		document.getElementById('nmcompany').value = "";
-		document.getElementById("nmstate").value = "";
-		document.getElementById("nmcity").value = "";
+		document.getElementById("cdstate").value = "00";
+		document.getElementById("cdcity").value = "00";
 		document.getElementById('dsadress').value = "";
 	}
 	
