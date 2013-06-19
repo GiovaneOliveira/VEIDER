@@ -1,6 +1,7 @@
 <?
 	require_once("../global.php");
 	require_once("../../class/class.dba_connect.inc");
+	require_once("../../class/veider_functions.inc");
 	session_start();
 	
 	switch($_REQUEST['type'])
