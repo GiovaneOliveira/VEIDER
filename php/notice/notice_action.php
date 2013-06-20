@@ -9,8 +9,8 @@
 	);
 	$fields = array(
 		"CDCOMPANY"=>$_REQUEST['cdcompany'],
-		"NMNOTICE"=>$conn->formatStringDBA($_REQUEST['nmnotice']),
-		"DSNOTICE"=>$conn->formatStringDBA($_REQUEST['dsnotice'])
+		"NMNOTICE"=>$conn->formatString($_REQUEST['nmnotice']),
+		"DSNOTICE"=>$conn->formatString($_REQUEST['dsnotice']),
 		"DTNOTICE"=>"GETDATE()"
 	);
 	
@@ -19,7 +19,9 @@
 	
 	echo "
 		<script>
-			window.open('notice_data.php?cdnotice=".$cdnotice."&cdcompany=".$_REQUEST['cdcompany']."&view=1', '_self')
+			opener.parent.refreshSrc('right', '');
+			alert('Notícia cadastrada!');
+			window.close();
 		</script>
 	";
 ?>

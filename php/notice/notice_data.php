@@ -1,4 +1,6 @@
 <? 
+	require_once("../../class/veider_functions.inc");
+	loading();
 	require_once("../../class/class.utils.inc");
 	require_once("../../class/class.dba_connect.inc");
 ?>
@@ -52,8 +54,10 @@
 
 <script type="text/javascript">
 	function save(){
-		if(required(document.getElementById("form"))) // Retorna true se todos os campos requeridos estiverem preenchidos
+		if(required(document.getElementById("form"))) { // Retorna true se todos os campos requeridos estiverem preenchidos
+			showLoading();
 			document.getElementById("form").submit();
+		}
 	}
 	
 	divBorderHeight(30);

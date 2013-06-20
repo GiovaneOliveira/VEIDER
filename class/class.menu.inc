@@ -60,7 +60,10 @@
                     $output .= "<div class='menuItem'>\n";
                 } else {
                     $item ++;
-                    $output .= "\t<a id='item_".$item."' class='itemSpan' onmousedown=\"menuBG(this.id, 3); reloadFrames('".$value['src']."');\" ".$mouseover.$mouseout.">".$value['label']."</a>\n";
+                    
+					$action = is_array($value['src']) ? "window_open('".$value['src']['data']."', ".$value['src']['width'].", ".$value['src']['height'].")" : "reloadFrames('".$value['src']."')";
+					
+					$output .= "\t<a id='item_".$item."' class='itemSpan' onmousedown=\"menuBG(this.id, 3); ".$action.";\" ".$mouseover.$mouseout.">".$value['label']."</a>\n";
                 }
             }
             $output .= "</div>\n";

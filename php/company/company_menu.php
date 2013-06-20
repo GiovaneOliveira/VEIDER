@@ -33,18 +33,23 @@
 		$menu->add("Reservas", null, true);
 		$menu->add("Consulta", "", false);
 		$menu->add("Cancelamento", "", false);
+		$menu->add("Sugestões", "", false);
 		
+		$name = "Visualizar";
 		if($company) {
+			$name = "Gestão";
 			$menu->add("Informativo", null, true);
 			$menu->add("Relatório de agendamento", "", false);
 			$menu->add("Relatório de assiduidade", "", false);
 		}
 		
-		$menu->add("Opções", null, true);
+		$menu->add($name, null, true);
 		$menu->add("Dados da empresa", "", false);
 		$menu->add("Espaços", "../room/room_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		$menu->add("Itens", "", false);
-		$menu->add("Sugestões", "", false);
+		if($company) {
+			$menu->add("Notícia", array("data"=>"../notice/notice_data.php?cdcompany=".$_REQUEST['cdcompany'], "width"=>"550", "height"=>"400"), false);
+		}
 	}
 	
 	$menu->output("100%");
