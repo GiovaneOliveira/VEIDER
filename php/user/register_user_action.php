@@ -20,7 +20,7 @@
             "table"=>"VRUSER",
             "primarykey"=>"CDUSER"
         );
-        
+		
         $fields = array(
             "NMUSER"=>$conn->formatString($_REQUEST['nmuser']),
             "IDLOGIN"=>$conn->formatString($_REQUEST['idlogin']),

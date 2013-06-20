@@ -208,7 +208,7 @@
 			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label>";
 			$enabled = (!$enabled)? " disabled='disabled'" : "";
 			$type = ($type == 1)?" checkbox":"radio";
-			$checked = ($checked)?" checked='true'":"checked='false'";
+			$checked = ($checked)?" checked='true'":"";
 			
 			echo "<input type=".$type." name='".$name."' id='".$id."' ".$onclick.$checked.$enabled." />".$label;
 		}

@@ -51,8 +51,8 @@
 		cdroom = document.getElementById("cdroom").value;
 		
 		switch(action) {
-			case 1: window_open("room_data.php?action="+action+"&cdroom="+cdroom+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 800, 600); break;
-			case 2: alert("Editar!"); break; // Abre tela "editar"
+			case 1: window_open("room_data.php?action="+action+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 800, 600); break;
+			case 2: window_open("room_data.php?action="+action+"&cdroom="+cdroom+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 800, 600); break; // Abre tela "editar"
 			case 3: alert("Visualizar!"); break; // Abre tela "visualizar"
 		}
 	}

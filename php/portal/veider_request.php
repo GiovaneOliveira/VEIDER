@@ -61,7 +61,7 @@
 		// DESBLOQUEIA USUÁRIO APÓS PREENCHER CHAVE DE ATIVAÇÃO
 		case 2:
 			$conn = new dba_connect();
-			$sql = "SELECT CDUSER FROM VRUSER WHERE ACTCODE = '".$_REQUEST['actice_code']."'";
+			$sql = "SELECT CDUSER FROM VRUSER WHERE ACTCODE = '".$_REQUEST['actice_code']."' AND ".$conn->protectStr("IDLOGIN", $_REQUEST['login'], false);
 			$ex = $conn->query($sql);
 			
 			if(isset($ex[0]))

@@ -162,7 +162,7 @@
 	}
 	
 	function userActive() {
-		window_open("../user/active_data.php", 635, 115);
+		window_open("../user/active_data.php", 635, 125);
 	}
 	
 	function Logout()

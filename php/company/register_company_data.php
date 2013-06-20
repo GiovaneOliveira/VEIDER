@@ -78,7 +78,7 @@
 					<?$utils->inputText("Email", "idmail", "idmail", 100, "width:245px;", $idmail, true, false);?>
 				</td>
 				<td style="padding-left:10px; width:50%; padding-top:10px;">
-					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true, $enabled);?>
+					<?$utils->inputText("Telefone", "nrphone", "nrphone", 10, "width:245px;", $nrphone, true, $enabled,false, array("onblur"=>"verifyValue()"));?>
 				</td>
 			</tr>
 			<tr>
@@ -110,6 +110,13 @@
 		include_once("../../js/rpc.js");
         $utils->writeJS();
 	?>
+	
+	function verifyValue(){
+		if(isNaN(document.getElementById('nrphone').value)){
+			alert('valor inválido');
+			document.getElementById('nrphone').value = '';
+		}
+	}
 	
 	function verifyCompany()
 	{

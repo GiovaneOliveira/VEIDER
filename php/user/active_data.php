@@ -23,7 +23,12 @@
 	<form id="form" name="form" >
 		<table style="width:100%">
 			<tr>
-				<td style="padding-top:20px;">
+				<td>
+					<?$utils->inputText("Login", "login", "login", 100,"width:510px;");?>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-top:10px;">
 					<?$utils->inputText("Chave", "actice_code", "actice_code", 60,"width:510px;");?>
 				</td>
 			</tr>
@@ -37,13 +42,14 @@
 	
 	function verifyCode()
 	{
-		RPC = new REQUEST("portal/veider_request.php?type=2&actice_code="+document.getElementById('actice_code').value);
+		RPC = new REQUEST("portal/veider_request.php?type=2&actice_code="+document.getElementById('actice_code').value+"&login="+document.getElementById('login').value);
 		retorno = RPC.Response(null);
 		
 		if(retorno == 0)
 		{
 			alert('Chave invalida');
 			document.getElementById('actice_code').value = '';
+			document.getElementById('login').value = '';
 		}
 		else
 		{
