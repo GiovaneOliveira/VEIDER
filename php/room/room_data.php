@@ -57,24 +57,29 @@
 		$fgfriday = $exRoom[0]['fgfriday'];
 		$fgsaturday = $exRoom[0]['fgsaturday'];
 	}
+	
+	if(isset($_REQUEST['view']) && $_REQUEST['view'] == 1)
+		$enabled = false;
+	else
+		$enabled = true;
 
-	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save");
-	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "photo");
+	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save", $enabled);
+	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "photo", false);
 	$utils->beginDivBorder(true);
 ?>
 	<form action="room_action.php?action=<?=$_REQUEST['action']?>&cdcompany=<?=$_REQUEST['cdcompany']?>&cdroom=<?= $_REQUEST['action'] == 2? $_REQUEST['cdroom'] : -1?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table cellpadding="0" cellspacing="0" style="width:100%">
 			<tr> 
 				<td style="padding-top: 10px; width: 80%">
-					<?$utils->inputText("Nome","nmroom","nmroom",60,"width:550px",$nmroom,true)?>
+					<?$utils->inputText("Nome","nmroom","nmroom",60,"width:550px",$nmroom,true,$enabled)?>
 				</td>
 				<td style="padding-left: 10px; padding-top: 10px; width: 20%">
-					<?$utils->inputText("Valor hora (R$)","vlhour","vlhour", 5, "width:115px",$vlhour,true,true,false, array("onblur"=>"verifyValue()"));?>
+					<?$utils->inputText("Valor hora (R$)","vlhour","vlhour", 5, "width:115px",$vlhour,true,$enabled,false, array("onblur"=>"verifyValue()"));?>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top: 10px;">
-					<?$utils->inputText("Endereço","dsadress","dsadress",50,"width:680px",$dsadress,true)?>
+					<?$utils->inputText("Endereço","dsadress","dsadress",50,"width:680px",$dsadress,true,$enabled)?>
 				</td>
 			</tr>
 			<tr>
@@ -93,12 +98,12 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top: 10px;">
-					<?$utils->inputTextArea("Descrição","dsroom","dsroom","width:680px; height: 100px",$dsroom)?>
+					<?$utils->inputTextArea("Descrição","dsroom","dsroom","width:680px; height: 100px",$dsroom, true,$enabled)?>
 				</td>
 			</tr>
 			<tr> 
 				<td style="padding-top:10px;" colspan="2">
-					<?$utils->inputFile("Foto", "flphoto_room", "flphoto_room", "width: 100%", "verifyImage()");?>
+					<?$utils->inputFile("Foto", "flphoto_room", "flphoto_room", "width: 100%", "verifyImage()",$enabled);?>
 				</td>
 			</tr>
 			<tr>
@@ -108,10 +113,10 @@
 						<table cellpadding="0" cellspacing="0" style="width:100%; padding-bottom:10px;">
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours(), "", $hourst, true);?>
+									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours(), "", $hourst, true,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours(), "", $hourend, true);?>
+									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours(), "", $hourend, true,$enabled);?>
 								</td>
 							</tr>
 						</table>
@@ -125,31 +130,31 @@
 						<table cellpadding="0" cellspacing="0" style="width:100%; padding-bottom:10px;">
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Domingo", 1, "fgsunday", "fgsunday",false, ($fgsunday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Domingo", 1, "fgsunday", "fgsunday",false, ($fgsunday == 1)?true:false,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Segunda-Feira", 1, "fgmonday", "fgmonday",false, ($fgmonday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Segunda-Feira", 1, "fgmonday", "fgmonday",false, ($fgmonday == 1)?true:false,$enabled);?>
 								</td>
 							</tr>
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Terça-Feira", 1, "fgtuesday", "fgtuesday",false, ($fgtuesday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Terça-Feira", 1, "fgtuesday", "fgtuesday",false, ($fgtuesday == 1)?true:false,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Quarta-Feira", 1, "fgwednesday", "fgwednesday",false, ($fgwednesday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Quarta-Feira", 1, "fgwednesday", "fgwednesday",false, ($fgwednesday == 1)?true:false,$enabled);?>
 								</td>
 							</tr>
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Quinta-Feira", 1, "fgthursday", "fgthursday",false, ($fgthursday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Quinta-Feira", 1, "fgthursday", "fgthursday",false, ($fgthursday == 1)?true:false,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Sexta-Feira", 1, "fgfriday", "fgfriday",false, ($fgfriday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Sexta-Feira", 1, "fgfriday", "fgfriday",false, ($fgfriday == 1)?true:false,$enabled);?>
 								</td>
 							</tr>
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCheckbox("Sábado", 1, "fgsaturday", "fgsaturday",false, ($fgsaturday == 1)?true:false);?>
+									<?$utils->inputCheckbox("Sábado", 1, "fgsaturday", "fgsaturday",false, ($fgsaturday == 1)?true:false,$enabled);?>
 								</td>
 							</tr>
 						</table>

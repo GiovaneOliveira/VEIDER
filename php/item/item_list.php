@@ -53,7 +53,7 @@
 		switch(action) {
 			case 1: window_open("item_data.php?action="+action+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 500, 125); break;
 			case 2: window_open("item_data.php?action="+action+"&cdobject="+cdobject+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 500, 125); break; // Abre tela "editar"
-			case 3: alert("Visualizar!"); break; // Abre tela "visualizar"
+			case 3: window_open("item_data.php?action=2&view=1&cdobject="+cdobject+"&cdcompany=<?= $_REQUEST['cdcompany']?>", 500, 125); break; // Abre tela "visualizar"
 		}
 	}
 	
