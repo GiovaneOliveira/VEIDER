@@ -59,7 +59,7 @@
 	}
 
 	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save");
-	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "");
+	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "photo");
 	$utils->beginDivBorder(true);
 ?>
 	<form action="room_action.php?action=<?=$_REQUEST['action']?>&cdcompany=<?=$_REQUEST['cdcompany']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >

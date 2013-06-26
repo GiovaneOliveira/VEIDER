@@ -64,7 +64,7 @@
 	
 	function enableDisable()
 	{
-		if(document.getElementById("cdroom") && document.getElementById("cdroom") > 0) {
+		if(document.getElementById("cdroom") && document.getElementById("cdroom").value > 0) {
 			enableButton("btn_calendar");
 			if(document.getElementById("btn_edit"))
 				enableButton("btn_edit");
