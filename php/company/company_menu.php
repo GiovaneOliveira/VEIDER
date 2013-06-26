@@ -33,7 +33,10 @@
 		$menu->add("Reservas", null, true);
 		$menu->add("Consulta", "", false);
 		$menu->add("Cancelamento", "", false);
-		$menu->add("Sugestões", "", false);
+		if($company)
+			$menu->add("Sugestões", "../suggestion/suggestion_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
+		else
+			$menu->add("Sugestões", array("data"=>"../suggestion/suggestion_data.php?cdcompany=".$_REQUEST['cdcompany'], "width"=>"550", "height"=>"440"), false);
 		
 		$name = "Visualizar";
 		if($company) {
@@ -44,7 +47,7 @@
 		}
 		
 		$menu->add($name, null, true);
-		$menu->add("Dados da empresa", "", false);
+		$menu->add("Dados da empresa", array("data"=>"../company/register_company_data.php?&action=2&cdcompany=".$_REQUEST['cdcompany'].($company?"":"&view=1"), "width"=>"635", "height"=>"470"), false);
 		$menu->add("Espaços", "../room/room_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		$menu->add("Itens", "../item/item_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		if($company) {
