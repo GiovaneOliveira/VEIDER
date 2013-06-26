@@ -46,7 +46,7 @@
 		$menu->add($name, null, true);
 		$menu->add("Dados da empresa", "", false);
 		$menu->add("Espaços", "../room/room_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
-		$menu->add("Itens", "", false);
+		$menu->add("Itens", "../item/item_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		if($company) {
 			$menu->add("Notícia", array("data"=>"../notice/notice_data.php?cdcompany=".$_REQUEST['cdcompany'], "width"=>"550", "height"=>"400"), false);
 		}

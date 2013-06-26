@@ -142,6 +142,17 @@
 				return "";
 		}
 		
+		function objectCondition($col, $row){
+			if($col == 1)
+				return "<img src='../../image/list_icon/bom.png' title='Bom'/>";
+			else if($col == 2)
+				return "<img src='../../image/list_icon/regular.png' title='Regular'/>";
+			else if($col == 3)
+				return "<img src='../../image/list_icon/ruim.png' title='Ruim'/>";
+			else
+				return "";
+		}
+		
 		/*
 		*  Cria array de horas ( [0] => 00:00 - [23] => 23:00 )
 		*/

@@ -62,7 +62,7 @@
 	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "photo");
 	$utils->beginDivBorder(true);
 ?>
-	<form action="room_action.php?action=<?=$_REQUEST['action']?>&cdcompany=<?=$_REQUEST['cdcompany']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
+	<form action="room_action.php?action=<?=$_REQUEST['action']?>&cdcompany=<?=$_REQUEST['cdcompany']?>&cdroom=<?= $_REQUEST['action'] == 2? $_REQUEST['cdroom'] : -1?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table cellpadding="0" cellspacing="0" style="width:100%">
 			<tr> 
 				<td style="padding-top: 10px; width: 80%">
