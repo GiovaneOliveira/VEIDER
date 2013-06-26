@@ -16,13 +16,12 @@
 <?
 	if(isset($_REQUEST['cdcompany']) && $_REQUEST['cdcompany'] != "") {
 		$ex = $conn->query("SELECT FLLOGO FROM VRCOMPANY WHERE CDCOMPANY = ".$_REQUEST['cdcompany']);
-		$logo = $ex[0]['fllogo'];
 	}
 ?>
 	<table cellpadding="0" cellspacing="0" style="width:80%; height:100%;">
 			<tr>
 				<td>
-					<? $utils->inputDivImg("logo_portal", "logo_portal", 500, 100, "position:absolute; right:150px; top: 10px;", (isset($logo) && $logo != "")?$logo:"logo_portal.png");?>
+					<? $utils->inputDivImg("logo_portal", "logo_portal", 500, 100, "position:absolute; right:150px; top: 10px;", empty($ex[0]['fllogo'])? "logo_portal.png" :$ex[0]['fllogo']);?>
 				</td>
 			</tr>
 	</table>

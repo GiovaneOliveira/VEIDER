@@ -70,7 +70,7 @@
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
-				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
+				<? $utils->inputDivImg("img_login", "img_login", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",empty($ex[0]['flphoto'])? "img_null.png" :$ex[0]['flphoto']);?>
 		</table>
 		<?
 	}
@@ -100,7 +100,7 @@
 					<? $utils->inputButton("Desconectar", "btn_logout", "btn_logout", 100, "Logout()");?>
 				</td>
 			</tr>
-				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);?>
+				<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",empty($ex[0]['flphoto'])? "img_null.png" :$ex[0]['flphoto']);?>
 		</table>
 		<?
 	}
@@ -131,7 +131,7 @@
 				</td>
 			</tr>
 		</table>
-		<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",$ex[0]['flphoto']);
+		<? $utils->inputDivImg("img_admin", "img_admin", 100, 100, "position:absolute; right:40px; bottom:8px; border-color:black; border-width:1px; border-style:solid",empty($ex[0]['flphoto'])? "img_null.png" :$ex[0]['flphoto']);
 	}
 	
 	$utils->endDivBorder(); 

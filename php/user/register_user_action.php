@@ -12,7 +12,7 @@
     {
         $conn = new dba_connect();
         
-        $flphoto = "NULL";
+        $flphoto = "";
         if(!empty($_FILES["flphoto"]["tmp_name"]))
             $flphoto = uploadImg($_FILES["flphoto"], 100, 100);
         
@@ -30,7 +30,7 @@
             "NRPHONE"=>$_REQUEST['nrphone'],
             "CDSTATE"=>$_REQUEST['cdstate'],
             "CDCITY"=>$_REQUEST['cdcity'],
-            "FLPHOTO"=>$conn->formatString($flphoto)
+            "FLPHOTO"=>empty($flphoto)?"NULL":$conn->formatString($flphoto)
         );
         
         // INSERT
