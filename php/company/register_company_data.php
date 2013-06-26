@@ -106,7 +106,7 @@
 
 <script type="text/javascript">
 	<?
-		verifyFormatImg("fllogo", "img_company");
+		verifyFormatImg("fllogo", "img_company", "logo_portal.png");
 		include_once("../../js/rpc.js");
         $utils->writeJS();
 	?>

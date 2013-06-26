@@ -162,7 +162,7 @@
 
 <script type="text/javascript">
 	<?$utils->writeJS();?>
-	<?verifyFormatImg("flphoto_company","img_company");?>
+	<?verifyFormatImg("flphoto_room","null", "null");?>
 	<?include_once("../../js/rpc.js");?>
 	
 	function verifyValue(){

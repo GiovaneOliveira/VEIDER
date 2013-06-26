@@ -72,7 +72,7 @@
 			return $nmImg;
 		}
 		
-		function verifyFormatImg($file,$img)
+		function verifyFormatImg($file,$img,$default)
 		{
 			echo "
 				function verifyImage()
@@ -87,16 +87,19 @@
 						if(right_ext[x] == extension)
 							valid_ext = true;
 					}
-
-					if(valid_ext == true)
-						document.getElementById('".$img."').src = document.getElementById('".$file."').value;
+				
+					if(valid_ext == true){
+						if(document.getElementById('".$img."'))
+							document.getElementById('".$img."').src = document.getElementById('".$file."').value;
+					}
 					else
 					{
 						var lastFile = document.getElementById('".$file."');
 						var cleanFile = lastFile.cloneNode(true);
 						lastFile.parentNode.replaceChild(cleanFile, lastFile);
-						document.getElementById('".$img."').src = '../../temp/img_null.png';
-						alert('erro');
+						if(document.getElementById('".$img."'))
+							document.getElementById('".$img."').src = '../../temp/".$default."';
+						alert('Erro referente a extenção do arquivo');
 					}
 				}
 			";

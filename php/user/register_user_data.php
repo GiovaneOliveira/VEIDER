@@ -111,7 +111,7 @@
 
 <script type="text/javascript">
 	<?
-        verifyFormatImg("flphoto", "img_register");
+        verifyFormatImg("flphoto", "img_register", "img_null.png");
 		include_once("../../js/rpc.js");
         $utils->writeJS();
     ?>
