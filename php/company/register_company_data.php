@@ -100,7 +100,7 @@
 				</td>
 			</tr>
 		</table>
-		<? $utils->inputDivImg("img_company", "img_company", 500, 100,"position:absolute; right:30px; bottom:30px; border-color:black; border-width:1px; border-style:solid",$img_company);?>
+		<? $utils->inputDivImg("img_company", "img_company", 500, 100,"position:absolute; right:30px; bottom:30px; border-color:black; border-width:1px; border-style:solid",empty($img_company)? "logo_portal.png" :$img_company);?>
 	</form>
 <? $utils->endDivBorder(); ?>
 
