@@ -1,6 +1,7 @@
 <?
 	require_once("../../class/class.tableList.inc");
     require_once("../../class/class.dba_connect.inc");
+	session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -12,7 +13,7 @@
     $list = new tableList();
 ?>
 </head>
-<body style="background-color:#333333; overflow:hidden;" >
+<body>
 <input type="hidden" id="cdcompany" name="cdcompany">
 <div id="dvGrid" name="dvGrid" class="dvToGrid">
 <?
@@ -66,17 +67,23 @@
 ?>
 </div>
 <script type="text/javascript">
+	var logged = <?echo (isset($_SESSION['FGTYPE']) && $_SESSION['FGTYPE'] > 0)? "true" : "false"; ?>;
+	
 	function reloadFrames() {
-		cdcompany = document.getElementById('cdcompany').value;
-		
-		// Menu
-		parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);
-		// Notícias
-		parent.refreshSrc("right", "../notice/notice_list.php?cdcompany="+cdcompany);
-		// Central
-		parent.refreshSrc("middle", "../portal/company_list.php");
-		// Cabeçalho
-		parent.refreshSrc("top", "../portal/header.php?cdcompany="+cdcompany);
+		if(logged) {
+			cdcompany = document.getElementById('cdcompany').value;
+			
+			// Menu
+			parent.refreshSrc("left", "../company/company_menu.php?cdcompany="+cdcompany);
+			// Notícias
+			parent.refreshSrc("right", "../notice/notice_list.php?cdcompany="+cdcompany);
+			// Central
+			parent.refreshSrc("middle", "../portal/company_list.php");
+			// Cabeçalho
+			parent.refreshSrc("top", "../portal/header.php?cdcompany="+cdcompany);
+		} else {
+			alert("É necessário estar autenticado para acessar esta página.");
+		}
 	}
 </script>
 </body>

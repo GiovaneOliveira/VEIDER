@@ -194,6 +194,7 @@
 		if(retorno == 1)
 		{
 			parent.refreshSrc("login", "../user/login_area.php");
+			parent.refreshSrc("middle", "");
 		}
 		else if(retorno == 2)
 		{
