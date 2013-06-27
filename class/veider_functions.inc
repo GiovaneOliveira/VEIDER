@@ -159,15 +159,15 @@
 		/*
 		*  Cria array de horas ( [0] => 00:00 - [23] => 23:00 )
 		*/
-		function makeHours()
+		function makeHours($st = 0,$end = 24)
 		{
 			$arrayHours = array(); 
-			for($key = 0; $key < 24; $key++)
+			for($key = $st; $key < $end; $key++)
 				{
 					if($key < 10)
-						$arrayHours[] = "0".$key.":00";
+						$arrayHours[$key] = "0".$key.":00";
 					else
-						$arrayHours[] = $key.":00";
+						$arrayHours[$key] = $key.":00";
 				}
 			
 			return $arrayHours;

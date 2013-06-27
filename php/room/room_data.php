@@ -27,8 +27,8 @@
 		$dsroom = "";
 		$cdstate = $exCompany[0]['cdstate'];
 		$cdcity = $exCompany[0]['cdcity'];
-		$hourst = "";
-		$hourend = "";
+		$hourst = 0;
+		$hourend = 23;
 		$fgsunday = 1;
 		$fgmonday = 1;
 		$fgtuesday = 1;

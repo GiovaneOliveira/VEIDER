@@ -31,8 +31,8 @@
 	}
 	else {
 		$menu->add("Reservas", null, true);
-		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
-		$menu->add("Consulta", "", false);
+		$menu->add("Agendamento", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
+		$menu->add("Consulta",  array("data"=>"../reserve/reserve_data.php?cdroom=1&action=1", "width"=>"800", "height"=>"600"), false);
 		$menu->add("Cancelamento", "", false);
 		if($company)
 			$menu->add("Sugestões", "../suggestion/suggestion_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
