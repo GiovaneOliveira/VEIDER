@@ -31,6 +31,7 @@
 	}
 	else {
 		$menu->add("Reservas", null, true);
+		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		$menu->add("Consulta", "", false);
 		$menu->add("Cancelamento", "", false);
 		if($company)

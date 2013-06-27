@@ -15,6 +15,7 @@
 		var $lastAvailable;
 		var $workdays;
         var $company;
+		var $cdroom;
         
 		var $_utils;
 		
@@ -45,6 +46,11 @@
             $this->company = $company;
         }
         
+		function setCdRoom($cdroom)
+		{
+			$this->cdroom = $cdroom;
+		}
+		
 		function variableDate()
 		{
 			$m = $this->actual_month + ($this->variation);
@@ -143,18 +149,18 @@
 			$end = false;
 			$day = 1;
 			
-			$monthDays['first'] = date("w", mktime(0, 0, 0, $this->actual_month, 1, $this->actual_year)); // Primeiro dia do mes (0=domingo a 6=sabado)
-			$monthDays['current'] = date("t", mktime(0, 0, 0, $this->actual_month, 1, $this->actual_year)); // quantidade de dias do mes
-			$monthDays['past'] = date("t", mktime(0, 0, 0, (($this->actual_month > 1)? ($this->actual_month - 1) : 12), 1, (($this->actual_month > 1)? $this->actual_year : ($this->actual_year - 1)))); // quantidade de dias do mes anterior
+			$monthDays['first'] = date("w", mktime(0, 0, 0, $this->month, 1, $this->year)); // Primeiro dia do mes (0=domingo a 6=sabado)
+			$monthDays['current'] = date("t", mktime(0, 0, 0, $this->month, 1, $this->year)); // quantidade de dias do mes
+			$monthDays['past'] = date("t", mktime(0, 0, 0, (($this->month > 1)? ($this->month - 1) : 12), 1, (($this->month > 1)? $this->year : ($this->year - 1)))); // quantidade de dias do mes anterior
 			
 			$calendar  = "<table id='calendarTable' name='calendarTable' class='calendarTable' cellpadding='0' cellspacing='5'>\n";
 			$calendar .= "		<thead>\n";
 			// Cabeçalho
 			$calendar .= "			<tr>\n";
-			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Anterior", "btnback", "btnback", "changeMonth(\"previous\")", "previous", ($this->variation <= -5? false:true), false)."</div></th>\n";
-			$calendar .= "				<th colspan='5'><table cellpadding='0' cellspacing='0' style='width:100%;'><tr><td style='border:none; vertical-align:bottom; text-align:center;'><font class='titleMonth'>".$this->company."</font></td></tr>\n";
-            $calendar .= "				<tr><td style='border:none; vertical-align:top; text-align:center;'><font class='titleMonth'>".$this->getMonthName()."</font></td></tr></table></th>\n";
-			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Próximo", "btnnext", "btnnext", "changeMonth(\"next\")", "next", ($this->variation >= 5? false:true), false)."</div></th>\n";
+			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Anterior", "btnback", "btnback", "changeMonth(\"previous\")", "previous", ($this->variation <= -5 || $this->cdroom == 0? false:true), false, true, true)."</div></th>\n";
+			$calendar .= "				<th colspan='5'><div style='height:20px; margin-top:-40px;'><table cellpadding='0' cellspacing='0' style='width:100%;'><tr><td style='border:none; vertical-align:botton; text-align:center;'><font class='titleMonth'>".$this->company."</font></td></tr>\n";
+            $calendar .= "				<tr><td style='border:none; vertical-align:top; text-align:center;'><font class='titleMonth'>".$this->getMonthName()."</font></td></tr></table></div></th>\n";
+			$calendar .= "				<th><div align='center'>".$this->_utils->imageButton("Próximo", "btnnext", "btnnext", "changeMonth(\"next\")", "next", ($this->variation >= 5 || $this->cdroom == 0? false:true), false, true, true)."</div></th>\n";
 			$calendar .= "			</tr>\n";
 			// Dias da semana
 			$calendar .= "			<tr>\n";

@@ -105,7 +105,7 @@
 		*	@param	string		$select ex: 'option2' -> Opção do combo que virá selecionada por padrão
 		*	@param boolean		$required, $enabled
 		*/
-		function inputCombobox($label = "", $id, $name, $style = "", $option = array(), $onchange = "", $select = null, $required = false, $enabled = true)
+		function inputCombobox($label = "", $id, $name, $style = "", $option = array(), $onchange = "", $select = null, $required = false, $enabled = true, $return = false)
 		{
 			$requiredLabel = ($required)? "<font class='inputCommon' style='cursor:help;' title='Obrigatório'>&nbsp;*</font>" : "";
 			$label = empty($label)? "" : "<label for='".$id."' class='inputCommon'>".$label."</label>".$requiredLabel."<br>";
@@ -129,8 +129,11 @@
 								$combobox .= "<option value='".$key."' id='opt_".$id."_".$key."' ".$selected.$father.">".$text."</option>";
 							}
 			$combobox .= "</select>";
-
-			echo $combobox;
+			
+			if($return)
+				return $combobox;
+			else
+				echo $combobox;
 		}
 		
 		function inputStateCombo($style = "", $selected = "00", $enabled = true, $required = true)
@@ -263,7 +266,7 @@
 		*	@param	strint		$icon ex: 'save' -> nome da imagem salva em "image/button_icon", em formato PNG
 		*	@param boolean		$enabled
 		*/
-		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true, $listBtns = false)
+		function imageButton($hint, $id, $name, $action, $icon, $enabled = true, $isToolbar = true, $listBtns = false, $isCalendar = false)
 		{
 			$action = empty($action)? "" : "onclick='".$action."'";
 			
@@ -286,7 +289,9 @@
 			$events = $action.$mouseover.$mouseout.$mousedown.$mouseup.$class.$disable;
 			
 			$margintop = ($this->qtbuttons >= 1 && !$listBtns)? "10" : "5";
-			$button = "<button id='".$id."' name='".$name."' style='padding-top:5px; width:57px; margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
+			$width = ($isCalendar)? "90px;" : "57px;";
+			$height = ($isCalendar)? "height:43px;" : "";
+			$button = "<button id='".$id."' name='".$name."' style='padding-top:5px; width:".$width.$height." margin-top:".$margintop."px;' align='center' ".$events.(!empty($hint)? "title='".$hint."'" : "").">
 								<img id='obj_".$id."' src='".$src."' ".$font."/>
 							</button>";
 
