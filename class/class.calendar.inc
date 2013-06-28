@@ -221,8 +221,9 @@
 		*/
 		function makeDay($monthDays, $day, $disabled)
 		{
-			$current = $this->year."-".$this->month."-".$day;
-			$dblclick = "";
+			$cday = $day< 10 ? '0'.$day : $day;
+			$current = $this->year."-".$this->month."-".$cday;
+			$click = "";
 			
 			if($disabled) {
 				$class = "disabled";
@@ -231,10 +232,10 @@
 				unset($this->reserved[$current]);
 			} else {
 				$class = "enabled";
-				$dblclick = "ondblclick=\"newReserve('$current');\"";
+				$click = "onclick=\"newReserve('$current');\"";
 			}
 			
-			$return = "				<td class='".$class."' ".$dblclick.">$day</td>\n";
+			$return = "				<td class='".$class."' ".$click.">$day</td>\n";
 			return $return;
 		}
 	}

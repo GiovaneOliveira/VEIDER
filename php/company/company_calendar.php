@@ -90,7 +90,7 @@
 	// date = data selecionada no calendario
 	function newReserve(date)
 	{
-		window_open("../reserve/reserve_data.php?action=1&dtreserve="+date+"&cdroom=<?echo $cdroom?>", 800, 600);
+		window_open("../reserve/reserve_data.php?action=1&dtrequest="+date+"&cdroom=<?echo $cdroom?>", 800, 600);
 	}
 </script>
 </body>
