@@ -64,7 +64,6 @@
 		$enabled = true;
 
 	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save", $enabled);
-	$utils->imageButton("Visualizar imagem", "btnview_img", "btnview_img", "opa()", "photo", false);
 	$utils->beginDivBorder(true);
 ?>
 	<form action="room_action.php?action=<?=$_REQUEST['action']?>&cdcompany=<?=$_REQUEST['cdcompany']?>&cdroom=<?= $_REQUEST['action'] == 2? $_REQUEST['cdroom'] : -1?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
@@ -101,11 +100,6 @@
 					<?$utils->inputTextArea("Descrição","dsroom","dsroom","width:680px; height: 100px",$dsroom, true,$enabled)?>
 				</td>
 			</tr>
-			<tr> 
-				<td style="padding-top:10px;" colspan="2">
-					<?$utils->inputFile("Foto", "flphoto_room", "flphoto_room", "width: 100%", "verifyImage()",$enabled);?>
-				</td>
-			</tr>
 			<tr>
 				<td style="padding-top:10px;" colspan="2">
 					<fieldset style=" border-color: #333333">
@@ -113,10 +107,10 @@
 						<table cellpadding="0" cellspacing="0" style="width:100%; padding-bottom:10px;">
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours(), "", $hourst, true,$enabled);?>
+									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours(), "verifyHours()", $hourst, true,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours(), "", $hourend, true,$enabled);?>
+									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours(), "verifyHours()", $hourend, true,$enabled);?>
 								</td>
 							</tr>
 						</table>
@@ -170,6 +164,15 @@
 	<?verifyFormatImg("flphoto_room","null", "null");?>
 	<?include_once("../../js/rpc.js");?>
 	
+	function verifyHours(){
+		if(parseInt(document.getElementById('hourend').value) <= parseInt(document.getElementById('hourst').value))
+		{
+			alert("Horário de início deve ser menor que Horário de término");
+			document.getElementById('hourst').selectedIndex = '';
+			document.getElementById('hourend').selectedIndex = '';
+		}
+	}
+	
 	function verifyValue(){
 		if(isNaN(document.getElementById('vlhour').value)){
 			alert('valor inválido');
@@ -180,10 +183,6 @@
 	function save(){
 		if(required(document.getElementById("form"))) // Retorna true se todos os campos requeridos estiverem preenchidos
 			document.getElementById("form").submit();
-	}
-	
-	function opa(){
-		alert('opa');
 	}
 	
 	divBorderHeight(30);

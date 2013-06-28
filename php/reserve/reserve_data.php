@@ -86,10 +86,10 @@
 						<table cellpadding="0" cellspacing="0" style="width:100%; padding-bottom:10px;">
 							<tr>
 								<td style="width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours($hourst, $hourend), "verifyCost()", -1, true,$enabled);?>
+									<?$utils->inputCombobox("Horário de início", "hourst", "hourst", "width:300px;", makeHours($hourst, $hourend), "verifyHours();verifyCost()", -1, true,$enabled);?>
 								</td>
 								<td style="padding-left:10px; width:50%; padding-top:10px;">
-									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours($hourst, $hourend), "verifyCost()", -1, true,$enabled);?>
+									<?$utils->inputCombobox("Horário de término", "hourend", "hourend", "width:300px;", makeHours($hourst, $hourend), "verifyHours();verifyCost()", -1, true,$enabled);?>
 								</td>
 							</tr>
 						</table>
@@ -121,6 +121,16 @@
 	
 	function assoc(){
 		window_open("reserve_assoc_list.php?code_itens="+document.getElementById('code_itens').value+"&cdcompany=<?=$exRoom[0]['cdcompany']?>&window=1",500,500);
+	}
+	
+	function verifyHours(){
+		if(parseInt(document.getElementById('hourend').value) <= parseInt(document.getElementById('hourst').value))
+		{
+			alert("Horário de início deve ser menor que Horário de término");
+			document.getElementById('hourst').selectedIndex = '';
+			document.getElementById('hourend').selectedIndex = '';
+			document.getElementById('vltotal').value = 0;
+		}
 	}
 	
 	function verifyCost(){

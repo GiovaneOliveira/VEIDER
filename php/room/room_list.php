@@ -17,7 +17,7 @@
 <input type="hidden" id="cdroom" name="cdroom">
 <div id="dvRoomGrid" id="dvRoomGrid" class="dvToGrid">
 <?
-	$sql = "SELECT ROOM.CDROOM, ROOM.CDCOMPANY,ROOM.NMROOM, ROOM.DSROOM, ROOM.VLHOUR
+	$sql = "SELECT ROOM.CDROOM, ROOM.CDCOMPANY,ROOM.NMROOM, ROOM.DSADRESS, ROOM.VLHOUR
 				FROM VRROOM ROOM, VRCOMPANY COMP
 				WHERE ROOM.CDCOMPANY = COMP.CDCOMPANY
 				AND ROOM.CDCOMPANY = ".$_REQUEST['cdcompany']."
@@ -25,7 +25,7 @@
 	$ex = $conn->query($sql);
 	
 	$list->setQueryFields($ex);
-	$list->setFieldNames(array("NMROOM", "DSROOM", "VLHOUR"));
+	$list->setFieldNames(array("NMROOM", "DSADRESS", "VLHOUR"));
 	$list->setTitleNames(array("NOME", "ENDEREÇO", "VALOR DA RESERVA (R$)"));
 	$list->setColWidth(array("400px", "400px", "200px"));
 	$list->setColAlign(array("left", "left", "right"));

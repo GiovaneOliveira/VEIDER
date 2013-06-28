@@ -13,8 +13,8 @@
 		$conn = new dba_connect();
 		
 		$fllogo = "";
-		if(!empty($_FILES["flphoto_company"]["tmp_name"]))
-			$fllogo = uploadImg($_FILES["flphoto_company"], 500, 100);
+		if(!empty($_FILES["fllogo"]["tmp_name"]))
+			$fllogo = uploadImg($_FILES["fllogo"], 500, 100);
 		
 		$table = array(
 			"table"=>"VRCOMPANY",

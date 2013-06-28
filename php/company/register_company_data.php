@@ -61,7 +61,7 @@
 	$utils->imageButton("Registrar", "btnregister", "btnregister", "save()", "save", $enabled);
 	$utils->beginDivBorder(true);
 ?>
-	<form id="form" name="form" action="register_company_action.php?action=<? echo $_REQUEST['action'].$form; ?>" method="post" enctype="multipart/form-data" target="_self">
+	<form id="form" name="form" action="register_company_action.php?action=<? echo $_REQUEST['action'].$form; ?>&cduser=<?=$_REQUEST['cduser']?>" method="post" enctype="multipart/form-data" target="_self">
 		<table style="width:100%">
 			<tr>
 				<td colspan="2" style="padding-top:10px;">
