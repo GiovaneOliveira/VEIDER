@@ -9,7 +9,7 @@
 						"primarykey" => "CDRESERVE");
 	
 	// Verificar se nao  tem reserva nessa data
-	$verif = $conn->query("SELECT CDRESERVE FROM VRRESERVE WHERE FGSITUATION = 1 AND DTREQUEST = '".$_REQUEST['dtrequest']."'");
+	$verif = $conn->query("SELECT CDRESERVE FROM VRRESERVE WHERE FGSITUATION = 1 AND DTREQUEST = '".$_REQUEST['dtrequest']."' AND CDROOM = ".$_REQUEST['cdroom']);
 	if(!$verif) {		
 		$fields = array("CDROOM" => $_REQUEST['cdroom'],
 							"CDUSER" => $_REQUEST['cduser'],
