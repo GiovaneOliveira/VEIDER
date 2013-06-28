@@ -38,7 +38,6 @@
 		$list->addButton("Visualizar", "btn_view", "btn_view", "roomActions(3)", "view", false);
 		$list->setDblClickFunction("roomActions(3)");
 	}
-	$list->addButton("Calendário do espaço", "btn_calendar", "btn_calendar", "openCalendar()", "calendar", false);
 	$list->setClickFunction("enableDisable()");
 	$list->setHiddenObject("cdroom");
 	$list->setHiddenFields(array("cdroom"));
@@ -65,13 +64,11 @@
 	function enableDisable()
 	{
 		if(document.getElementById("cdroom") && document.getElementById("cdroom").value > 0) {
-			enableButton("btn_calendar");
 			if(document.getElementById("btn_edit"))
 				enableButton("btn_edit");
 			else if(document.getElementById("btn_view"))
 				enableButton("btn_view");
 		} else {
-			disableButton("btn_calendar");
 			if(document.getElementById("btn_edit"))
 				disableButton("btn_edit");
 			else if(document.getElementById("btn_view"))
