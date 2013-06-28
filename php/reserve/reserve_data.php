@@ -15,7 +15,7 @@
 	$conn = new dba_connect();
 ?>
 </head>
-<body style="margin:10px;" bgcolor="#333333">
+<body style="margin:10px;">
 <input type="hidden" id="code_itens" name="code_itens" value="0"></input>
 <input type="hidden" id="vl_itens" name="vl_itens" value=0></input>
 <input type="hidden" id="cdobject" name="cdobject"></input>
@@ -45,7 +45,7 @@
 	$utils->imageButton("Deletar item", "btndel", "btndel", "delete_assoc()", "delete", false);
 	$utils->beginDivBorder(true);
 ?>
-	<form action="reserve_action.php?action=<?=$_REQUEST['action']?>&cdroom=<?=$_REQUEST['cdroom']?>&cduser=<?=$exUser[0]['cduser'];?>&date=2008-11-11" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
+	<form action="reserve_action.php?action=<?=$_REQUEST['action']?>&cdroom=<?=$_REQUEST['cdroom']?>&cduser=<?=$exUser[0]['cduser'];?>&date=<?=$_REQUEST['dtreserve']?>" method="post" enctype="multipart/form-data" target="_self" id="form" name="form" >
 		<table cellpadding="0" cellspacing="0" style="width:100%">
 			<tr> 
 				<td colspan="2" style="padding-top: 10px; width: 100%">

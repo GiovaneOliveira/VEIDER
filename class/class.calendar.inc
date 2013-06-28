@@ -16,6 +16,7 @@
 		var $workdays;
         var $company;
 		var $cdroom;
+		var $reserved;
         
 		var $_utils;
 		
@@ -49,6 +50,11 @@
 		function setCdRoom($cdroom)
 		{
 			$this->cdroom = $cdroom;
+		}
+		
+		function setReservedDays($dates)
+		{
+			$this->reserved = $dates;
 		}
 		
 		function variableDate()
@@ -215,9 +221,20 @@
 		*/
 		function makeDay($monthDays, $day, $disabled)
 		{
-			$class = $disabled? "disabled" : "enabled";
+			$current = $this->year."-".$this->month."-".$day;
+			$dblclick = "";
 			
-			$return = "				<td class='".$class."'>$day</td>\n";
+			if($disabled) {
+				$class = "disabled";
+			} else if(array_key_exists($current, $this->reserved)) {
+				$class = "reserved";
+				unset($this->reserved[$current]);
+			} else {
+				$class = "enabled";
+				$dblclick = "ondblclick=\"newReserve('$current');\"";
+			}
+			
+			$return = "				<td class='".$class."' ".$dblclick.">$day</td>\n";
 			return $return;
 		}
 	}

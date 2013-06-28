@@ -31,19 +31,21 @@
 	}
 	else {
 		$menu->add("Reservas", null, true);
-		$menu->add("Agendamento", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
-		$menu->add("Consulta",  array("data"=>"../reserve/reserve_data.php?cdroom=1&action=1", "width"=>"800", "height"=>"600"), false);
-		$menu->add("Cancelamento", "", false);
-		if($company)
+		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
+		$menu->add("Consulta", "", false);
+		if($company) {
+			$menu->add("Cancelamento", "../reserve/reserve_cancel.php?cdcompany=".$_REQUEST['cdcompany'], false);
 			$menu->add("Sugestões", "../suggestion/suggestion_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
-		else
+		} else {
+			$menu->add("Cancelamento", "../reserve/reserve_cancel.php?cdcompany=".$_REQUEST['cdcompany']."&cduser=".$_SESSION['CDUSER'], false);
 			$menu->add("Sugestões", array("data"=>"../suggestion/suggestion_data.php?cdcompany=".$_REQUEST['cdcompany'], "width"=>"550", "height"=>"440"), false);
+		}
 		
 		$name = "Visualizar";
 		if($company) {
 			$name = "Gestão";
 			$menu->add("Informativo", null, true);
-			$menu->add("Relatório de agendamento", "", false);
+			$menu->add("Relatório de agendamento", array("data"=>"../company/company_report.php?type=1","width"=>"1000","height"=>"700"), false);
 			$menu->add("Relatório de assiduidade", "", false);
 		}
 		

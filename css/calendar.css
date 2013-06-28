@@ -17,7 +17,6 @@
 	min-width: 80px;
 	font-family: Gill, Helvetica, sans-serif;
 	font-size: 15px;
-	color: #333333;
 	font-weight: bold;
 	border: 1px solid #666666;
 	border-radius: 7px;
@@ -25,14 +24,17 @@
 
 #calendarTable th {
 	background-color: #F5F5F5;
+	color: #333333;
 }
 
 .enabled {
-	background-color: #F5F5F5;
+	background-color: #98FB98;
 	text-align: left;
 	vertical-align: top;
 	padding-top: 10px;
 	padding-left: 10px;
+	color: #333333;
+	cursor: pointer;
 }
 
 .disabled {
@@ -41,4 +43,14 @@
 	vertical-align: top;
 	padding-top: 10px;
 	padding-left: 10px;
+	color: #666666;
+}
+
+.reserved {
+	background-color: #FA8072;
+	text-align: left;
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left: 10px;
+	color: #333333;
 }

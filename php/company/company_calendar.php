@@ -51,8 +51,19 @@
 		$combo = $utils->inputCombobox("", "cdroom", "cdroom", "width:200px;", array(), "changeRoom(this)", $cdroom, false, true, true);
 	}
     
+	$res = $conn->query("SELECT DTREQUEST FROM VRRESERVE WHERE CDROOM = ".($cdroom? $cdroom : "-1"));
+	
+	if($res) {
+		foreach($res as $value) {
+			$dates[$value['dtrequest']] = $value['dtrequest'];
+		}
+	} else {
+		$dates = array();
+	}
+	
 	$calendar->setCdRoom($cdroom);
     $calendar->setCompany($ex[0]['nmcompany']." - ".$combo);
+	$calendar->setReservedDays($dates);
 	$calendar->setWorkDays($workdays);
     $calendar->printCalendar();
 ?>
@@ -74,6 +85,12 @@
 	{
 		room = (obj.value != "")? obj.value : 0;
 		location.replace("company_calendar.php?variation="+variation+"&cdcompany="+cdcompany+"&cdroom="+room);
+	}
+	
+	// date = data selecionada no calendario
+	function newReserve(date)
+	{
+		window_open("../reserve/reserve_data.php?action=1&dtreserve="+date+"&cdroom=<?echo $cdroom?>", 800, 600);
 	}
 </script>
 </body>
