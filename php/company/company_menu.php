@@ -44,8 +44,7 @@
 		if($company) {
 			$name = "Gestão";
 			$menu->add("Informativo", null, true);
-			$menu->add("Relatório de agendamento", array("data"=>"../company/company_report.php?type=1","width"=>"1000","height"=>"700"), false);
-			$menu->add("Relatório de assiduidade", "", false);
+			$menu->add("Relatório de agendamento", array("data"=>"../company/company_report.php?cdcompany=".$_REQUEST['cdcompany'],"width"=>"1000","height"=>"700"), false);
 		}
 		
 		$menu->add($name, null, true);
