@@ -6,7 +6,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Cancelamento de reserva</title>
+<title><?echo ($_REQUEST['type'] == 2)? "Cancelamento" : "Encerramento"; ?> de reserva</title>
 <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <?
@@ -24,7 +24,7 @@
 	$utils->imageButton("Salvar", "btn_save", "btn_save", "save()", "save", $enabled);
 	$utils->beginDivBorder(true);
 ?>
-<form id="form" name="form" action="reserve_cancel_action.php?cdreserve=<?echo $_REQUEST['cdreserve']?>" method="post" target="_self">
+<form id="form" name="form" action="reserve_cancel_action.php?type=<?echo $_REQUEST['type']?>&cdreserve=<?echo $_REQUEST['cdreserve']?>" method="post" target="_self">
 	<table cellpadding="0" cellspacing="0" style="width:100%;">
 		<tr>
 			<td style="padding-top:10px;">
@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" style="padding-top:10px;">
-				<?$utils->inputTextArea("Justificativa", "dsjustify", "dsjustify", "width:100%; height:190px;", ($enabled? "" : $fields[0]['dsjustify']), $enabled, $enabled);?>
+				<?$utils->inputTextArea("Justificativa", "dsjustify", "dsjustify", "width:100%; height:190px;", ($enabled? "" : $fields[0]['dsjustify']), ($_REQUEST['type'] == 3? false : $enabled), $enabled);?>
 			</td>
 		</tr>
 	</table>

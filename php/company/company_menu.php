@@ -32,9 +32,8 @@
 	else {
 		$menu->add("Reservas", null, true);
 		$menu->add("Calendário", "../company/company_calendar.php?cdcompany=".$_REQUEST['cdcompany'], false);
-		$menu->add("Consulta", "", false);
 		if($company) {
-			$menu->add("Cancelamento", "../reserve/reserve_cancel.php?cdcompany=".$_REQUEST['cdcompany'], false);
+			$menu->add("Encerramento", "../reserve/reserve_cancel.php?cdcompany=".$_REQUEST['cdcompany'], false);
 			$menu->add("Sugestões", "../suggestion/suggestion_list.php?cdcompany=".$_REQUEST['cdcompany'], false);
 		} else {
 			$menu->add("Cancelamento", "../reserve/reserve_cancel.php?cdcompany=".$_REQUEST['cdcompany']."&cduser=".$_SESSION['CDUSER'], false);

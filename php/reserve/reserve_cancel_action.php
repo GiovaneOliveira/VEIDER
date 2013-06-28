@@ -4,7 +4,7 @@
 	$conn = new dba_connect();
 	
 	$table = array("table"=>"VRRESERVE");
-	$fields = array("FGSITUATION"=>2, "DSJUSTIFY"=>$conn->formatString($_REQUEST['dsjustify']));
+	$fields = array("FGSITUATION"=>$_REQUEST['type'], "DSJUSTIFY"=>$conn->formatString($_REQUEST['dsjustify']));
 	$where = array("CDRESERVE=".$_REQUEST['cdreserve']=>" AND ");
 	
 	$conn->transaction("update", $table, $fields, $where);
