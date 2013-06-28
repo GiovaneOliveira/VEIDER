@@ -20,6 +20,7 @@
 			FROM VRRESERVE RES, VRUSER US, VRROOM RO
 			WHERE US.CDUSER = RES.CDUSER
 			AND RO.CDROOM = RES.CDROOM
+			AND RES.FGSITUATION = 1
 			AND RO.CDCOMPANY = ".$_REQUEST['cdcompany'].
 			((isset($_REQUEST['cduser']) && $_REQUEST['cduser'] != "")? " AND RES.CDUSER = ".$_REQUEST['cduser'] : "")."
 			ORDER BY RES.DTREQUEST DESC";
@@ -36,7 +37,6 @@
 	$list->setHiddenObject("cdreserve");
 	$list->setHiddenFields(array("cdreserve"));
 	$list->setHasToolbar(true);
-	$list->addButton("Visualizar", "btn_view", "btn_view", "action(1)", "view", false);
 	$list->addButton("Cancelar", "btn_cancel", "btn_cancel", "action(2)", "disable", false);
 	$list->printList("dvGrid");
 ?>
@@ -47,19 +47,13 @@
 		cdreserve = document.getElementById('cdreserve').value;
 		
 		switch(type) {
-			case 1:
-				
-				break;
 			case 2:
-				if(confirm("Deseja cancelar reserva?")) {
-					
-				}
+				window_open("reserve_cancel_data.php?cdreserve="+cdreserve, 600, 300);
 				break;
 		}
 	}
 	
 	function enableBtn() {
-		enableButton("btn_view");
 		enableButton("btn_cancel");
 	}
 </script>

@@ -51,7 +51,7 @@
 		$combo = $utils->inputCombobox("", "cdroom", "cdroom", "width:200px;", array(), "changeRoom(this)", $cdroom, false, true, true);
 	}
     
-	$res = $conn->query("SELECT DTREQUEST FROM VRRESERVE WHERE CDROOM = ".($cdroom? $cdroom : "-1"));
+	$res = $conn->query("SELECT DTREQUEST FROM VRRESERVE WHERE FGSITUATION = 1 AND CDROOM = ".($cdroom? $cdroom : "-1"));
 	
 	if($res) {
 		foreach($res as $value) {
